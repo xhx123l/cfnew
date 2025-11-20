@@ -832,6 +832,7 @@
                 overflow: hidden;
                 transform: translateY(100px);
                 animation: pop-up 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+                margin: 0 auto; /* 添加居中 */
             }
             .blog-header {
                 text-align: center;
@@ -992,16 +993,17 @@
         </style>
     </head>
     <body>
-        <div class="page-overlay"></div>
-        <div class="floating-hearts" id="floatingHearts"></div>
-            <div class="pink-text">${t.terminal}</div>
-            <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-                <select id="languageSelector" style="background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);" onchange="changeLanguage(this.value)">
-                    <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
-                    <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
-                </select>
-            </div>
-        <div class="terminal">
+        <div class="main-content">
+            <div class="page-overlay"></div>
+            <div class="floating-hearts" id="floatingHearts"></div>
+                <div class="pink-text">${t.terminal}</div>
+                <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+                    <select id="languageSelector" style="background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);" onchange="changeLanguage(this.value)">
+                        <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
+                        <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
+                    </select>
+                </div>
+            <div class="terminal">
             <div class="terminal-header">
                 <div class="terminal-buttons">
                     <div class="terminal-button"></div>
@@ -1030,7 +1032,8 @@
                 </div>
             </div>
         </div>
-        <script>
+    </div>
+    <script>
             function createFloatingHearts() {
                 const heartsContainer = document.getElementById('floatingHearts');
                 const heartCount = 15;
@@ -1187,6 +1190,7 @@
                 });
             });
         </script>
+    </div>
     </body>
     </html>`;
                         return new Response(terminalHtml, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
@@ -2150,6 +2154,27 @@
                 background-size: cover;
                 color: #ff1493; min-height: 100vh;
                 overflow-x: hidden; position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            .main-content {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                min-height: 100vh;
+                padding: 20px 0;
+            }
+            @media (max-width: 768px) {
+                body {
+                    align-items: flex-start;
+                    padding: 0;
+                }
+                .main-content {
+                    padding: 10px 0;
+                    align-items: flex-start;
+                }
             }
             .page-overlay {
                 position: fixed;
@@ -2168,18 +2193,27 @@
                     -webkit-backdrop-filter: blur(2px);
                     background: rgba(255, 255, 255, 0.05);
                 }
+                .container {
+                    padding: 10px;
+                    width: 100%;
+                    max-width: 100%;
+                }
                 .card {
-                    margin: 15px;
+                    margin: 15px auto;
                     padding: 20px;
+                    width: 100%;
+                    max-width: 95%;
                 }
                 .terminal {
                     width: 95%;
                     height: 400px;
-                    margin: 10px;
+                    margin: 10px auto;
+                    max-width: 95%;
                 }
                 .client-grid {
                     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                     gap: 10px;
+                    width: 100%;
                 }
                 .client-btn {
                     padding: 12px 15px;
@@ -2187,13 +2221,27 @@
                 }
                 .title {
                     font-size: 2.5rem;
+                    text-align: center;
+                }
+                .subtitle {
+                    text-align: center;
                 }
                 .blog-intro {
                     padding: 15px;
-                    margin: 15px 0;
+                    margin: 15px auto;
+                    width: 100%;
+                    max-width: 95%;
+                }
+                .header {
+                    width: 100%;
+                    max-width: 95%;
+                    margin: 0 auto 20px;
                 }
             }
             @media (max-width: 480px) {
+                .container {
+                    padding: 5px;
+                }
                 .title {
                     font-size: 2rem;
                 }
@@ -2202,15 +2250,38 @@
                 }
                 .card {
                     padding: 15px;
+                    margin: 10px auto;
                 }
                 .terminal {
+                    width: 95%;
                     height: 350px;
+                    margin: 10px auto;
                 }
                 .terminal-header {
                     padding: 10px 15px;
                 }
                 .terminal-title {
                     font-size: 14px;
+                }
+                .client-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                    gap: 8px;
+                }
+                .client-btn {
+                    padding: 10px 12px;
+                    font-size: 0.85rem;
+                }
+                .blog-intro {
+                    padding: 12px;
+                    margin: 10px auto;
+                }
+            }
+            @media (max-width: 360px) {
+                .client-grid {
+                    grid-template-columns: 1fr;
+                }
+                .client-btn {
+                    margin-bottom: 5px;
                 }
             }
             @keyframes bg-pulse {
@@ -2257,6 +2328,13 @@
                 position: relative; 
                 z-index: 1; 
                 animation: pop-up 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+                width: 100%;
+            }
+            @media (max-width: 768px) {
+                .container {
+                    width: 100%;
+                    max-width: 100%;
+                }
             }
             @keyframes pop-up {
                 0% {
@@ -2528,16 +2606,17 @@
         </style>
     </head>
     <body>
-        <div class="page-overlay"></div>
-        <div class="floating-hearts" id="floatingHearts"></div>
-            <div class="pink-text">${t.terminal}</div>
-            <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-                <select id="languageSelector" style="background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);" onchange="changeLanguage(this.value)">
-                    <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
-                    <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
-                </select>
-            </div>
-        <div class="container">
+        <div class="main-content">
+            <div class="page-overlay"></div>
+            <div class="floating-hearts" id="floatingHearts"></div>
+                <div class="pink-text">${t.terminal}</div>
+                <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+                    <select id="languageSelector" style="background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);" onchange="changeLanguage(this.value)">
+                        <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
+                        <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
+                    </select>
+                </div>
+            <div class="container">
             <div class="blog-header">
                     <h1 class="title">${t.title}</h1>
                     <p class="subtitle">${t.subtitle}</p>
@@ -3701,6 +3780,7 @@
                 }
             });
         </script>
+    </div>
     </body>
     </html>`;
         
