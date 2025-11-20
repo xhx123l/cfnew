@@ -777,113 +777,120 @@
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body {
                 font-family: "Courier New", monospace;
-                background: #000; color: #00ff00; min-height: 100vh;
+                background: linear-gradient(135deg, #ffe6f2, #ffb6c1, #ff69b4); 
+                color: #ff1493; min-height: 100vh;
                 overflow-x: hidden; position: relative;
                 display: flex; justify-content: center; align-items: center;
-            }
-            .matrix-bg {
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: linear-gradient(45deg, #000 0%, #001100 50%, #000 100%);
-                z-index: -1;
-                animation: bg-pulse 8s ease-in-out infinite;
+                animation: bg-pulse 3s ease-in-out infinite alternate;
             }
             @keyframes bg-pulse {
-                0%, 100% { background: linear-gradient(45deg, #000 0%, #001100 50%, #000 100%); }
-                50% { background: linear-gradient(45deg, #000 0%, #002200 50%, #000 100%); }
+                0% { background: linear-gradient(135deg, #ffe6f2, #ffb6c1); }
+                100% { background: linear-gradient(135deg, #ffb6c1, #ff69b4); }
             }
-            .matrix-rain {
+            .pink-bg {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.03) 2px, rgba(0,255,0,0.03) 4px);
-                animation: matrix-fall 20s linear infinite;
+                background: radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.15) 0%, rgba(255, 192, 203, 0) 20%),
+                            radial-gradient(circle at 90% 80%, rgba(255, 105, 180, 0.15) 0%, rgba(255, 255, 255, 0) 20%);
                 z-index: -1;
             }
-            @keyframes matrix-fall {
-                0% { transform: translateY(-100%); }
-                100% { transform: translateY(100vh); }
-            }
-            .matrix-code-rain {
+            .floating-hearts {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                pointer-events: none; z-index: -1;
-                overflow: hidden;
+                pointer-events: none;
+                z-index: -1;
             }
-            .matrix-column {
-                position: absolute; top: -100%; left: 0;
-                color: #00ff00; font-family: "Courier New", monospace;
-                font-size: 14px; line-height: 1.2;
-                animation: matrix-drop 15s linear infinite;
-                text-shadow: 0 0 5px #00ff00;
+            .heart {
+                position: absolute;
+                font-size: 20px;
+                color: rgba(255, 105, 180, 0.6);
+                animation: float 8s linear infinite;
             }
-            @keyframes matrix-drop {
-                0% { top: -100%; opacity: 1; }
-                10% { opacity: 1; }
-                90% { opacity: 0.3; }
-                100% { top: 100vh; opacity: 0; }
-            }
-            .matrix-column:nth-child(odd) {
-                animation-duration: 12s;
-                animation-delay: -2s;
-            }
-            .matrix-column:nth-child(even) {
-                animation-duration: 18s;
-                animation-delay: -5s;
-            }
-            .matrix-column:nth-child(3n) {
-                animation-duration: 20s;
-                animation-delay: -8s;
+            @keyframes float {
+                0% {
+                    transform: translateY(100vh) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 0.7;
+                }
+                90% {
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
             }
             .terminal {
                 width: 90%; max-width: 800px; height: 500px;
-                background: rgba(0, 0, 0, 0.9);
-                border: 2px solid #00ff00;
-                border-radius: 8px;
-                box-shadow: 0 0 30px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.1);
+                background: rgba(255, 250, 250, 0.85);
+                border: 3px solid #ff69b4;
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4), inset 0 0 15px rgba(255, 182, 193, 0.5);
                 backdrop-filter: blur(10px);
                 position: relative; z-index: 1;
                 overflow: hidden;
+                transform: translateY(100px);
+                animation: pop-up 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            }
+            @keyframes pop-up {
+                0% {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+                100% {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
             }
             .terminal-header {
-                background: rgba(0, 20, 0, 0.8);
-                padding: 10px 15px;
-                border-bottom: 1px solid #00ff00;
+                background: linear-gradient(to right, #ffb6c1, #ff69b4);
+                padding: 15px 20px;
+                border-bottom: 3px solid #ff69b4;
                 display: flex; align-items: center;
+                border-radius: 17px 17px 0 0;
             }
             .terminal-buttons {
-                display: flex; gap: 8px;
+                display: flex; gap: 10px;
             }
             .terminal-button {
-                width: 12px; height: 12px; border-radius: 50%;
-                background: #ff5f57; border: none;
+                width: 14px; height: 14px; border-radius: 50%;
+                background: #ff9eb3; border: 1px solid #ff69b4;
             }
-            .terminal-button:nth-child(2) { background: #ffbd2e; }
-            .terminal-button:nth-child(3) { background: #28ca42; }
+            .terminal-button:nth-child(2) { background: #ffd3e0; }
+            .terminal-button:nth-child(3) { background: #ffb6c1; }
             .terminal-title {
-                margin-left: 15px; color: #00ff00;
-                font-size: 14px; font-weight: bold;
+                margin-left: 15px; color: #ff1493;
+                font-size: 16px; font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
             }
             .terminal-body {
-                padding: 20px; height: calc(100% - 50px);
-                overflow-y: auto; font-size: 14px;
-                line-height: 1.4;
+                padding: 25px; height: calc(100% - 60px);
+                overflow-y: auto; font-size: 15px;
+                line-height: 1.5;
             }
             .terminal-line {
-                margin-bottom: 8px; display: flex; align-items: center;
+                margin-bottom: 12px; display: flex; align-items: center;
             }
             .terminal-prompt {
-                color: #00ff00; margin-right: 10px;
+                color: #ff69b4; margin-right: 12px;
                 font-weight: bold;
             }
             .terminal-input {
-                background: transparent; border: none; outline: none;
-                color: #00ff00; font-family: "Courier New", monospace;
-                font-size: 14px; flex: 1;
-                caret-color: #00ff00;
+                background: rgba(255, 182, 193, 0.2); border: 2px solid #ffb6c1; 
+                border-radius: 10px; outline: none;
+                color: #ff1493; font-family: "Courier New", monospace;
+                font-size: 15px; flex: 1; padding: 8px 12px;
+                caret-color: #ff69b4;
             }
             .terminal-input::placeholder {
-                color: #00aa00; opacity: 0.7;
+                color: #ff69b4; opacity: 0.7;
+            }
+            .terminal-input:focus {
+                box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
             }
             .terminal-cursor {
-                display: inline-block; width: 8px; height: 16px;
-                background: #00ff00; animation: blink 1s infinite;
+                display: inline-block; width: 10px; height: 18px;
+                background: #ff69b4; animation: blink 1s infinite;
                 margin-left: 2px;
             }
             @keyframes blink {
@@ -891,33 +898,36 @@
                 51%, 100% { opacity: 0; }
             }
             .terminal-output {
-                color: #00aa00; margin: 5px 0;
+                color: #ff69b4; margin: 8px 0;
+                font-weight: 500;
             }
             .terminal-error {
-                color: #ff4444; margin: 5px 0;
+                color: #ff4444; margin: 8px 0;
+                font-weight: bold;
             }
             .terminal-success {
-                color: #44ff44; margin: 5px 0;
+                color: #44ff44; margin: 8px 0;
+                font-weight: bold;
             }
-            .matrix-text {
+            .pink-text {
                 position: fixed; top: 20px; right: 20px;
-                color: #00ff00; font-family: "Courier New", monospace;
-                font-size: 0.8rem; opacity: 0.6;
-                animation: matrix-flicker 3s infinite;
+                color: #ff69b4; font-family: "Courier New", monospace;
+                font-size: 0.8rem; 
+                text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.6);
+                animation: text-pulse 2s infinite alternate;
             }
-            @keyframes matrix-flicker {
-                0%, 100% { opacity: 0.6; }
-                50% { opacity: 1; }
+            @keyframes text-pulse {
+                0% { opacity: 0.7; }
+                100% { opacity: 1; }
             }
         </style>
     </head>
     <body>
-        <div class="matrix-bg"></div>
-        <div class="matrix-rain"></div>
-        <div class="matrix-code-rain" id="matrixCodeRain"></div>
-            <div class="matrix-text">${t.terminal}</div>
+        <div class="pink-bg"></div>
+        <div class="floating-hearts" id="floatingHearts"></div>
+            <div class="pink-text">${t.terminal}</div>
             <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-                <select id="languageSelector" style="background: rgba(0, 20, 0, 0.9); border: 2px solid #00ff00; color: #00ff00; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 0 0 5px #00ff00; box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);" onchange="changeLanguage(this.value)">
+                <select id="languageSelector" style="background: rgba(255, 182, 193, 0.9); border: 2px solid #ff69b4; color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);" onchange="changeLanguage(this.value)">
                     <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
                     <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
                 </select>
@@ -1121,7 +1131,7 @@
                 });
             
             document.addEventListener('DOMContentLoaded', function() {
-                createMatrixRain();
+                createFloatingHearts();
                 
                 const input = document.getElementById('uuidInput');
                 input.focus();
@@ -2091,180 +2101,245 @@
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body {
                 font-family: "Courier New", monospace;
-                background: #000; color: #00ff00; min-height: 100vh;
+                background: linear-gradient(135deg, #ffe6f2, #ffb6c1, #ff69b4); 
+                color: #ff1493; min-height: 100vh;
                 overflow-x: hidden; position: relative;
-            }
-            .matrix-bg {
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: linear-gradient(45deg, #000 0%, #001100 50%, #000 100%);
-                z-index: -1;
-                animation: bg-pulse 8s ease-in-out infinite;
+                animation: bg-pulse 3s ease-in-out infinite alternate;
             }
             @keyframes bg-pulse {
-                0%, 100% { background: linear-gradient(45deg, #000 0%, #001100 50%, #000 100%); }
-                50% { background: linear-gradient(45deg, #000 0%, #002200 50%, #000 100%); }
+                0% { background: linear-gradient(135deg, #ffe6f2, #ffb6c1); }
+                100% { background: linear-gradient(135deg, #ffb6c1, #ff69b4); }
             }
-            .matrix-rain {
+            .pink-bg {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.03) 2px, rgba(0,255,0,0.03) 4px);
-                animation: matrix-fall 20s linear infinite;
+                background: radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.15) 0%, rgba(255, 192, 203, 0) 20%),
+                            radial-gradient(circle at 90% 80%, rgba(255, 105, 180, 0.15) 0%, rgba(255, 255, 255, 0) 20%);
                 z-index: -1;
             }
-            @keyframes matrix-fall {
-                0% { transform: translateY(-100%); }
-                100% { transform: translateY(100vh); }
-            }
-            .matrix-code-rain {
+            .floating-hearts {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                pointer-events: none; z-index: -1;
-                overflow: hidden;
+                pointer-events: none;
+                z-index: -1;
             }
-            .matrix-column {
-                position: absolute; top: -100%; left: 0;
-                color: #00ff00; font-family: "Courier New", monospace;
-                font-size: 14px; line-height: 1.2;
-                animation: matrix-drop 15s linear infinite;
-                text-shadow: 0 0 5px #00ff00;
+            .heart {
+                position: absolute;
+                font-size: 20px;
+                color: rgba(255, 105, 180, 0.6);
+                animation: float 8s linear infinite;
             }
-            @keyframes matrix-drop {
-                0% { top: -100%; opacity: 1; }
-                10% { opacity: 1; }
-                90% { opacity: 0.3; }
-                100% { top: 100vh; opacity: 0; }
+            @keyframes float {
+                0% {
+                    transform: translateY(100vh) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 0.7;
+                }
+                90% {
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
             }
-            .matrix-column:nth-child(odd) {
-                animation-duration: 12s;
-                animation-delay: -2s;
+            .container { 
+                max-width: 900px; 
+                margin: 0 auto; 
+                padding: 20px; 
+                position: relative; 
+                z-index: 1; 
+                animation: pop-up 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             }
-            .matrix-column:nth-child(even) {
-                animation-duration: 18s;
-                animation-delay: -5s;
+            @keyframes pop-up {
+                0% {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+                100% {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
             }
-            .matrix-column:nth-child(3n) {
-                animation-duration: 20s;
-                animation-delay: -8s;
+            .header { 
+                text-align: center; 
+                margin-bottom: 40px; 
+                animation: header-bounce 1s ease-in-out;
             }
-            .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
-            .header { text-align: center; margin-bottom: 40px; }
+            @keyframes header-bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
             .title {
-                font-size: 3.5rem; font-weight: bold;
-                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+                font-size: 3.5rem; 
+                font-weight: bold;
                 margin-bottom: 10px;
-                animation: matrix-glow 1.5s ease-in-out infinite alternate, matrix-pulse 3s ease-in-out infinite;
+                animation: pink-glow 2s ease-in-out infinite alternate, pink-pulse 3s ease-in-out infinite;
                 position: relative;
-                background: linear-gradient(45deg, #00ff00, #00aa00, #00ff00);
+                background: linear-gradient(45deg, #ff69b4, #ffb6c1, #ff69b4);
                 background-size: 200% 200%;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
+                text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
             }
-            @keyframes matrix-glow {
-                from { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00; }
-                to { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 50px #00ff00; }
+            @keyframes pink-glow {
+                from { text-shadow: 2px 2px 10px rgba(255, 182, 193, 0.8), 2px 2px 20px rgba(255, 105, 180, 0.6); }
+                to { text-shadow: 2px 2px 20px rgba(255, 182, 193, 1), 2px 2px 30px rgba(255, 105, 180, 0.8); }
             }
-            @keyframes matrix-pulse {
+            @keyframes pink-pulse {
                 0%, 100% { background-position: 0% 50%; }
                 50% { background-position: 100% 50%; }
             }
-            .subtitle { color: #00aa00; margin-bottom: 30px; font-size: 1.2rem; }
+            .subtitle { 
+                color: #ff69b4; 
+                margin-bottom: 30px; 
+                font-size: 1.2rem; 
+                text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            }
             .card {
-                background: rgba(0, 20, 0, 0.9);
-                border: 2px solid #00ff00;
-                border-radius: 0; padding: 30px; margin-bottom: 20px;
-                box-shadow: 0 0 30px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.1);
+                background: rgba(255, 250, 250, 0.9);
+                border: 3px solid #ff69b4;
+                border-radius: 20px; 
+                padding: 30px; 
+                margin-bottom: 20px;
+                box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4), inset 0 0 15px rgba(255, 182, 193, 0.5);
                 position: relative;
                 backdrop-filter: blur(10px);
-                animation: card-glow 4s ease-in-out infinite;
+                animation: card-float 4s ease-in-out infinite;
                 box-sizing: border-box;
                 width: 100%;
                 max-width: 100%;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
-            @keyframes card-glow {
-                0%, 100% { box-shadow: 0 0 30px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.1); }
-                50% { box-shadow: 0 0 40px rgba(0, 255, 0, 0.7), inset 0 0 30px rgba(0, 255, 0, 0.2); }
+            @keyframes card-float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
             }
-            .card::before {
-                content: ""; position: absolute; top: 0; left: 0;
-                width: 100%; height: 100%;
-                background: linear-gradient(45deg, transparent 49%, #00ff00 50%, transparent 51%);
-                opacity: 0.2; pointer-events: none;
-                animation: scan-line 3s linear infinite;
-            }
-            @keyframes scan-line {
-                0% { transform: translateX(-100%); }
-                100% { transform: translateX(100%); }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6), inset 0 0 20px rgba(255, 182, 193, 0.7);
             }
             .card-title {
-                font-size: 1.8rem; margin-bottom: 20px;
-                color: #00ff00; text-shadow: 0 0 5px #00ff00;
+                font-size: 1.8rem; 
+                margin-bottom: 20px;
+                color: #ff69b4; 
+                text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+                position: relative;
+                display: inline-block;
+            }
+            .card-title::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 50%;
+                height: 3px;
+                background: linear-gradient(to right, #ff69b4, #ffb6c1);
+                border-radius: 3px;
             }
             .client-grid {
-                display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 15px; margin: 20px 0;
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 15px; 
+                margin: 20px 0;
             }
             .client-btn {
-                background: rgba(0, 20, 0, 0.8);
-                border: 2px solid #00ff00;
-                padding: 15px 20px; color: #00ff00;
-                font-family: "Courier New", monospace; font-weight: bold;
-                cursor: pointer; transition: all 0.4s ease;
-                text-align: center; position: relative;
+                background: linear-gradient(to bottom, #ffb6c1, #ffc0cb);
+                border: 2px solid #ff69b4;
+                border-radius: 15px;
+                padding: 15px 20px; 
+                color: #ff1493;
+                font-family: "Courier New", monospace; 
+                font-weight: bold;
+                cursor: pointer; 
+                transition: all 0.4s ease;
+                text-align: center; 
+                position: relative;
                 overflow: hidden;
-                text-shadow: 0 0 5px #00ff00;
-                box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+                text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+                box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
             }
             .client-btn::before {
-                content: ""; position: absolute; top: 0; left: -100%;
-                width: 100%; height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(0,255,0,0.4), transparent);
+                content: ""; 
+                position: absolute; 
+                top: 0; 
+                left: -100%;
+                width: 100%; 
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
                 transition: left 0.6s ease;
             }
             .client-btn::after {
-                content: ""; position: absolute; top: 0; left: 0;
-                width: 100%; height: 100%;
-                background: linear-gradient(45deg, transparent 30%, rgba(0,255,0,0.1) 50%, transparent 70%);
+                content: ""; 
+                position: absolute; 
+                top: 0; 
+                left: 0;
+                width: 100%; 
+                height: 100%;
+                background: linear-gradient(45deg, transparent 30%, rgba(255, 182, 193, 0.3) 50%, transparent 70%);
                 opacity: 0;
                 transition: opacity 0.3s ease;
             }
-            .client-btn:hover::before { left: 100%; }
-            .client-btn:hover::after { opacity: 1; }
+            .client-btn:hover::before { 
+                left: 100%; 
+            }
+            .client-btn:hover::after { 
+                opacity: 1; 
+            }
             .client-btn:hover {
-                background: rgba(0, 255, 0, 0.3);
-                box-shadow: 0 0 25px #00ff00, 0 0 35px rgba(0, 255, 0, 0.5);
-                transform: translateY(-3px) scale(1.05);
-                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+                background: linear-gradient(to bottom, #ff69b4, #ff85a1);
+                box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6), 0 0 20px rgba(255, 105, 180, 0.4);
+                transform: translateY(-5px) scale(1.05);
+                text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
             }
             .generate-btn {
-                background: rgba(0, 255, 0, 0.15);
-                border: 2px solid #00ff00; padding: 15px 30px;
-                color: #00ff00; font-family: "Courier New", monospace;
-                font-weight: bold; cursor: pointer;
-                transition: all 0.4s ease; margin-right: 15px;
-                text-shadow: 0 0 8px #00ff00;
-                box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+                background: linear-gradient(to bottom, #ffb6c1, #ffc0cb);
+                border: 2px solid #ff69b4; 
+                border-radius: 15px;
+                padding: 15px 30px;
+                color: #ff1493; 
+                font-family: "Courier New", monospace;
+                font-weight: bold; 
+                cursor: pointer;
+                transition: all 0.4s ease; 
+                margin-right: 15px;
+                text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+                box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
                 position: relative;
                 overflow: hidden;
             }
             .generate-btn::before {
-                content: ""; position: absolute; top: 0; left: -100%;
-                width: 100%; height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(0,255,0,0.5), transparent);
+                content: ""; 
+                position: absolute; 
+                top: 0; 
+                left: -100%;
+                width: 100%; 
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
                 transition: left 0.8s ease;
             }
-            .generate-btn:hover::before { left: 100%; }
-            .generate-btn:hover {
-                background: rgba(0, 255, 0, 0.4);
-                box-shadow: 0 0 30px #00ff00, 0 0 40px rgba(0, 255, 0, 0.6);
-                transform: translateY(-4px) scale(1.08);
-                text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
+            .generate-btn:hover::before { 
+                left: 100%; 
             }
-            .atob('c3Vic2NyaXB0aW9u')-url {
-                background: rgba(0, 0, 0, 0.9);
-                border: 2px solid #00ff00; padding: 15px;
-                word-break: break-all; font-family: "Courier New", monospace;
-                color: #00ff00; margin-top: 20px; display: none;
-                box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.4), 0 0 20px rgba(0, 255, 0, 0.3);
-                border-radius: 5px;
+            .generate-btn:hover {
+                background: linear-gradient(to bottom, #ff69b4, #ff85a1);
+                box-shadow: 0 10px 30px rgba(255, 105, 180, 0.6), 0 0 25px rgba(255, 105, 180, 0.5);
+                transform: translateY(-6px) scale(1.08);
+                text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8);
+            }
+            .subscription-url {
+                background: rgba(255, 250, 250, 0.9);
+                border: 2px solid #ff69b4; 
+                border-radius: 15px;
+                padding: 15px;
+                word-break: break-all; 
+                font-family: "Courier New", monospace;
+                color: #ff1493; 
+                margin-top: 20px; 
+                display: none;
+                box-shadow: inset 0 0 15px rgba(255, 182, 193, 0.4), 0 0 20px rgba(255, 105, 180, 0.3);
+                border-radius: 10px;
                 animation: url-glow 2s ease-in-out infinite alternate;
                 position: relative;
                 overflow-wrap: break-word;
@@ -2273,38 +2348,31 @@
                 box-sizing: border-box;
             }
             @keyframes url-glow {
-                from { box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.4), 0 0 20px rgba(0, 255, 0, 0.3); }
-                to { box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.6), 0 0 30px rgba(0, 255, 0, 0.5); }
+                from { box-shadow: inset 0 0 15px rgba(255, 182, 193, 0.4), 0 0 20px rgba(255, 105, 180, 0.3); }
+                to { box-shadow: inset 0 0 20px rgba(255, 182, 193, 0.6), 0 0 30px rgba(255, 105, 180, 0.5); }
             }
-            .atob('c3Vic2NyaXB0aW9u')-url::before {
-                content: ""; position: absolute; top: 0; left: -100%;
-                width: 100%; height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(0,255,0,0.1), transparent);
-                animation: url-scan 3s linear infinite;
+            .pink-text {
+                position: fixed; 
+                top: 20px; 
+                right: 20px;
+                color: #ff69b4; 
+                font-family: "Courier New", monospace;
+                font-size: 0.8rem; 
+                text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.6);
+                animation: text-pulse 2s infinite alternate;
             }
-            @keyframes url-scan {
-                0% { left: -100%; }
-                100% { left: 100%; }
-            }
-            .matrix-text {
-                position: fixed; top: 20px; right: 20px;
-                color: #00ff00; font-family: "Courier New", monospace;
-                font-size: 0.8rem; opacity: 0.6;
-                animation: matrix-flicker 3s infinite;
-            }
-            @keyframes matrix-flicker {
-                0%, 100% { opacity: 0.6; }
-                50% { opacity: 1; }
+            @keyframes text-pulse {
+                0% { opacity: 0.7; }
+                100% { opacity: 1; }
             }
         </style>
     </head>
     <body>
-        <div class="matrix-bg"></div>
-        <div class="matrix-rain"></div>
-        <div class="matrix-code-rain" id="matrixCodeRain"></div>
-            <div class="matrix-text">${t.terminal}</div>
+        <div class="pink-bg"></div>
+        <div class="floating-hearts" id="floatingHearts"></div>
+            <div class="pink-text">${t.terminal}</div>
             <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-                <select id="languageSelector" style="background: rgba(0, 20, 0, 0.9); border: 2px solid #00ff00; color: #00ff00; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 0 0 5px #00ff00; box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);" onchange="changeLanguage(this.value)">
+                <select id="languageSelector" style="background: rgba(255, 182, 193, 0.9); border: 2px solid #ff69b4; color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);" onchange="changeLanguage(this.value)">
                     <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
                     <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
                 </select>
@@ -2328,7 +2396,7 @@
                     <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'NEKORAY')">NEKORAY</button>
                     <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'Shadowrocket')">Shadowrocket</button>
                 </div>
-                <div class=atob('c3Vic2NyaXB0aW9uLXVybA==') id="clientSubscriptionUrl"></div>
+                <div class="subscription-url" id="clientSubscriptionUrl"></div>
             </div>
             <div class="card">
                     <h2 class="card-title">${t.systemStatus}</h2>
@@ -2740,46 +2808,22 @@
                 }
             }
             
-            function createMatrixRain() {
-                const matrixContainer = document.getElementById('matrixCodeRain');
-                const matrixChars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-                const columns = Math.floor(window.innerWidth / 18);
+            function createFloatingHearts() {
+                const heartsContainer = document.getElementById('floatingHearts');
+                const heartCount = 15;
                 
-                for (let i = 0; i < columns; i++) {
-                    const column = document.createElement('div');
-                    column.className = 'matrix-column';
-                    column.style.left = (i * 18) + 'px';
-                    column.style.animationDelay = Math.random() * 15 + 's';
-                    column.style.animationDuration = (Math.random() * 15 + 8) + 's';
-                    column.style.fontSize = (Math.random() * 4 + 12) + 'px';
-                    column.style.opacity = Math.random() * 0.8 + 0.2;
+                for (let i = 0; i < heartCount; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '❤';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                    heart.style.animationDelay = Math.random() * 5 + 's';
+                    heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                    heart.style.opacity = Math.random() * 0.5 + 0.3;
                     
-                    let text = '';
-                    const charCount = Math.floor(Math.random() * 30 + 20);
-                    for (let j = 0; j < charCount; j++) {
-                        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-                        const brightness = Math.random() > 0.1 ? '#00ff00' : '#00aa00';
-                        text += '<span style="color: ' + brightness + ';">' + char + '</span><br>';
-                    }
-                    column.innerHTML = text;
-                    matrixContainer.appendChild(column);
+                    heartsContainer.appendChild(heart);
                 }
-                
-                setInterval(function() {
-                    const columns = matrixContainer.querySelectorAll('.matrix-column');
-                    columns.forEach(function(column) {
-                        if (Math.random() > 0.95) {
-                            const chars = column.querySelectorAll('span');
-                            if (chars.length > 0) {
-                                const randomChar = chars[Math.floor(Math.random() * chars.length)];
-                                randomChar.style.color = '#ffffff';
-                                setTimeout(function() {
-                                    randomChar.style.color = '#00ff00';
-                                }, 200);
-                            }
-                        }
-                    });
-                }, 100);
             }
             
             async function checkSystemStatus() {
@@ -3406,7 +3450,7 @@
             }
             
             document.addEventListener('DOMContentLoaded', function() {
-                createMatrixRain();
+                createFloatingHearts();
                 checkSystemStatus();
                 checkKVStatus();
                 
