@@ -822,11 +822,12 @@
             }
             .terminal {
                 width: 90%; max-width: 800px; height: 500px;
-                background: rgba(255, 250, 250, 0.85);
-                border: 3px solid #ff69b4;
+                background: rgba(255, 255, 255, 0.25);
+                border: 3px solid rgba(255, 105, 180, 0.5);
                 border-radius: 20px;
-                box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4), inset 0 0 15px rgba(255, 182, 193, 0.5);
-                backdrop-filter: blur(10px);
+                box-shadow: 0 8px 32px rgba(139, 0, 139, 0.2), inset 0 4px 8px rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
                 position: relative; z-index: 1;
                 overflow: hidden;
                 transform: translateY(100px);
@@ -843,11 +844,14 @@
                 }
             }
             .terminal-header {
-                background: linear-gradient(to right, #ffb6c1, #ff69b4);
+                background: rgba(255, 255, 255, 0.3);
                 padding: 15px 20px;
-                border-bottom: 3px solid #ff69b4;
+                border-bottom: 3px solid rgba(255, 105, 180, 0.5);
                 display: flex; align-items: center;
                 border-radius: 17px 17px 0 0;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2);
             }
             .terminal-buttons {
                 display: flex; gap: 10px;
@@ -876,11 +880,15 @@
                 font-weight: bold;
             }
             .terminal-input {
-                background: rgba(255, 182, 193, 0.2); border: 2px solid #ffb6c1; 
+                background: rgba(255, 255, 255, 0.3); 
+                border: 2px solid rgba(255, 105, 180, 0.5); 
                 border-radius: 10px; outline: none;
-                color: #ff1493; font-family: "Courier New", monospace;
+                color: #ff69b4; font-family: "Courier New", monospace;
                 font-size: 15px; flex: 1; padding: 8px 12px;
                 caret-color: #ff69b4;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
             }
             .terminal-input::placeholder {
                 color: #ff69b4; opacity: 0.7;
@@ -927,7 +935,7 @@
         <div class="floating-hearts" id="floatingHearts"></div>
             <div class="pink-text">${t.terminal}</div>
             <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-                <select id="languageSelector" style="background: rgba(255, 182, 193, 0.9); border: 2px solid #ff69b4; color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);" onchange="changeLanguage(this.value)">
+                <select id="languageSelector" style="background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);" onchange="changeLanguage(this.value)">
                     <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
                     <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
                 </select>
@@ -2081,7 +2089,6 @@
                 background-size: cover;
                 color: #ff1493; min-height: 100vh;
                 overflow-x: hidden; position: relative;
-                animation: bg-pulse 3s ease-in-out infinite alternate;
             }
             .page-overlay {
                 position: fixed;
@@ -2089,7 +2096,9 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(135deg, rgba(255, 230, 242, 0.7), rgba(255, 182, 193, 0.7), rgba(255, 105, 180, 0.7)); 
+                background: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
                 z-index: -1;
             }
             @keyframes bg-pulse {
@@ -2184,14 +2193,15 @@
                 text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
             }
             .card {
-                background: rgba(255, 250, 250, 0.9);
-                border: 3px solid #ff69b4;
+                background: rgba(255, 255, 255, 0.25);
+                border: 3px solid rgba(255, 105, 180, 0.5);
                 border-radius: 20px; 
                 padding: 30px; 
                 margin-bottom: 20px;
-                box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4), inset 0 0 15px rgba(255, 182, 193, 0.5);
+                box-shadow: 0 8px 32px rgba(139, 0, 139, 0.2), inset 0 4px 8px rgba(255, 255, 255, 0.3);
                 position: relative;
-                backdrop-filter: blur(10px);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
                 animation: card-float 4s ease-in-out infinite;
                 box-sizing: border-box;
                 width: 100%;
@@ -2231,8 +2241,8 @@
                 margin: 20px 0;
             }
             .client-btn {
-                background: linear-gradient(to bottom, #ffb6c1, #ffc0cb);
-                border: 2px solid #ff69b4;
+                background: rgba(255, 255, 255, 0.3);
+                border: 2px solid rgba(255, 105, 180, 0.5);
                 border-radius: 15px;
                 padding: 15px 20px; 
                 color: #ff1493;
@@ -2244,7 +2254,9 @@
                 position: relative;
                 overflow: hidden;
                 text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-                box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+                box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
             }
             .client-btn::before {
                 content: ""; 
@@ -2280,8 +2292,8 @@
                 text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
             }
             .generate-btn {
-                background: linear-gradient(to bottom, #ffb6c1, #ffc0cb);
-                border: 2px solid #ff69b4; 
+                background: rgba(255, 255, 255, 0.3);
+                border: 2px solid rgba(255, 105, 180, 0.5); 
                 border-radius: 15px;
                 padding: 15px 30px;
                 color: #ff1493; 
@@ -2291,9 +2303,11 @@
                 transition: all 0.4s ease; 
                 margin-right: 15px;
                 text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-                box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+                box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2);
                 position: relative;
                 overflow: hidden;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
             }
             .generate-btn::before {
                 content: ""; 
@@ -2315,16 +2329,15 @@
                 text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8);
             }
             .subscription-url {
-                background: rgba(255, 250, 250, 0.9);
-                border: 2px solid #ff69b4; 
-                border-radius: 15px;
+                background: rgba(255, 255, 255, 0.25);
+                border: 2px solid rgba(255, 105, 180, 0.5); 
                 padding: 15px;
                 word-break: break-all; 
                 font-family: "Courier New", monospace;
                 color: #ff1493; 
                 margin-top: 20px; 
                 display: none;
-                box-shadow: inset 0 0 15px rgba(255, 182, 193, 0.4), 0 0 20px rgba(255, 105, 180, 0.3);
+                box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.3);
                 border-radius: 10px;
                 animation: url-glow 2s ease-in-out infinite alternate;
                 position: relative;
@@ -2332,6 +2345,8 @@
                 overflow-x: auto;
                 max-width: 100%;
                 box-sizing: border-box;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
             }
             @keyframes url-glow {
                 from { box-shadow: inset 0 0 15px rgba(255, 182, 193, 0.4), 0 0 20px rgba(255, 105, 180, 0.3); }
@@ -2358,7 +2373,7 @@
         <div class="floating-hearts" id="floatingHearts"></div>
             <div class="pink-text">${t.terminal}</div>
             <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
-                <select id="languageSelector" style="background: rgba(255, 182, 193, 0.9); border: 2px solid #ff69b4; color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);" onchange="changeLanguage(this.value)">
+                <select id="languageSelector" style="background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff1493; padding: 8px 12px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);" onchange="changeLanguage(this.value)">
                     <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
                     <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
                 </select>
@@ -2386,7 +2401,7 @@
             </div>
             <div class="card">
                     <h2 class="card-title">${t.systemStatus}</h2>
-                                    <div id="systemStatus" style="margin: 20px 0; padding: 15px; background: rgba(255, 182, 193, 0.3); border: 2px solid #ff69b4; box-shadow: 0 0 20px rgba(255, 105, 180, 0.3), inset 0 0 15px rgba(255, 182, 193, 0.1); position: relative; overflow: hidden; border-radius: 15px;">
+                                    <div id="systemStatus" style="margin: 20px 0; padding: 15px; background: rgba(255, 255, 255, 0.25); border: 2px solid rgba(255, 105, 180, 0.5); box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.3); position: relative; overflow: hidden; border-radius: 15px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
                         <div style="color: #ff69b4; margin-bottom: 15px; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">[ ${t.checking} ]</div>
                         <div id="regionStatus" style="margin: 8px 0; color: #ff69b4; font-family: 'Courier New', monospace; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.workerRegion}${t.checking}</div>
                         <div id="geoInfo" style="margin: 8px 0; color: #ff85a1; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.detectionMethod}${t.checking}</div>
@@ -2398,14 +2413,14 @@
             </div>
             <div class="card" id="configCard" style="display: none;">
                     <h2 class="card-title">${t.configManagement}</h2>
-                <div id="kvStatus" style="margin-bottom: 20px; padding: 10px; background: rgba(255, 182, 193, 0.3); border: 1px solid #ff69b4; color: #ff69b4; border-radius: 10px;">
+                <div id="kvStatus" style="margin-bottom: 20px; padding: 10px; background: rgba(255, 255, 255, 0.25); border: 1px solid rgba(255, 105, 180, 0.5); color: #ff69b4; border-radius: 10px; box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
                         ${t.kvStatusChecking}
                 </div>
                 <div id="configContent" style="display: none;">
                     <form id="regionForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.specifyRegion}</label>
-                            <select id="wkRegion" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);">
+                            <select id="wkRegion" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
                                     <option value="">${t.autoDetect}</option>
                                     <option value="US">${t.regionNames.US}</option>
                                     <option value="SG">${t.regionNames.SG}</option>
@@ -2446,7 +2461,7 @@
                                 </div>
                                 <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 105, 180, 0.3);">
                                         <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-size: 0.95rem;">${t.trojanPassword}</label>
-                                        <input type="text" id="tp" placeholder="${t.trojanPasswordPlaceholder}" style="width: 100%; padding: 10px; background: rgba(255, 250, 250, 0.9); border: 1px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 13px; border-radius: 8px;">
+                                        <input type="text" id="tp" placeholder="${t.trojanPasswordPlaceholder}" style="width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 13px; border-radius: 8px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);">
                                         <small style="color: #ff85a1; font-size: 0.8rem; display: block; margin-top: 5px;">${t.trojanPasswordHint}</small>
                                 </div>
                                     <small style="color: #00aa00; font-size: 0.85rem; display: block; margin-top: 10px;">${t.protocolHint}</small>
@@ -2455,32 +2470,32 @@
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.customHomepage}</label>
-                                <input type="text" id="customHomepage" placeholder="${t.customHomepagePlaceholder}" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                                <input type="text" id="customHomepage" placeholder="${t.customHomepagePlaceholder}" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);">
                                 <small style="color: #ff85a1; font-size: 0.85rem;">${t.customHomepageHint}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.customPath}</label>
-                                <input type="text" id="customPath" placeholder="${isFarsi ? 'مثال: /mypath یا خالی بگذارید تا از UUID استفاده شود' : '例如: /mypath 或留空使用 UUID'}" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                                <input type="text" id="customPath" placeholder="${isFarsi ? 'مثال: /mypath یا خالی بگذارید تا از UUID استفاده شود' : '例如: /mypath 或留空使用 UUID'}" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);">
                                 <small style="color: #ff85a1; font-size: 0.85rem;">${isFarsi ? 'مسیر اشتراک سفارشی. اگر خالی بگذارید از UUID به عنوان مسیر استفاده می‌شود.' : '自定义订阅路径。留空则使用 UUID 作为路径。'}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.customIP}</label>
-                                <input type="text" id="customIP" placeholder="${isFarsi ? 'مثال: 1.2.3.4:443' : '例如: 1.2.3.4:443'}" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                                <input type="text" id="customIP" placeholder="${isFarsi ? 'مثال: 1.2.3.4:443' : '例如: 1.2.3.4:443'}" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);">
                                 <small style="color: #ff85a1; font-size: 0.85rem;">${isFarsi ? 'آدرس و پورت ProxyIP سفارشی' : '自定义ProxyIP地址和端口'}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.preferredIPs}</label>
-                                <input type="text" id="preferredIPs" placeholder="${isFarsi ? 'مثال: 1.2.3.4:443#گره هنگ‌کنگ,5.6.7.8:80#گره آمریکا,example.com:8443#گره سنگاپور' : '例如: 1.2.3.4:443#香港节点,5.6.7.8:80#美国节点,example.com:8443#新加坡节点'}" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                                <input type="text" id="preferredIPs" placeholder="${isFarsi ? 'مثال: 1.2.3.4:443#گره هنگ‌کنگ,5.6.7.8:80#گره آمریکا,example.com:8443#گره سنگاپور' : '例如: 1.2.3.4:443#香港节点,5.6.7.8:80#美国节点,example.com:8443#新加坡节点'}" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);">
                                 <small style="color: #ff85a1; font-size: 0.85rem;">${isFarsi ? 'فرمت: IP:پورت#نام گره یا IP:پورت (بدون # از نام پیش‌فرض استفاده می‌شود). پشتیبانی از چندین مورد، با کاما جدا می‌شوند. <span style="color: #ffaa00;">IP های اضافه شده از طریق API به طور خودکار در اینجا نمایش داده می‌شوند.</span>' : '格式: IP:端口#节点名称 或 IP:端口 (无#则使用默认名称)。支持多个，用逗号分隔。<span style="color: #ffaa00;">API添加的IP会自动显示在这里。</span>'}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.preferredIPsURL}</label>
-                                <input type="text" id="preferredIPsURL" placeholder="${isFarsi ? 'پیش‌فرض: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt' : '默认: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt'}" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                                <input type="text" id="preferredIPsURL" placeholder="${isFarsi ? 'پیش‌فرض: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt' : '默认: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt'}" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);">
                                 <small style="color: #ff85a1; font-size: 0.85rem;">${isFarsi ? 'URL منبع لیست IP ترجیحی سفارشی، اگر خالی بگذارید از آدرس پیش‌فرض استفاده می‌شود' : '自定义优选IP列表来源URL，留空则使用默认地址'}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.socks5Config}</label>
-                                <input type="text" id="socksConfig" placeholder="${isFarsi ? 'مثال: user:pass@host:port یا host:port' : '例如: user:pass@host:port 或 host:port'}" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                                <input type="text" id="socksConfig" placeholder="${isFarsi ? 'مثال: user:pass@host:port یا host:port' : '例如: user:pass@host:port 或 host:port'}" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);">
                                 <small style="color: #ff85a1; font-size: 0.85rem;">${isFarsi ? 'آدرس پروکسی SOCKS5، برای انتقال تمام ترافیک خروجی استفاده می‌شود' : 'SOCKS5代理地址，用于转发所有出站流量'}</small>
                         </div>
                             <button type="submit" style="background: linear-gradient(to bottom, #ffb6c1, #ffc0cb); border: 2px solid #ff69b4; border-radius: 15px; padding: 12px 24px; color: #ff1493; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); transition: all 0.4s ease; box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);">${t.saveConfig}</button>
@@ -2519,7 +2534,7 @@
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.allowAPIManagement}</label>
-                            <select id="apiEnabled" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                            <select id="apiEnabled" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
                                     <option value="">${t.apiEnabledDefault}</option>
                                     <option value="yes">${t.apiEnabledYes}</option>
                             </select>
@@ -2527,7 +2542,7 @@
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.regionMatching}</label>
-                            <select id="regionMatching" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                            <select id="regionMatching" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
                                     <option value="">${t.regionMatchingDefault}</option>
                                     <option value="no">${t.regionMatchingNo}</option>
                             </select>
@@ -2535,7 +2550,7 @@
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.downgradeControl}</label>
-                            <select id="downgradeControl" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                            <select id="downgradeControl" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
                                     <option value="">${t.downgradeControlDefault}</option>
                                     <option value="no">${t.downgradeControlNo}</option>
                             </select>
@@ -2543,7 +2558,7 @@
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.tlsControl}</label>
-                            <select id="portControl" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                            <select id="portControl" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
                                     <option value="">${t.tlsControlDefault}</option>
                                     <option value="yes">${t.tlsControlYes}</option>
                             </select>
@@ -2551,7 +2566,7 @@
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.preferredControl}</label>
-                            <select id="preferredControl" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                            <select id="preferredControl" style="width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.3); border: 2px solid rgba(255, 105, 180, 0.5); color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
                                     <option value="">${t.preferredControlDefault}</option>
                                     <option value="yes">${t.preferredControlYes}</option>
                             </select>
