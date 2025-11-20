@@ -923,7 +923,7 @@
         </style>
     </head>
     <body>
-        <div class="pink-bg"></div>
+        <div class="page-overlay"></div>
         <div class="floating-hearts" id="floatingHearts"></div>
             <div class="pink-text">${t.terminal}</div>
             <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
@@ -2077,10 +2077,20 @@
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body {
                 font-family: "Courier New", monospace;
-                background: linear-gradient(135deg, #ffe6f2, #ffb6c1, #ff69b4); 
+                background: url('https://youke1.picui.cn/s1/2025/11/20/691f00bb51099.jpg') no-repeat center center fixed;
+                background-size: cover;
                 color: #ff1493; min-height: 100vh;
                 overflow-x: hidden; position: relative;
                 animation: bg-pulse 3s ease-in-out infinite alternate;
+            }
+            .page-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, rgba(255, 230, 242, 0.7), rgba(255, 182, 193, 0.7), rgba(255, 105, 180, 0.7)); 
+                z-index: -1;
             }
             @keyframes bg-pulse {
                 0% { background: linear-gradient(135deg, #ffe6f2, #ffb6c1); }
@@ -2344,7 +2354,7 @@
         </style>
     </head>
     <body>
-        <div class="pink-bg"></div>
+        <div class="page-overlay"></div>
         <div class="floating-hearts" id="floatingHearts"></div>
             <div class="pink-text">${t.terminal}</div>
             <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
@@ -2394,8 +2404,8 @@
                 <div id="configContent" style="display: none;">
                     <form id="regionForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
-                                <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">${t.specifyRegion}</label>
-                            <select id="wkRegion" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
+                                <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.specifyRegion}</label>
+                            <select id="wkRegion" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px; box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);">
                                     <option value="">${t.autoDetect}</option>
                                     <option value="US">${t.regionNames.US}</option>
                                     <option value="SG">${t.regionNames.SG}</option>
@@ -2464,14 +2474,14 @@
                                 <small style="color: #ff85a1; font-size: 0.85rem;">${isFarsi ? 'فرمت: IP:پورت#نام گره یا IP:پورت (بدون # از نام پیش‌فرض استفاده می‌شود). پشتیبانی از چندین مورد، با کاما جدا می‌شوند. <span style="color: #ffaa00;">IP های اضافه شده از طریق API به طور خودکار در اینجا نمایش داده می‌شوند.</span>' : '格式: IP:端口#节点名称 或 IP:端口 (无#则使用默认名称)。支持多个，用逗号分隔。<span style="color: #ffaa00;">API添加的IP会自动显示在这里。</span>'}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">${t.preferredIPsURL}</label>
-                                <input type="text" id="preferredIPsURL" placeholder="${isFarsi ? 'پیش‌فرض: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt' : '默认: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt'}" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                                <small style="color: #00aa00; font-size: 0.85rem;">${isFarsi ? 'URL منبع لیست IP ترجیحی سفارشی، اگر خالی بگذارید از آدرس پیش‌فرض استفاده می‌شود' : '自定义优选IP列表来源URL，留空则使用默认地址'}</small>
+                                <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.preferredIPsURL}</label>
+                                <input type="text" id="preferredIPsURL" placeholder="${isFarsi ? 'پیش‌فرض: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt' : '默认: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt'}" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                                <small style="color: #ff85a1; font-size: 0.85rem;">${isFarsi ? 'URL منبع لیست IP ترجیحی سفارشی، اگر خالی بگذارید از آدرس پیش‌فرض استفاده می‌شود' : '自定义优选IP列表来源URL，留空则使用默认地址'}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">${t.socks5Config}</label>
-                                <input type="text" id="socksConfig" placeholder="${isFarsi ? 'مثال: user:pass@host:port یا host:port' : '例如: user:pass@host:port 或 host:port'}" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                                <small style="color: #00aa00; font-size: 0.85rem;">${isFarsi ? 'آدرس پروکسی SOCKS5، برای انتقال تمام ترافیک خروجی استفاده می‌شود' : 'SOCKS5代理地址，用于转发所有出站流量'}</small>
+                                <label style="display: block; margin-bottom: 8px; color: #ff69b4; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.socks5Config}</label>
+                                <input type="text" id="socksConfig" placeholder="${isFarsi ? 'مثال: user:pass@host:port یا host:port' : '例如: user:pass@host:port 或 host:port'}" style="width: 100%; padding: 12px; background: rgba(255, 250, 250, 0.9); border: 2px solid #ff69b4; color: #ff69b4; font-family: 'Courier New', monospace; font-size: 14px; border-radius: 10px;">
+                                <small style="color: #ff85a1; font-size: 0.85rem;">${isFarsi ? 'آدرس پروکسی SOCKS5، برای انتقال تمام ترافیک خروجی استفاده می‌شود' : 'SOCKS5代理地址，用于转发所有出站流量'}</small>
                         </div>
                             <button type="submit" style="background: linear-gradient(to bottom, #ffb6c1, #ffc0cb); border: 2px solid #ff69b4; border-radius: 15px; padding: 12px 24px; color: #ff1493; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); transition: all 0.4s ease; box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);">${t.saveConfig}</button>
                     </form>
