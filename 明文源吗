@@ -2077,7 +2077,7 @@
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body {
                 font-family: "Courier New", monospace;
-                background: url('https://youke1.picui.cn/s1/2025/11/20/691f00bb51099.jpg') no-repeat center center fixed;
+                background: url('https://youke1.picui.cn/s1/2025/11/20/691f0586a9903.png') no-repeat center center fixed;
                 background-size: cover;
                 color: #ff1493; min-height: 100vh;
                 overflow-x: hidden; position: relative;
