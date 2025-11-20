@@ -822,16 +822,57 @@
             }
             .terminal {
                 width: 90%; max-width: 800px; height: 500px;
-                background: rgba(255, 255, 255, 0.25);
-                border: 3px solid rgba(255, 105, 180, 0.5);
+                background: rgba(255, 255, 255, 0.2);
+                border: 3px solid rgba(255, 105, 180, 0.4);
                 border-radius: 20px;
-                box-shadow: 0 8px 32px rgba(139, 0, 139, 0.2), inset 0 4px 8px rgba(255, 255, 255, 0.3);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
+                box-shadow: 0 8px 32px rgba(255, 182, 193, 0.3), inset 0 4px 8px rgba(255, 255, 255, 0.4);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
                 position: relative; z-index: 1;
                 overflow: hidden;
                 transform: translateY(100px);
                 animation: pop-up 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            }
+            .blog-header {
+                text-align: center;
+                margin-bottom: 30px;
+                position: relative;
+            }
+            .blog-title {
+                font-size: 2.5rem;
+                color: #ff1493;
+                text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+                margin-bottom: 10px;
+                position: relative;
+                display: inline-block;
+            }
+            .blog-title::after {
+                content: ' ✨';
+                display: inline-block;
+                animation: twinkle 1.5s infinite;
+            }
+            .blog-subtitle {
+                color: #ff69b4;
+                font-size: 1.2rem;
+                text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            }
+            .pink-heart {
+                color: #ff69b4;
+                animation: heartbeat 1.2s infinite;
+            }
+            @keyframes twinkle {
+                0%, 100% { opacity: 1; transform: scale(1); }
+                50% { opacity: 0.7; transform: scale(1.1); }
+            }
+            @keyframes heartbeat {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.2); }
+            }
+            .emoji-divider {
+                text-align: center;
+                font-size: 1.5rem;
+                color: #ff69b4;
+                margin: 20px 0;
             }
             @keyframes pop-up {
                 0% {
@@ -844,14 +885,22 @@
                 }
             }
             .terminal-header {
-                background: rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.25);
                 padding: 15px 20px;
-                border-bottom: 3px solid rgba(255, 105, 180, 0.5);
+                border-bottom: 3px solid rgba(255, 105, 180, 0.4);
                 display: flex; align-items: center;
                 border-radius: 17px 17px 0 0;
                 backdrop-filter: blur(4px);
                 -webkit-backdrop-filter: blur(4px);
-                box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2);
+                box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
+            }
+            .terminal-title {
+                margin-left: 15px; color: #ff69b4;
+                font-size: 16px; font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            }
+            .terminal-title::before {
+                content: '🎀 ';
             }
             .terminal-buttons {
                 display: flex; gap: 10px;
@@ -906,16 +955,28 @@
                 51%, 100% { opacity: 0; }
             }
             .terminal-output {
-                color: #ff85a1; margin: 8px 0;
+                color: #ff69b4; margin: 8px 0;
                 font-weight: 500;
+                position: relative;
+            }
+            .terminal-output::before {
+                content: '🌸 ';
             }
             .terminal-error {
                 color: #ff6b81; margin: 8px 0;
                 font-weight: bold;
+                position: relative;
+            }
+            .terminal-error::before {
+                content: '⚠️ ';
             }
             .terminal-success {
                 color: #ff85a1; margin: 8px 0;
                 font-weight: bold;
+                position: relative;
+            }
+            .terminal-success::before {
+                content: '💖 ';
             }
             .pink-text {
                 position: fixed; top: 20px; right: 20px;
@@ -952,15 +1013,15 @@
             <div class="terminal-body" id="terminalBody">
                 <div class="terminal-line">
                     <span class="terminal-prompt">root:~$</span>
-                        <span class="terminal-output">${t.congratulations}</span>
+                        <span class="terminal-output">🌸 ${t.congratulations}</span>
                 </div>
                 <div class="terminal-line">
                     <span class="terminal-prompt">root:~$</span>
-                        <span class="terminal-output">${cp && cp.trim() ? t.enterD : t.enterU}</span>
+                        <span class="terminal-output">💖 ${cp && cp.trim() ? t.enterD : t.enterU}</span>
                 </div>
                 <div class="terminal-line">
                     <span class="terminal-prompt">root:~$</span>
-                        <span class="terminal-output">${t.command}${cp && cp.trim() ? t.path : t.uuid}]</span>
+                        <span class="terminal-output">✨ ${t.command}${cp && cp.trim() ? t.path : t.uuid}]</span>
                 </div>
                 <div class="terminal-line">
                     <span class="terminal-prompt">root:~$</span>
@@ -2096,10 +2157,61 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(5px);
-                -webkit-backdrop-filter: blur(5px);
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(3px);
+                -webkit-backdrop-filter: blur(3px);
                 z-index: -1;
+            }
+            @media (max-width: 768px) {
+                .page-overlay {
+                    backdrop-filter: blur(2px);
+                    -webkit-backdrop-filter: blur(2px);
+                    background: rgba(255, 255, 255, 0.05);
+                }
+                .card {
+                    margin: 15px;
+                    padding: 20px;
+                }
+                .terminal {
+                    width: 95%;
+                    height: 400px;
+                    margin: 10px;
+                }
+                .client-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                    gap: 10px;
+                }
+                .client-btn {
+                    padding: 12px 15px;
+                    font-size: 0.9rem;
+                }
+                .title {
+                    font-size: 2.5rem;
+                }
+                .blog-intro {
+                    padding: 15px;
+                    margin: 15px 0;
+                }
+            }
+            @media (max-width: 480px) {
+                .title {
+                    font-size: 2rem;
+                }
+                .subtitle {
+                    font-size: 1rem;
+                }
+                .card {
+                    padding: 15px;
+                }
+                .terminal {
+                    height: 350px;
+                }
+                .terminal-header {
+                    padding: 10px 15px;
+                }
+                .terminal-title {
+                    font-size: 14px;
+                }
             }
             @keyframes bg-pulse {
                 0% { background: linear-gradient(135deg, #ffe6f2, #ffb6c1); }
@@ -2178,6 +2290,32 @@
                 background-clip: text;
                 text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
             }
+            .blog-intro {
+                text-align: center;
+                margin: 20px 0 40px 0;
+                padding: 20px;
+                background: rgba(255, 255, 255, 0.15);
+                border-radius: 15px;
+                border: 2px solid rgba(255, 182, 193, 0.4);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            }
+            .blog-intro p {
+                margin: 10px 0;
+                color: #ff69b4;
+                font-size: 1.1rem;
+                text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            }
+            .blog-intro p:first-child::before {
+                content: '🌸 ';
+            }
+            .blog-intro p:nth-child(2)::before {
+                content: '💖 ';
+            }
+            .blog-intro p:last-child::before {
+                content: '✨ ';
+            }
             @keyframes pink-glow {
                 from { text-shadow: 2px 2px 10px rgba(255, 182, 193, 0.8), 2px 2px 20px rgba(255, 105, 180, 0.6); }
                 to { text-shadow: 2px 2px 20px rgba(255, 182, 193, 1), 2px 2px 30px rgba(255, 105, 180, 0.8); }
@@ -2193,20 +2331,32 @@
                 text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
             }
             .card {
-                background: rgba(255, 255, 255, 0.25);
-                border: 3px solid rgba(255, 105, 180, 0.5);
+                background: rgba(255, 255, 255, 0.2);
+                border: 3px solid rgba(255, 105, 180, 0.4);
                 border-radius: 20px; 
                 padding: 30px; 
                 margin-bottom: 20px;
-                box-shadow: 0 8px 32px rgba(139, 0, 139, 0.2), inset 0 4px 8px rgba(255, 255, 255, 0.3);
+                box-shadow: 0 8px 32px rgba(255, 182, 193, 0.3), inset 0 4px 8px rgba(255, 255, 255, 0.4);
                 position: relative;
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
                 animation: card-float 4s ease-in-out infinite;
                 box-sizing: border-box;
                 width: 100%;
                 max-width: 100%;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card::before {
+                content: '🌸';
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                font-size: 1.2rem;
+                animation: float-icon 3s infinite;
+            }
+            @keyframes float-icon {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
             }
             @keyframes card-float {
                 0%, 100% { transform: translateY(0); }
@@ -2223,6 +2373,13 @@
                 text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
                 position: relative;
                 display: inline-block;
+            }
+            .card-title::before {
+                content: '🌸 ';
+                position: absolute;
+                left: -25px;
+                top: 0;
+                animation: float-icon 3s infinite;
             }
             .card-title::after {
                 content: '';
@@ -2241,8 +2398,8 @@
                 margin: 20px 0;
             }
             .client-btn {
-                background: rgba(255, 255, 255, 0.3);
-                border: 2px solid rgba(255, 105, 180, 0.5);
+                background: rgba(255, 255, 255, 0.25);
+                border: 2px solid rgba(255, 105, 180, 0.4);
                 border-radius: 15px;
                 padding: 15px 20px; 
                 color: #ff1493;
@@ -2254,7 +2411,7 @@
                 position: relative;
                 overflow: hidden;
                 text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-                box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2);
+                box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
                 backdrop-filter: blur(4px);
                 -webkit-backdrop-filter: blur(4px);
             }
@@ -2269,31 +2426,25 @@
                 transition: left 0.6s ease;
             }
             .client-btn::after {
-                content: ""; 
+                content: "💖"; 
                 position: absolute; 
-                top: 0; 
-                left: 0;
-                width: 100%; 
-                height: 100%;
-                background: linear-gradient(45deg, transparent 30%, rgba(255, 182, 193, 0.3) 50%, transparent 70%);
-                opacity: 0;
-                transition: opacity 0.3s ease;
+                top: 5px; 
+                right: 5px;
+                font-size: 0.8rem;
+                opacity: 0.7;
             }
             .client-btn:hover::before { 
                 left: 100%; 
             }
-            .client-btn:hover::after { 
-                opacity: 1; 
-            }
             .client-btn:hover {
-                background: linear-gradient(to bottom, #ff69b4, #ff85a1);
-                box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6), 0 0 20px rgba(255, 105, 180, 0.4);
+                background: rgba(255, 255, 255, 0.4);
+                box-shadow: 0 8px 25px rgba(255, 182, 193, 0.5), 0 0 20px rgba(255, 182, 193, 0.4);
                 transform: translateY(-5px) scale(1.05);
-                text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+                text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8);
             }
             .generate-btn {
-                background: rgba(255, 255, 255, 0.3);
-                border: 2px solid rgba(255, 105, 180, 0.5); 
+                background: rgba(255, 255, 255, 0.25);
+                border: 2px solid rgba(255, 105, 180, 0.4); 
                 border-radius: 15px;
                 padding: 15px 30px;
                 color: #ff1493; 
@@ -2303,7 +2454,7 @@
                 transition: all 0.4s ease; 
                 margin-right: 15px;
                 text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-                box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2);
+                box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
                 position: relative;
                 overflow: hidden;
                 backdrop-filter: blur(4px);
@@ -2319,12 +2470,20 @@
                 background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
                 transition: left 0.8s ease;
             }
+            .generate-btn::after {
+                content: "🌸"; 
+                position: absolute; 
+                top: 3px; 
+                right: 8px;
+                font-size: 1rem;
+                animation: float-icon 2s infinite;
+            }
             .generate-btn:hover::before { 
                 left: 100%; 
             }
             .generate-btn:hover {
-                background: linear-gradient(to bottom, #ff69b4, #ff85a1);
-                box-shadow: 0 10px 30px rgba(255, 105, 180, 0.6), 0 0 25px rgba(255, 105, 180, 0.5);
+                background: rgba(255, 255, 255, 0.4);
+                box-shadow: 0 10px 30px rgba(255, 182, 193, 0.5), 0 0 25px rgba(255, 182, 193, 0.4);
                 transform: translateY(-6px) scale(1.08);
                 text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.8);
             }
@@ -2379,9 +2538,14 @@
                 </select>
             </div>
         <div class="container">
-            <div class="header">
+            <div class="blog-header">
                     <h1 class="title">${t.title}</h1>
                     <p class="subtitle">${t.subtitle}</p>
+                    <div class="blog-intro">
+                        <p>${t.congratulations}</p>
+                        <p>${cp && cp.trim() ? t.enterD : t.enterU}</p>
+                        <p>${t.command}${cp && cp.trim() ? t.path : t.uuid}]</p>
+                    </div>
             </div>
             <div class="card">
                     <h2 class="card-title">${t.selectClient}</h2>
@@ -2401,14 +2565,14 @@
             </div>
             <div class="card">
                     <h2 class="card-title">${t.systemStatus}</h2>
-                                    <div id="systemStatus" style="margin: 20px 0; padding: 15px; background: rgba(255, 255, 255, 0.25); border: 2px solid rgba(255, 105, 180, 0.5); box-shadow: 0 5px 15px rgba(139, 0, 139, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.3); position: relative; overflow: hidden; border-radius: 15px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
-                        <div style="color: #ff69b4; margin-bottom: 15px; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">[ ${t.checking} ]</div>
-                        <div id="regionStatus" style="margin: 8px 0; color: #ff69b4; font-family: 'Courier New', monospace; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.workerRegion}${t.checking}</div>
-                        <div id="geoInfo" style="margin: 8px 0; color: #ff85a1; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.detectionMethod}${t.checking}</div>
-                        <div id="backupStatus" style="margin: 8px 0; color: #ff69b4; font-family: 'Courier New', monospace; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.proxyIPStatus}${t.checking}</div>
-                        <div id="currentIP" style="margin: 8px 0; color: #ff69b4; font-family: 'Courier New', monospace; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.currentIP}${t.checking}</div>
-                        <div id="regionMatch" style="margin: 8px 0; color: #ff69b4; font-family: 'Courier New', monospace; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.regionMatch}${t.checking}</div>
-                        <div id="selectionLogic" style="margin: 8px 0; color: #ff85a1; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);">${t.selectionLogic}${t.selectionLogicText}</div>
+                                    <div id="systemStatus" style="margin: 20px 0; padding: 15px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 105, 180, 0.4); box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.4); position: relative; overflow: hidden; border-radius: 15px; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
+                        <div style="color: #ff69b4; margin-bottom: 15px; font-weight: bold; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); position: relative;">🌸 [ ${t.checking} ]</div>
+                        <div id="regionStatus" style="margin: 8px 0; color: #ff69b4; font-family: 'Courier New', monospace; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); position: relative;"><span style="margin-right: 5px;">📍</span>${t.workerRegion}${t.checking}</div>
+                        <div id="geoInfo" style="margin: 8px 0; color: #ff85a1; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); position: relative;"><span style="margin-right: 5px;">🌐</span>${t.detectionMethod}${t.checking}</div>
+                        <div id="backupStatus" style="margin: 8px 0; color: #ff69b4; font-family: 'Courier New', monospace; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); position: relative;"><span style="margin-right: 5px;">🛡️</span>${t.proxyIPStatus}${t.checking}</div>
+                        <div id="currentIP" style="margin: 8px 0; color: #ff69b4; font-family: 'Courier New', monospace; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); position: relative;"><span style="margin-right: 5px;">🖥️</span>${t.currentIP}${t.checking}</div>
+                        <div id="regionMatch" style="margin: 8px 0; color: #ff69b4; font-family: 'Courier New', monospace; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); position: relative;"><span style="margin-right: 5px;">🎯</span>${t.regionMatch}${t.checking}</div>
+                        <div id="selectionLogic" style="margin: 8px 0; color: #ff85a1; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); position: relative;"><span style="margin-right: 5px;">💡</span>${t.selectionLogic}${t.selectionLogicText}</div>
                 </div>
             </div>
             <div class="card" id="configCard" style="display: none;">
@@ -2590,8 +2754,10 @@
             <div class="card">
                     <h2 class="card-title">${t.relatedLinks}</h2>
                 <div style="text-align: center; margin: 20px 0;">
-                        <a href="https://github.com/byJoey/cfnew" target="_blank" style="color: #ff69b4; text-decoration: none; margin: 0 20px; font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); transition: all 0.3s ease;">${t.githubProject}</a>
-                    <a href="https://www.youtube.com/@joeyblog" target="_blank" style="color: #ff69b4; text-decoration: none; margin: 0 20px; font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); transition: all 0.3s ease;">YouTube @joeyblog</a>
+                        <a href="https://github.com/byJoey/cfnew" target="_blank" style="color: #ff69b4; text-decoration: none; margin: 0 20px; font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); transition: all 0.3s ease; display: inline-block; position: relative;">${t.githubProject}
+                        <span style="position: absolute; left: -20px; top: 0; animation: float-icon 2s infinite;">💖</span></a>
+                    <a href="https://www.youtube.com/@joeyblog" target="_blank" style="color: #ff69b4; text-decoration: none; margin: 0 20px; font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); transition: all 0.3s ease; display: inline-block; position: relative;">YouTube @joeyblog
+                        <span style="position: absolute; left: -20px; top: 0; animation: float-icon 2.5s infinite;">🌸</span></a>
                 </div>
             </div>
         </div>
