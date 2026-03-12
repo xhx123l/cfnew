@@ -3053,6 +3053,22 @@
                 margin-left: 6px;
                 vertical-align: middle;
             }
+            /* 平板设备 (768px - 1024px) */
+            @media (max-width: 1024px) {
+                .title {
+                    font-size: 2.5rem;
+                }
+                .client-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+                    gap: var(--spacing-sm);
+                }
+                .card {
+                    padding: var(--spacing-md);
+                    margin-bottom: var(--spacing-md);
+                }
+            }
+            
+            /* 手机设备 (小于 768px) */
             @media (max-width: 768px) {
                 body {
                     padding: var(--spacing-sm);
@@ -3063,34 +3079,75 @@
                 .header {
                     padding-top: var(--spacing-md);
                     margin-bottom: var(--spacing-lg);
+                    text-align: center;
                 }
                 .title {
-                    font-size: 2.2rem;
+                    font-size: 2rem;
+                }
+                .subtitle {
+                    font-size: 1rem;
                 }
                 .card {
                     padding: var(--spacing-md);
                     margin-bottom: var(--spacing-md);
                 }
+                .card-title {
+                    font-size: 1.4rem;
+                }
                 .client-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
                     gap: var(--spacing-xs);
                 }
                 .client-btn {
                     padding: var(--spacing-xs) var(--spacing-sm);
-                    font-size: 14px;
-                }
-                .language-selector {
-                    top: var(--spacing-sm);
-                    left: var(--spacing-sm);
-                }
-                #languageSelector {
-                    padding: 6px 10px;
-                    font-size: 12px;
+                    font-size: 13px;
+                    min-height: 44px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
                 .app-title {
                     top: var(--spacing-sm);
                     right: var(--spacing-sm);
                     font-size: 14px;
+                }
+                /* 优化表单元素在移动设备上的触摸体验 */
+                form input[type="text"], form input[type="number"], form select {
+                    min-height: 44px;
+                    font-size: 16px;
+                }
+                form button[type="submit"], form button[type="button"] {
+                    min-height: 44px;
+                    font-size: 16px;
+                }
+                /* 优化延迟测试部分在移动设备上的显示 */
+                #latencyTestResults {
+                    max-height: 200px;
+                }
+                /* 优化时间显示在移动设备上的大小 */
+                #beijingTime {
+                    font-size: 0.9rem;
+                    line-height: 1.4;
+                }
+            }
+            
+            /* 小屏幕手机 (小于 480px) */
+            @media (max-width: 480px) {
+                .title {
+                    font-size: 1.8rem;
+                }
+                .client-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                }
+                .client-btn {
+                    font-size: 12px;
+                    padding: 8px 12px;
+                }
+                .card-title {
+                    font-size: 1.2rem;
+                }
+                #beijingTime {
+                    font-size: 0.8rem;
                 }
             }
         </style>
