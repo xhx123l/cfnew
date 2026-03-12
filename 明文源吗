@@ -3119,6 +3119,9 @@
                 form button[type="submit"], form button[type="button"] {
                     min-height: 44px;
                     font-size: 16px;
+                    width: 100%;
+                    margin-right: 0;
+                    margin-bottom: 10px;
                 }
                 /* 优化延迟测试部分在移动设备上的显示 */
                 #latencyTestResults {
@@ -3128,6 +3131,53 @@
                 #beijingTime {
                     font-size: 0.9rem;
                     line-height: 1.4;
+                }
+                /* 优化系统状态卡片在移动设备上的显示 */
+                #systemStatus {
+                    gap: 8px !important;
+                }
+                #systemStatus div {
+                    font-size: 0.85rem !important;
+                }
+                /* 优化配置管理卡片在移动设备上的显示 */
+                #configContent {
+                    padding: 0;
+                }
+                form {
+                    margin-bottom: var(--spacing-md);
+                }
+                form div {
+                    margin-bottom: var(--spacing-md);
+                }
+                /* 优化按钮在移动设备上的显示 */
+                .generate-btn {
+                    width: 100%;
+                    margin-right: 0;
+                    margin-bottom: 10px;
+                }
+                /* 优化复选框和开关在移动设备上的显示 */
+                .toggle-switch {
+                    width: 44px;
+                    height: 22px;
+                }
+                .toggle-slider:before {
+                    height: 16px;
+                    width: 16px;
+                    left: 3px;
+                    bottom: 3px;
+                }
+                input:checked + .toggle-slider:before {
+                    transform: translateX(22px);
+                }
+                /* 优化延迟测试控制在移动设备上的显示 */
+                #latencyTestResults button {
+                    width: 100%;
+                    margin-bottom: 8px;
+                }
+                /* 优化相关链接在移动设备上的显示 */
+                .related-links a {
+                    display: block;
+                    margin: 5px 0;
                 }
             }
             
@@ -3197,15 +3247,15 @@
             </div>
             <div class="card" id="systemStatusCard">
                     <h2 class="card-title">${t.systemStatus}</h2>
-                <div id="systemStatus">
-                        <div style="color: #007aff; margin-bottom: 15px; font-weight: 600;">[ ${t.checking} ]</div>
-                        <div id="regionStatus">${t.workerRegion}${t.checking}</div>
-                        <div id="geoInfo">${t.detectionMethod}${t.checking}</div>
-                        <div id="backupStatus">${t.proxyIPStatus}${t.checking}</div>
-                        <div id="currentIP">${t.currentIP}${t.checking}</div>
-                        <div id="echStatus" style="font-size: 0.9rem;">ECH状态: ${t.checking}</div>
-                        <div id="regionMatch">${t.regionMatch}${t.checking}</div>
-                        <div id="selectionLogic" style="font-size: 0.9rem; color: #666;">${t.selectionLogic}${t.selectionLogicText}</div>
+                <div id="systemStatus" style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="color: #007aff; margin-bottom: 10px; font-weight: 600;">[ ${t.checking} ]</div>
+                        <div id="regionStatus" style="font-size: 0.9rem;">${t.workerRegion}${t.checking}</div>
+                        <div id="geoInfo" style="font-size: 0.9rem;">${t.detectionMethod}${t.checking}</div>
+                        <div id="backupStatus" style="font-size: 0.9rem;">${t.proxyIPStatus}${t.checking}</div>
+                        <div id="currentIP" style="font-size: 0.9rem;">${t.currentIP}${t.checking}</div>
+                        <div id="echStatus" style="font-size: 0.8rem;">ECH状态: ${t.checking}</div>
+                        <div id="regionMatch" style="font-size: 0.9rem;">${t.regionMatch}${t.checking}</div>
+                        <div id="selectionLogic" style="font-size: 0.8rem; color: #666;">${t.selectionLogic}${t.selectionLogicText}</div>
                 </div>
             </div>
             <div class="card" id="configCard" style="display: block;">
@@ -3217,7 +3267,7 @@
                     <form id="regionForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: var(--spacing-xs); color: var(--text-primary); font-weight: 600;">${t.specifyRegion}</label>
-                            <select id="wkRegion" style="width: 100%; padding: var(--spacing-sm); background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 122, 255, 0.3); color: var(--text-primary); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: all 0.3s ease;">
+                            <select id="wkRegion" style="width: 100%; padding: var(--spacing-sm); background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(255, 255, 255, 0.8); color: var(--text-primary); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: all 0.3s ease; min-height: 44px;">
                                     <option value="">${t.autoDetect}</option>
                                     <option value="US">${t.regionNames.US}</option>
                                     <option value="SG">${t.regionNames.SG}</option>
@@ -3236,7 +3286,7 @@
                     <form id="otherConfigForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
                                 <label>${t.protocolSelection}</label>
-                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 122, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 122, 255, 0.1);">
+                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 12px; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15); backdrop-filter: blur(15px);">
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
                                         <label class="toggle-switch">
