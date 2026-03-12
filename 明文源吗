@@ -2722,8 +2722,8 @@ function parseAddressAndPort(input) {
                 margin-right: auto;
             }
             .card {
-                background: var(--card-background);
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.25);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 border-radius: var(--border-radius-lg);
                 padding: var(--spacing-lg);
                 margin-bottom: var(--spacing-lg);
@@ -2731,7 +2731,8 @@ function parseAddressAndPort(input) {
                 position: relative;
                 transition: all var(--transition-normal);
                 overflow: hidden;
-                backdrop-filter: blur(10px);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
             }
             .card::before {
                 content: '';
@@ -2739,14 +2740,16 @@ function parseAddressAndPort(input) {
                 top: 0;
                 left: 0;
                 right: 0;
-                height: 2px;
-                background: linear-gradient(90deg, var(--primary-color), #5ac8fa);
+                height: 3px;
+                background: linear-gradient(90deg, rgba(0, 122, 255, 0.5), rgba(90, 200, 250, 0.5));
                 border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+                backdrop-filter: blur(5px);
             }
             .card:hover {
                 transform: translateY(-5px);
-                box-shadow: var(--shadow-lg);
-                border-color: rgba(10, 132, 255, 0.2);
+                box-shadow: 0 16px 32px rgba(31, 38, 135, 0.25);
+                border-color: rgba(10, 132, 255, 0.4);
+                background: rgba(255, 255, 255, 0.3);
             }
             .card-title {
                 font-size: 1.4rem;
@@ -2757,7 +2760,7 @@ function parseAddressAndPort(input) {
                 align-items: center;
                 gap: 12px;
                 padding-bottom: var(--spacing-xs);
-                border-bottom: 1px solid var(--border-color);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             }
             .card-title::before {
                 display: inline-flex;
@@ -2853,8 +2856,9 @@ function parseAddressAndPort(input) {
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                min-height: auto;
+                min-height: 65px;
                 height: auto;
+                min-width: 85px;
             }
             .client-btn::before {
                 content: '';
@@ -2923,8 +2927,8 @@ function parseAddressAndPort(input) {
                 box-shadow: var(--shadow-sm);
             }
             .subscription-url {
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 padding: var(--spacing-md);
                 word-break: break-all;
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -2938,6 +2942,8 @@ function parseAddressAndPort(input) {
                 overflow-x: auto;
                 max-width: 100%;
                 box-sizing: border-box;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
             }
             .language-selector {
                 position: fixed;
@@ -2946,8 +2952,8 @@ function parseAddressAndPort(input) {
                 z-index: 1000;
             }
             #languageSelector {
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 color: var(--text-primary);
                 padding: var(--spacing-xs) var(--spacing-sm);
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -2957,6 +2963,8 @@ function parseAddressAndPort(input) {
                 box-shadow: var(--shadow-sm);
                 outline: none;
                 transition: all 0.3s ease;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
             }
             #languageSelector:hover {
                 box-shadow: var(--shadow-md);
@@ -2974,11 +2982,13 @@ function parseAddressAndPort(input) {
             #systemStatus {
                 margin: var(--spacing-md) 0;
                 padding: var(--spacing-md);
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 box-shadow: var(--shadow-sm);
                 position: relative;
                 border-radius: 8px;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
             }
             #systemStatus div {
                 margin-bottom: var(--spacing-sm);
@@ -2994,13 +3004,15 @@ function parseAddressAndPort(input) {
                 color: var(--text-secondary);
             }
             #kvStatus, #currentConfig, #pathTypeInfo {
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.25);
                 color: var(--text-primary);
                 border-radius: 8px;
                 padding: var(--spacing-md);
                 margin-bottom: var(--spacing-md);
                 box-shadow: var(--shadow-sm);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
             }
             #pathTypeInfo {
                 background-color: #f0f8ff;
@@ -3021,8 +3033,8 @@ function parseAddressAndPort(input) {
             form input[type="text"], form input[type="number"], form select {
                 width: 100%;
                 padding: var(--spacing-sm) var(--spacing-md);
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 color: var(--text-primary);
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 14px;
@@ -3030,12 +3042,13 @@ function parseAddressAndPort(input) {
                 box-shadow: var(--shadow-sm);
                 transition: all var(--transition-fast);
                 backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
             }
             form input[type="text"]:focus, form input[type="number"]:focus, form select:focus {
                 outline: none;
-                border-color: var(--primary-color);
-                box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.2), var(--shadow-md);
-                background-color: var(--card-background);
+                border-color: rgba(0, 122, 255, 0.5);
+                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3), var(--shadow-md);
+                background: rgba(255, 255, 255, 0.25);
             }
             /* 苹果风格开关样式 */
             .toggle-switch {
@@ -3074,8 +3087,8 @@ function parseAddressAndPort(input) {
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
             }
             input:checked + .toggle-slider {
-                background: linear-gradient(to bottom, #4cd964, #42d65c);
-                border-color: #28a745;
+                background: linear-gradient(to bottom, #42a7ff, #3a98ef);
+                border-color: #007aff;
             }
             input:checked + .toggle-slider:before {
                 transform: translateX(22px);
@@ -3088,10 +3101,10 @@ function parseAddressAndPort(input) {
                 background: linear-gradient(to bottom, #d0d0d0, #e5e5e7);
             }
             input:checked:hover + .toggle-slider {
-                background: linear-gradient(to bottom, #3ed959, #34c759);
+                background: linear-gradient(to bottom, #3a98ef, #2a89e5);
             }
             form button[type="submit"], form button[type="button"] {
-                background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+                background: linear-gradient(135deg, #007aff, #0066cc);
                 border: none;
                 padding: 12px 16px;
                 color: white;
@@ -3123,7 +3136,7 @@ function parseAddressAndPort(input) {
                 pointer-events: none;
             }
             form button[type="submit"]:hover, form button[type="button"]:hover {
-                background: linear-gradient(135deg, var(--primary-hover), #0056b3);
+                background: linear-gradient(135deg, #0066cc, #0052a3);
                 box-shadow: var(--shadow-md);
                 transform: translateY(-2px);
             }
@@ -3171,33 +3184,41 @@ function parseAddressAndPort(input) {
             #latencyTestResults {
                 max-height: 250px;
                 overflow-y: auto;
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 border-radius: 8px;
                 padding: var(--spacing-md);
                 box-shadow: var(--shadow-sm);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
             }
             #latencyResultsList {
-                background-color: #f8f9fa;
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.2);
                 border-radius: 6px;
                 padding: var(--spacing-sm);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
             }
             #cityFilterContainer {
                 margin-bottom: var(--spacing-sm);
                 padding: var(--spacing-md);
-                background-color: #f8f9fa;
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 border-radius: 8px;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
             }
             #statusMessage {
                 display: none;
                 padding: var(--spacing-md);
                 margin: var(--spacing-sm) 0;
                 border: 1px solid rgba(0, 122, 255, 0.3);
-                background-color: #f0f8ff;
+                background: rgba(240, 248, 255, 0.25);
                 color: var(--primary-color);
                 border-radius: 8px;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
             }
             .related-links {
                 text-align: center;
@@ -3218,16 +3239,18 @@ function parseAddressAndPort(input) {
             }
             .device-tag {
                 display: inline-block;
-                background: linear-gradient(to bottom, #a5d2ff, #80b8ff);
-                color: #000080;
+                background: rgba(165, 210, 255, 0.3);
+                color: #007aff;
                 font-size: 10px;
                 font-weight: 600;
                 padding: 3px 8px;
                 border-radius: 20px;
                 margin-left: 8px;
                 vertical-align: middle;
-                border: 1px solid rgba(128, 184, 255, 0.3);
+                border: 1px solid rgba(0, 122, 255, 0.4);
                 box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
             }
             /* 平板设备 (768px - 1024px) */
             @media (max-width: 1024px) and (min-width: 769px) {
@@ -3235,17 +3258,18 @@ function parseAddressAndPort(input) {
                     font-size: 2.2rem;
                 }
                 .client-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
                     gap: var(--spacing-sm);
                 }
                 .card {
                     padding: var(--spacing-md);
                     margin-bottom: var(--spacing-md);
+                    background: rgba(255, 255, 255, 0.28);
                 }
                 .client-btn {
-                    padding: var(--spacing-sm) var(--spacing-sm);
-                    font-size: 13px;
-                    min-height: 56px;
+                    padding: 14px 8px;
+                    font-size: 12px;
+                    min-height: 60px;
                 }
             }
             
@@ -3275,27 +3299,29 @@ function parseAddressAndPort(input) {
                     padding: var(--spacing-md);
                     margin-bottom: var(--spacing-md);
                     border-radius: var(--border-radius);
+                    background: rgba(255, 255, 255, 0.28);
                 }
                 .card-title {
                     font-size: 1.2rem;
                     margin-bottom: var(--spacing-sm);
                 }
                 .client-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-                    gap: var(--spacing-xs);
-                    grid-gap: var(--spacing-xs);
+                    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                    gap: var(--spacing-sm);
+                    grid-gap: var(--spacing-sm);
                 }
                 .client-btn {
-                    padding: 12px 6px;
-                    font-size: 12px;
+                    padding: 14px 8px;
+                    font-size: 11px;
                     min-height: auto;
                     height: auto;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    gap: 3px;
+                    gap: 4px;
                     line-height: 1.3;
+                    min-height: 70px;
                 }
                 .app-title {
                     top: var(--spacing-xs);
@@ -3308,6 +3334,7 @@ function parseAddressAndPort(input) {
                     font-size: 15px;
                     padding: 10px 12px;
                     border-radius: 8px;
+                    background: rgba(255, 255, 255, 0.25) !important;
                 }
                 form button[type="submit"], form button[type="button"] {
                     min-height: 44px;
@@ -3415,25 +3442,27 @@ function parseAddressAndPort(input) {
                 }
                 .card {
                     padding: var(--spacing-sm);
+                    background: rgba(255, 255, 255, 0.3);
                 }
                 .card-title {
                     font-size: 1.1rem;
                     padding-bottom: var(--spacing-xs);
                 }
                 .client-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-                    gap: 6px;
+                    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+                    gap: 8px;
                 }
                 .client-btn {
-                    padding: 10px 6px;
-                    font-size: 11px;
-                    min-height: auto;
+                    padding: 12px 6px;
+                    font-size: 10px;
+                    min-height: 65px;
                     height: auto;
                     gap: 3px;
+                    line-height: 1.2;
                 }
                 .device-tag {
-                    font-size: 9px;
-                    padding: 2px 6px;
+                    font-size: 8px;
+                    padding: 2px 5px;
                     margin-left: 4px;
                 }
                 #beijingTime {
@@ -3444,6 +3473,7 @@ function parseAddressAndPort(input) {
                     font-size: 14px;
                     border-radius: 8px;
                     padding: 12px 16px;
+                    background: linear-gradient(135deg, #007aff, #0066cc);
                 }
                 form input[type="text"], form input[type="number"], form select {
                     min-height: 44px;
@@ -3473,7 +3503,7 @@ function parseAddressAndPort(input) {
                     <h2 class="card-title">${t.selectClient}</h2>
                 
                 <!-- PC 客户端 -->
-                <div style="margin-bottom: 30px;">
+                <div style="margin-bottom: 30px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
                     <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600;">PC</h3>
                     <div class="client-grid">
                         <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='), 'CLASH')">CLASH <span class="device-tag" id="clash-tag"></span></button>
@@ -3484,7 +3514,7 @@ function parseAddressAndPort(input) {
                 </div>
                 
                 <!-- 苹果客户端 -->
-                <div style="margin-bottom: 30px;">
+                <div style="margin-bottom: 30px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
                     <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600;">苹果</h3>
                     <div class="client-grid">
                         <button class="client-btn" onclick="generateClientLink(atob('c3VyZ2U='), 'SURGE')">SURGE <span class="device-tag" id="surge-tag"></span></button>
@@ -3496,7 +3526,7 @@ function parseAddressAndPort(input) {
                 </div>
                 
                 <!-- 安卓客户端 -->
-                <div style="margin-bottom: 20px;">
+                <div style="margin-bottom: 20px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
                     <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600;">安卓</h3>
                     <div class="client-grid">
                         <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'V2RAYNG')">V2RAYNG <span class="device-tag" id="v2rayng-tag"></span></button>
@@ -3546,7 +3576,7 @@ function parseAddressAndPort(input) {
                     <form id="otherConfigForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
                                 <label>${t.protocolSelection}</label>
-                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 12px; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15); backdrop-filter: blur(15px);">
+                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 12px; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
                                         <label class="toggle-switch">
@@ -3669,11 +3699,10 @@ function parseAddressAndPort(input) {
                             <div id="cfRandomDiv" style="margin-bottom: 15px; display: none;">
                                 <button type="button" id="generateCFIPBtn" style="background: #007aff; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 100%; transition: all 0.3s;">🎲 ${t.generateIP}</button>
                             </div>
-                            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                <button type="button" id="startLatencyTest" style="background: #5cd689; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">▶ ${t.startTest}</button>
-                                <button type="button" id="stopLatencyTest" style="background: #ff3b30; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: none; transition: all 0.3s;">⏹ ${t.stopTest}</button>
-                            </div>
-                            <div id="latencyTestStatus" style="color: #666; font-size: 0.9rem; margin-bottom: 10px; display: none;"></div>
+                                                            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                                                            <button type="button" id="startLatencyTest" style="background: #007aff; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">▶ ${t.startTest}</button>
+                                                            <button type="button" id="stopLatencyTest" style="background: #ff3b30; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: none; transition: all 0.3s;">⏹ ${t.stopTest}</button>
+                                                        </div>                            <div id="latencyTestStatus" style="color: #666; font-size: 0.9rem; margin-bottom: 10px; display: none;"></div>
                             <div id="latencyTestResults">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                                     <span style="color: #007aff; font-weight: 600;">${t.testResult}</span>
@@ -3697,7 +3726,7 @@ function parseAddressAndPort(input) {
                                 </div>
                                 <div id="latencyResultsList"></div>
                                 <div style="margin-top: 15px; display: flex; gap: 10px;">
-                                    <button type="button" id="overwriteSelectedToYx" style="flex: 1; background: #5cd689; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">${isFarsi ? '覆盖添加' : '覆盖添加'}</button>
+                                    <button type="button" id="overwriteSelectedToYx" style="flex: 1; background: #007aff; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">${isFarsi ? '覆盖添加' : '覆盖添加'}</button>
                                     <button type="button" id="appendSelectedToYx" style="flex: 1; background: #5ac8fa; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">${isFarsi ? '追加添加' : '追加添加'}</button>
                                 </div>
                             </div>
@@ -3720,7 +3749,7 @@ function parseAddressAndPort(input) {
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label>${t.builtinPreferred}</label>
-                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 122, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 122, 255, 0.1);">
+                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
                                         <label class="toggle-switch">
@@ -3753,7 +3782,7 @@ function parseAddressAndPort(input) {
                         </div>
                         <div style="margin-bottom: 15px;">
                                 <label>优选IP筛选设置</label>
-                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 122, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 122, 255, 0.1);">
+                            <div style="padding: 20px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
                                 <div style="margin-bottom: 20px;">
                                     <label style="display: block; margin-bottom: 10px; font-weight: 600;">IP版本选择</label>
                                     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
