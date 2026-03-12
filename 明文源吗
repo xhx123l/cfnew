@@ -2822,6 +2822,17 @@ function parseAddressAndPort(input) {
                 to { opacity: 1; }
             }
             
+            @keyframes pulse {
+                0%, 100% { 
+                    transform: scale(1); 
+                    opacity: 1; 
+                }
+                50% { 
+                    transform: scale(1.1); 
+                    opacity: 0.8; 
+                }
+            }
+            
             .scale-in {
                 animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             }
@@ -3605,6 +3616,9 @@ function parseAddressAndPort(input) {
             <div class="app-title">${t.terminal}</div>
         <div class="container">
             <div class="header">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: var(--spacing-md);">
+                        <div style="font-size: 3rem; animation: pulse 2s ease-in-out infinite;">🦝</div>
+                    </div>
                     <h1 class="title">${t.title}</h1>
                     <p class="subtitle" id="beijingTime"></p>
             </div>
@@ -3613,32 +3627,32 @@ function parseAddressAndPort(input) {
                 
                 <!-- PC 客户端 -->
                 <div style="margin-bottom: 30px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
-                    <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600;">PC</h3>
+                    <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px;">💻 PC</h3>
                     <div class="client-grid">
-                        <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='), 'CLASH')">CLASH <span class="device-tag" id="clash-tag"></span></button>
-                        <button class="client-btn" onclick="generateClientLink(atob('c2luZ2JveA=='), 'SING-BOX')">SING-BOX <span class="device-tag" id="sing-box-tag"></span></button>
-                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'V2RAY')">V2RAY <span class="device-tag" id="v2ray-tag"></span></button>
-                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'NEKORAY')">NEKORAY <span class="device-tag" id="nekoray-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='), 'CLASH')">🎮 CLASH <span class="device-tag" id="clash-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('c2luZ2JveA=='), 'SING-BOX')">📦 SING-BOX <span class="device-tag" id="sing-box-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'V2RAY')">🚀 V2RAY <span class="device-tag" id="v2ray-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'NEKORAY')">🐱 NEKORAY <span class="device-tag" id="nekoray-tag"></span></button>
                     </div>
                 </div>
                 
                 <!-- 苹果客户端 -->
                 <div style="margin-bottom: 30px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
-                    <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600;">苹果</h3>
+                    <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px;">🍎 苹果</h3>
                     <div class="client-grid">
-                        <button class="client-btn" onclick="generateClientLink(atob('c3VyZ2U='), 'SURGE')">SURGE <span class="device-tag" id="surge-tag"></span></button>
-                        <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='), 'STASH')">STASH <span class="device-tag" id="stash-tag"></span></button>
-                        <button class="client-btn" onclick="generateClientLink(atob('bG9vbg=='), 'LOON')">LOON <span class="device-tag" id="loon-tag"></span></button>
-                        <button class="client-btn" onclick="generateClientLink(atob('cXVhbng='), 'QUANTUMULT X')">QUANTUMULT X <span class="device-tag" id="quantumult-tag"></span></button>
-                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'Shadowrocket')">Shadowrocket <span class="device-tag" id="shadowrocket-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('c3VyZ2U='), 'SURGE')">⚡ SURGE <span class="device-tag" id="surge-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='), 'STASH')">📦 STASH <span class="device-tag" id="stash-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('bG9vbg=='), 'LOON')">🌙 LOON <span class="device-tag" id="loon-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('cXVhbng='), 'QUANTUMULT X')">🔄 QUANTUMULT X <span class="device-tag" id="quantumult-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'Shadowrocket')">🚀 Shadowrocket <span class="device-tag" id="shadowrocket-tag"></span></button>
                     </div>
                 </div>
                 
                 <!-- 安卓客户端 -->
                 <div style="margin-bottom: 20px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
-                    <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600;">安卓</h3>
+                    <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px;">🤖 安卓</h3>
                     <div class="client-grid">
-                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'V2RAYNG')">V2RAYNG <span class="device-tag" id="v2rayng-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'V2RAYNG')">📱 V2RAYNG <span class="device-tag" id="v2rayng-tag"></span></button>
                     </div>
                 </div>
                 
@@ -3647,14 +3661,14 @@ function parseAddressAndPort(input) {
             <div class="card" id="systemStatusCard">
                     <h2 class="card-title">${t.systemStatus}</h2>
                 <div id="systemStatus" style="display: flex; flex-direction: column; gap: 10px;">
-                        <div style="color: #007aff; margin-bottom: 10px; font-weight: 600;">[ ${t.checking} ]</div>
-                        <div id="regionStatus" style="font-size: 0.9rem;">${t.workerRegion}${t.checking}</div>
-                        <div id="geoInfo" style="font-size: 0.9rem;">${t.detectionMethod}${t.checking}</div>
-                        <div id="backupStatus" style="font-size: 0.9rem;">${t.proxyIPStatus}${t.checking}</div>
-                        <div id="currentIP" style="font-size: 0.9rem;">${t.currentIP}${t.checking}</div>
-                        <div id="echStatus" style="font-size: 0.8rem;">ECH状态: ${t.checking}</div>
-                        <div id="regionMatch" style="font-size: 0.9rem;">${t.regionMatch}${t.checking}</div>
-                        <div id="selectionLogic" style="font-size: 0.8rem; color: #666;">${t.selectionLogic}${t.selectionLogicText}</div>
+                        <div style="color: #007aff; margin-bottom: 10px; font-weight: 600;">🔄 [ ${t.checking} ]</div>
+                        <div id="regionStatus" style="font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">🌍 ${t.workerRegion}${t.checking}</div>
+                        <div id="geoInfo" style="font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">📍 ${t.detectionMethod}${t.checking}</div>
+                        <div id="backupStatus" style="font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">🔌 ${t.proxyIPStatus}${t.checking}</div>
+                        <div id="currentIP" style="font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">🌐 ${t.currentIP}${t.checking}</div>
+                        <div id="echStatus" style="font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">🔒 ECH状态: ${t.checking}</div>
+                        <div id="regionMatch" style="font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">🎯 ${t.regionMatch}${t.checking}</div>
+                        <div id="selectionLogic" style="font-size: 0.8rem; color: #666; display: flex; align-items: center; gap: 6px;">📋 ${t.selectionLogic}${t.selectionLogicText}</div>
                 </div>
             </div>
             <div class="card" id="configCard" style="display: block;">
@@ -3665,7 +3679,7 @@ function parseAddressAndPort(input) {
                 <div id="configContent" style="display: none;">
                     <form id="regionForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
-                                <label style="display: block; margin-bottom: var(--spacing-xs); color: var(--text-primary); font-weight: 600;">${t.specifyRegion}</label>
+                                <label style="display: flex; align-items: center; gap: 8px; margin-bottom: var(--spacing-xs); color: var(--text-primary); font-weight: 600;">🌍 ${t.specifyRegion}</label>
                             <select id="wkRegion" style="width: 100%; padding: var(--spacing-sm); background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(255, 255, 255, 0.8); color: var(--text-primary); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: all 0.3s ease; min-height: 44px;">
                                     <option value="">${t.autoDetect}</option>
                                     <option value="US">${t.regionNames.US}</option>
@@ -3680,11 +3694,11 @@ function parseAddressAndPort(input) {
                             </select>
                                 <small id="wkRegionHint" style="display: none; color: var(--text-secondary); font-size: 0.85rem; display: block; margin-top: var(--spacing-xs);">⚠️ ${t.customIPDisabledHint}</small>
                         </div>
-                            <button type="submit" style="background-color: var(--primary-color); border: none; padding: var(--spacing-sm) var(--spacing-md); color: white; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; cursor: pointer; margin-right: var(--spacing-sm); border-radius: 8px; box-shadow: var(--shadow-sm); transition: all 0.3s ease;">${t.saveRegion}</button>
+                            <button type="submit" style="background-color: var(--primary-color); border: none; padding: var(--spacing-sm) var(--spacing-md); color: white; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; cursor: pointer; margin-right: var(--spacing-sm); border-radius: 8px; box-shadow: var(--shadow-sm); transition: all 0.3s ease; display: flex; align-items: center; gap: 6px;">💾 ${t.saveRegion}</button>
                     </form>
                     <form id="otherConfigForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
-                                <label>${t.protocolSelection}</label>
+                                <label style="display: flex; align-items: center; gap: 8px; font-weight: 600;">📡 ${t.protocolSelection}</label>
                             <div style="padding: 20px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 12px; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
@@ -3725,56 +3739,56 @@ function parseAddressAndPort(input) {
                                         <small style="display: block; margin-top: 5px; margin-left: 60px;">${t.enableECHHint}</small>
                                     </div>
                                     <div style="margin-top: 20px; margin-bottom: 15px;">
-                                        <label>${t.customDNS}</label>
+                                        <label style="display: flex; align-items: center; gap: 8px;">🌐 ${t.customDNS}</label>
                                         <input type="text" id="customDNS" placeholder="${t.customDNSPlaceholder}">
                                         <small>${t.customDNSHint}</small>
                                     </div>
                                     <div style="margin-bottom: 15px;">
-                                        <label>${t.customECHDomain}</label>
+                                        <label style="display: flex; align-items: center; gap: 8px;">🔒 ${t.customECHDomain}</label>
                                         <input type="text" id="customECHDomain" placeholder="${t.customECHDomainPlaceholder}">
                                         <small>${t.customECHDomainHint}</small>
                                     </div>
                                 </div>
                                 <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0, 122, 255, 0.2);">
-                                        <label>${t.trojanPassword}</label>
+                                        <label style="display: flex; align-items: center; gap: 8px;">🔑 ${t.trojanPassword}</label>
                                         <input type="text" id="tp" placeholder="${t.trojanPasswordPlaceholder}">
                                         <small>${t.trojanPasswordHint}</small>
                                 </div>
                                     <small style="display: block; margin-top: 15px;">${t.protocolHint}</small>
-                                    <button type="button" id="saveProtocolBtn" style="margin-top: 20px; width: 100%;">${t.saveProtocol}</button>
+                                    <button type="button" id="saveProtocolBtn" style="margin-top: 20px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;">💾 ${t.saveProtocol}</button>
                             </div>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.customHomepage}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🏠 ${t.customHomepage}</label>
                                 <input type="text" id="customHomepage" placeholder="${t.customHomepagePlaceholder}">
                                 <small>${t.customHomepageHint}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.customPath}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🛤️ ${t.customPath}</label>
                                 <input type="text" id="customPath" placeholder="${isFarsi ? 'مثال: /mypath یا خالی بگذارید تا از UUID استفاده شود' : '例如: /mypath 或留空使用 UUID'}">
                                 <small>${isFarsi ? 'مسیر اشتراک سفارشی. اگر خالی بگذارید از UUID به عنوان مسیر استفاده می‌شود.' : '自定义订阅路径。留空则使用 UUID 作为路径。'}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.customIP}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🔌 ${t.customIP}</label>
                                 <input type="text" id="customIP" placeholder="${isFarsi ? 'مثال: 1.2.3.4:443' : '例如: 1.2.3.4:443'}">
                                 <small>${isFarsi ? 'آدرس و پورت ProxyIP سفارشی' : '自定义ProxyIP地址和端口'}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.preferredIPs}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">⭐ ${t.preferredIPs}</label>
                                 <input type="text" id="yx" placeholder="${isFarsi ? 'مثال: 1.2.3.4:443#گره هنگ‌کنگ,5.6.7.8:80#گره آمریکا,example.com:8443#گره سنگاپور' : '例如: 1.2.3.4:443#日本节点,5.6.7.8:80#美国节点,example.com:8443#新加坡节点'}">
                                 <small>${isFarsi ? 'فرمت: IP:پورت#نام گره یا IP:پورت (بدون # از نام پیش‌فرض استفاده می‌شود). پشتیبانی از چندین مورد، با کاما جدا می‌شوند. <span style="color: #ff9500;">IP های اضافه شده از طریق API به طور خودکار در اینجا نمایش داده می‌شوند.</span>' : '格式: IP:端口#节点名称 或 IP:端口 (无#则使用默认名称)。支持多个，用逗号分隔。<span style="color: #ff9500;">API添加的IP会自动显示在这里。</span>'}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.preferredIPsURL}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🔗 ${t.preferredIPsURL}</label>
                                 <input type="text" id="yxURL" placeholder="${isFarsi ? 'پیش‌فرض: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt' : '默认: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt'}">
                                 <small>${isFarsi ? 'URL منبع لیست IP ترجیحی سفارشی، اگر خالی بگذارید از آدرس پیش‌فرض استفاده می‌شود' : '自定义优选IP列表来源URL，留空则使用默认地址'}</small>
                         </div>
                         
                         <div style="margin-bottom: 20px; padding: 20px; background: rgba(255, 255, 255, 0.25); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 20px; box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
-                            <h4 style="color: var(--primary-color); margin: 0 0 15px 0; font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">⚡ ${t.latencyTest}</h4>
+                            <h4 style="color: var(--primary-color); margin: 0 0 15px 0; font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">🚀 ${t.latencyTest}</h4>
                             <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; align-items: center;">
                                 <div style="min-width: 120px;">
-                                    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">${t.ipSource}</label>
+                                    <label style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px; font-size: 0.9rem;">📥 ${t.ipSource}</label>
                                     <select id="ipSourceSelect">
                                         <option value="manual">${t.manualInput}</option>
                                         <option value="cfRandom">${t.cfRandomIP}</option>
@@ -3782,82 +3796,82 @@ function parseAddressAndPort(input) {
                                     </select>
                                 </div>
                                 <div style="width: 100px;">
-                                    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">${t.latencyTestPort}</label>
+                                    <label style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px; font-size: 0.9rem;">🚪 ${t.latencyTestPort}</label>
                                     <input type="number" id="latencyTestPort" value="443" min="1" max="65535">
                                 </div>
                                 <div id="randomCountDiv" style="width: 100px; display: none;">
-                                    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">${t.randomCount}</label>
+                                    <label style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px; font-size: 0.9rem;">🎲 ${t.randomCount}</label>
                                     <input type="number" id="randomIPCount" value="20" min="1" max="100">
                                 </div>
                                 <div style="width: 80px;">
-                                    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">${isFarsi ? 'رشته‌ها' : '线程'}</label>
+                                    <label style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px; font-size: 0.9rem;">🧵 ${isFarsi ? 'رشته‌ها' : '线程'}</label>
                                     <input type="number" id="testThreads" value="5" min="1" max="50">
                                 </div>
                             </div>
                             <div id="manualInputDiv" style="margin-bottom: 15px;">
-                                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">${t.latencyTestIP}</label>
+                                <label style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px; font-size: 0.9rem;">📍 ${t.latencyTestIP}</label>
                                 <input type="text" id="latencyTestInput" placeholder="${t.latencyTestIPPlaceholder}">
                             </div>
                             <div id="urlFetchDiv" style="margin-bottom: 15px; display: none;">
-                                <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">${t.fetchURL}</label>
+                                <label style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px; font-size: 0.9rem;">🔗 ${t.fetchURL}</label>
                                 <div style="display: flex; gap: 8px;">
                                     <input type="text" id="fetchURLInput" placeholder="${t.fetchURLPlaceholder}" style="flex: 1;">
-                                    <button type="button" id="fetchIPBtn" style="background: linear-gradient(135deg, #007aff, #0066cc); color: white; border: none; padding: 10px 18px; border-radius: 10px; cursor: pointer; white-space: nowrap; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2); font-weight: 600;">⬇ ${t.fetchIP}</button>
+                                    <button type="button" id="fetchIPBtn" style="background: linear-gradient(135deg, #007aff, #0066cc); color: white; border: none; padding: 10px 18px; border-radius: 10px; cursor: pointer; white-space: nowrap; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2); font-weight: 600;">⬇️ ${t.fetchIP}</button>
                                 </div>
                             </div>
                             <div id="cfRandomDiv" style="margin-bottom: 15px; display: none;">
-                                <button type="button" id="generateCFIPBtn" style="background: linear-gradient(135deg, #007aff, #0066cc); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; width: 100%; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2); font-weight: 600;">🎲 ${t.generateIP}</button>
+                                <button type="button" id="generateCFIPBtn" style="background: linear-gradient(135deg, #007aff, #0066cc); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; width: 100%; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px;">🎲 ${t.generateIP}</button>
                             </div>
-                                                            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                                            <button type="button" id="startLatencyTest" style="background: linear-gradient(135deg, #007aff, #0066cc); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2); font-weight: 600;">▶ ${t.startTest}</button>
-                                                            <button type="button" id="stopLatencyTest" style="background: linear-gradient(135deg, #ff453a, #e32d22); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; display: none; transition: all 0.2s; box-shadow: 0 1px 2px rgba(239, 68, 68, 0.2); font-weight: 600;">⏹ ${t.stopTest}</button>
+                                                            <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                                                            <button type="button" id="startLatencyTest" style="background: linear-gradient(135deg, #007aff, #0066cc); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2); font-weight: 600; display: flex; align-items: center; gap: 6px;">▶️ ${t.startTest}</button>
+                                                            <button type="button" id="stopLatencyTest" style="background: linear-gradient(135deg, #ff453a, #e32d22); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; display: none; transition: all 0.2s; box-shadow: 0 1px 2px rgba(239, 68, 68, 0.2); font-weight: 600; display: flex; align-items: center; gap: 6px;">⏹️ ${t.stopTest}</button>
                                                         </div>                            <div id="latencyTestStatus" style="color: #666; font-size: 0.9rem; margin-bottom: 10px; display: none;"></div>
                             <div id="latencyTestResults">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                    <span style="color: #007aff; font-weight: 600;">${t.testResult}</span>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                                    <span style="color: #007aff; font-weight: 600; display: flex; align-items: center; gap: 6px;">📊 ${t.testResult}</span>
                                     <div style="display: flex; gap: 8px;">
-                                        <button type="button" id="selectAllResults" style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(0, 122, 255, 0.4); padding: 6px 12px; color: #007aff; font-size: 0.85rem; cursor: pointer; border-radius: 8px; transition: all 0.2s; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-weight: 500;">${t.selectAll}</button>
-                                        <button type="button" id="deselectAllResults" style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(0, 122, 255, 0.4); padding: 6px 12px; color: #007aff; font-size: 0.85rem; cursor: pointer; border-radius: 8px; transition: all 0.2s; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-weight: 500;">${t.deselectAll}</button>
+                                        <button type="button" id="selectAllResults" style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(0, 122, 255, 0.4); padding: 6px 12px; color: #007aff; font-size: 0.85rem; cursor: pointer; border-radius: 8px; transition: all 0.2s; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-weight: 500; display: flex; align-items: center; gap: 4px;">✓ ${t.selectAll}</button>
+                                        <button type="button" id="deselectAllResults" style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(0, 122, 255, 0.4); padding: 6px 12px; color: #007aff; font-size: 0.85rem; cursor: pointer; border-radius: 8px; transition: all 0.2s; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-weight: 500; display: flex; align-items: center; gap: 4px;">✕ ${t.deselectAll}</button>
                                     </div>
                                 </div>
                                 <div id="cityFilterContainer" style="margin-bottom: 15px; padding: 15px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 12px; display: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
                                     <div style="margin-bottom: 10px;">
-                                        <label style="display: inline-flex; align-items: center; cursor: pointer; font-size: 0.9rem;">
+                                        <label style="display: inline-flex; align-items: center; cursor: pointer; font-size: 0.9rem; gap: 4px;">
                                             <input type="radio" name="cityFilterMode" value="all" checked>
-                                            <span>${isFarsi ? '全部城市' : '全部城市'}</span>
+                                            <span>🌍 ${isFarsi ? '全部城市' : '全部城市'}</span>
                                         </label>
-                                        <label style="display: inline-flex; align-items: center; cursor: pointer; font-size: 0.9rem; margin-left: 15px;">
+                                        <label style="display: inline-flex; align-items: center; cursor: pointer; font-size: 0.9rem; margin-left: 15px; gap: 4px;">
                                             <input type="radio" name="cityFilterMode" value="fastest10">
-                                            <span>${isFarsi ? '只选择最快的10个' : '只选择最快的10个'}</span>
+                                            <span>⚡ ${isFarsi ? '只选择最快的10个' : '只选择最快的10个'}</span>
                                         </label>
                                     </div>
                                     <div id="cityCheckboxesContainer" style="display: flex; flex-wrap: wrap; gap: 8px; max-height: 80px; overflow-y: auto; padding: 5px;"></div>
                                 </div>
                                 <div id="latencyResultsList"></div>
-                                <div style="margin-top: 15px; display: flex; gap: 10px;">
-                                    <button type="button" id="overwriteSelectedToYx" style="flex: 1; background: linear-gradient(135deg, #007aff, #0066cc); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2);">${isFarsi ? '覆盖添加' : '覆盖添加'}</button>
-                                    <button type="button" id="appendSelectedToYx" style="flex: 1; background: linear-gradient(135deg, #5ac8fa, #42b7f1); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.2s; box-shadow: 0 1px 2px rgba(90, 200, 250, 0.2);">${isFarsi ? '追加添加' : '追加添加'}</button>
+                                <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                                    <button type="button" id="overwriteSelectedToYx" style="flex: 1; min-width: 140px; background: linear-gradient(135deg, #007aff, #0066cc); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2); display: flex; align-items: center; justify-content: center; gap: 6px;">🔄 ${isFarsi ? '覆盖添加' : '覆盖添加'}</button>
+                                    <button type="button" id="appendSelectedToYx" style="flex: 1; min-width: 140px; background: linear-gradient(135deg, #5ac8fa, #42b7f1); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.2s; box-shadow: 0 1px 2px rgba(90, 200, 250, 0.2); display: flex; align-items: center; justify-content: center; gap: 6px;">➕ ${isFarsi ? '追加添加' : '追加添加'}</button>
                                 </div>
                             </div>
                         </div>
                         
                         <div style="margin-bottom: 15px;">
-                                <label>${t.socks5Config}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🧦 ${t.socks5Config}</label>
                                 <input type="text" id="socksConfig" placeholder="${isFarsi ? 'مثال: user:pass@host:port یا host:port' : '例如: user:pass@host:port 或 host:port'}">
                                 <small>${isFarsi ? 'آدرس پروکسی SOCKS5، برای انتقال تمام ترافیک خروجی استفاده می‌شود' : 'SOCKS5代理地址，用于转发所有出站流量'}</small>
                         </div>
-                            <button type="submit">${t.saveConfig}</button>
+                            <button type="submit" style="display: flex; align-items: center; justify-content: center; gap: 6px;">💾 ${t.saveConfig}</button>
                     </form>
                     
-                        <h3 style="color: #007aff; margin: 20px 0 15px 0; font-size: 1.2rem; font-weight: 600;">${t.advancedControl}</h3>
+                        <h3 style="color: #007aff; margin: 20px 0 15px 0; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; gap: 8px;">🔧 ${t.advancedControl}</h3>
                     <form id="advancedConfigForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
-                                <label>${t.subscriptionConverter}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🔄 ${t.subscriptionConverter}</label>
                                 <input type="text" id="scu" placeholder="${t.subscriptionConverterPlaceholder}">
                                 <small>${t.subscriptionConverterHint}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.builtinPreferred}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">📦 ${t.builtinPreferred}</label>
                             <div style="padding: 20px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
@@ -3890,10 +3904,10 @@ function parseAddressAndPort(input) {
                             </div>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>优选IP筛选设置</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🎯 优选IP筛选设置</label>
                             <div style="padding: 20px; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
                                 <div style="margin-bottom: 20px;">
-                                    <label style="display: block; margin-bottom: 10px; font-weight: 600;">IP版本选择</label>
+                                    <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-weight: 600;">📡 IP版本选择</label>
                                     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                                         <label style="display: inline-flex; align-items: center; cursor: pointer;">
                                             <label class="toggle-switch">
@@ -3912,7 +3926,7 @@ function parseAddressAndPort(input) {
                                     </div>
                                 </div>
                                 <div style="margin-bottom: 15px;">
-                                    <label style="display: block; margin-bottom: 10px; font-weight: 600;">运营商选择</label>
+                                    <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-weight: 600;">📶 运营商选择</label>
                                     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                                         <label style="display: inline-flex; align-items: center; cursor: pointer;">
                                             <label class="toggle-switch">
@@ -3941,7 +3955,7 @@ function parseAddressAndPort(input) {
                             </div>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.allowAPIManagement}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🔐 ${t.allowAPIManagement}</label>
                             <select id="apiEnabled">
                                     <option value="">${t.apiEnabledDefault}</option>
                                     <option value="yes">${t.apiEnabledYes}</option>
@@ -3949,7 +3963,7 @@ function parseAddressAndPort(input) {
                                 <small style="color: #ff9500;">${t.apiEnabledHint}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.regionMatching}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🎯 ${t.regionMatching}</label>
                             <select id="regionMatching">
                                     <option value="">${t.regionMatchingDefault}</option>
                                     <option value="no">${t.regionMatchingNo}</option>
@@ -3957,7 +3971,7 @@ function parseAddressAndPort(input) {
                                 <small>${t.regionMatchingHint}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.downgradeControl}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">⬇️ ${t.downgradeControl}</label>
                             <select id="downgradeControl">
                                     <option value="">${t.downgradeControlDefault}</option>
                                     <option value="no">${t.downgradeControlNo}</option>
@@ -3965,7 +3979,7 @@ function parseAddressAndPort(input) {
                                 <small>${t.downgradeControlHint}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.tlsControl}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">🔒 ${t.tlsControl}</label>
                             <select id="portControl">
                                     <option value="">${t.tlsControlDefault}</option>
                                     <option value="yes">${t.tlsControlYes}</option>
@@ -3973,24 +3987,24 @@ function parseAddressAndPort(input) {
                                 <small>${t.tlsControlHint}</small>
                         </div>
                         <div style="margin-bottom: 15px;">
-                                <label>${t.preferredControl}</label>
+                                <label style="display: flex; align-items: center; gap: 8px;">⭐ ${t.preferredControl}</label>
                             <select id="preferredControl">
                                     <option value="">${t.preferredControlDefault}</option>
                                     <option value="yes">${t.preferredControlYes}</option>
                             </select>
                                 <small>${t.preferredControlHint}</small>
                         </div>
-                            <button type="submit">${t.saveAdvanced}</button>
+                            <button type="submit" style="display: flex; align-items: center; justify-content: center; gap: 6px;">💾 ${t.saveAdvanced}</button>
                     </form>
                     <div id="currentConfig">
                             ${t.loading}
                     </div>
                     <div id="pathTypeInfo">
-                            <div style="font-weight: 600; margin-bottom: 8px; color: #007aff;">${t.currentConfig}</div>
+                            <div style="font-weight: 600; margin-bottom: 8px; color: #007aff; display: flex; align-items: center; gap: 6px;">📍 ${t.currentConfig}</div>
                             <div id="pathTypeStatus">${t.checking}</div>
                     </div>
-                        <button onclick="loadCurrentConfig()" style="background: #007aff; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; margin-right: 10px; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3); transition: all 0.3s ease;">${t.refreshConfig}</button>
-                        <button onclick="resetAllConfig()" style="background: #ff3b30; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3); transition: all 0.3s ease;">${t.resetConfig}</button>
+                        <button onclick="loadCurrentConfig()" style="background: #007aff; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; margin-right: 10px; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 6px;">🔄 ${t.refreshConfig}</button>
+                        <button onclick="resetAllConfig()" style="background: #ff3b30; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 6px;">🗑️ ${t.resetConfig}</button>
                 </div>
                 <div id="statusMessage"></div>
             </div>
@@ -3998,7 +4012,7 @@ function parseAddressAndPort(input) {
             <div class="card" id="relatedLinksCard">
                     <h2 class="card-title">${t.relatedLinks}</h2>
                 <div class="related-links">
-                        <a href="https://github.com/xhx123l/cfnew" target="_blank">${t.githubProject}</a>
+                        <a href="https://github.com/xhx123l/cfnew" target="_blank" style="display: flex; align-items: center; gap: 8px;">🐙 ${t.githubProject}</a>
                 </div>
             </div>
         </div>
