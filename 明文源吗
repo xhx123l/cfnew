@@ -2623,27 +2623,27 @@ function parseAddressAndPort(input) {
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
             :root {
-                --primary-color: #0a84ff;
-                --primary-hover: #0071e3;
-                --background-color: #f5f5f7;
-                --card-background: #ffffff;
-                --text-primary: #1d1d1f;
-                --text-secondary: #86868b;
-                --border-color: #d2d2d7;
-                --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06);
-                --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.08);
-                --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
-                --border-radius: 14px;
-                --border-radius-sm: 8px;
-                --border-radius-lg: 18px;
-                --spacing-xs: 6px;
-                --spacing-sm: 12px;
-                --spacing-md: 18px;
-                --spacing-lg: 24px;
-                --spacing-xl: 36px;
-                --transition-fast: 0.2s ease;
-                --transition-normal: 0.3s ease;
-                --transition-slow: 0.5s ease;
+                --primary-color: #60a5fa;
+                --primary-hover: #3b82f6;
+                --background-color: #0f172a;
+                --card-background: rgba(255, 255, 255, 0.05);
+                --text-primary: #ffffff;
+                --text-secondary: #94a3b8;
+                --border-color: rgba(255, 255, 255, 0.1);
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+                --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+                --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+                --border-radius: 16px;
+                --border-radius-sm: 10px;
+                --border-radius-lg: 24px;
+                --spacing-xs: 8px;
+                --spacing-sm: 16px;
+                --spacing-md: 24px;
+                --spacing-lg: 32px;
+                --spacing-xl: 48px;
+                --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             }
             body {
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -2662,11 +2662,12 @@ function parseAddressAndPort(input) {
             h1, h2, h3, h4, h5, h6 {
                 font-weight: 700;
                 line-height: 1.3;
+                letter-spacing: -0.02em;
             }
             h3 {
-                font-size: 1.3rem;
+                font-size: 1.25rem;
                 color: var(--text-primary);
-                margin-bottom: 15px;
+                margin-bottom: 16px;
                 font-weight: 600;
             }
             body::before {
@@ -2676,11 +2677,21 @@ function parseAddressAndPort(input) {
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(245, 245, 247, 0.85);
+                background: 
+                    radial-gradient(circle at 20% 80%, rgba(96, 165, 250, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(147, 197, 253, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 50%, rgba(191, 219, 254, 0.2) 0%, transparent 60%);
                 z-index: -1;
+                pointer-events: none;
+                animation: pulseGlow 8s ease-in-out infinite;
+            }
+            
+            @keyframes pulseGlow {
+                0%, 100% { opacity: 0.6; }
+                50% { opacity: 1; }
             }
             .container {
-                max-width: 950px;
+                max-width: 1000px;
                 margin: 0 auto;
                 padding: var(--spacing-md);
                 position: relative;
@@ -2695,39 +2706,48 @@ function parseAddressAndPort(input) {
             .header::after {
                 content: '';
                 display: block;
-                width: 60px;
-                height: 3px;
-                background: var(--primary-color);
+                width: 80px;
+                height: 4px;
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
                 margin: var(--spacing-md) auto 0;
-                border-radius: 3px;
+                border-radius: 4px;
+                box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
             }
             .title {
-                font-size: 2.5rem;
-                font-weight: 700;
-                color: var(--text-primary);
+                font-size: 3rem;
+                font-weight: 800;
+                background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #bfdbfe 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
                 margin-bottom: var(--spacing-xs);
                 position: relative;
                 text-align: center;
-                letter-spacing: -0.02em;
-                line-height: 1.2;
+                line-height: 1.1;
+                animation: titleGlow 3s ease-in-out infinite;
+            }
+            @keyframes titleGlow {
+                0%, 100% { filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.3)); }
+                50% { filter: drop-shadow(0 0 40px rgba(147, 197, 253, 0.3)); }
             }
             .subtitle {
                 color: var(--text-secondary);
                 margin-bottom: var(--spacing-lg);
-                font-size: 1.1rem;
-                line-height: 1.5;
+                font-size: 1.15rem;
+                line-height: 1.6;
                 text-align: center;
                 max-width: 600px;
                 margin-left: auto;
                 margin-right: auto;
+                font-weight: 400;
             }
             .card {
-                background: rgba(255, 255, 255, 0.25);
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.1);
                 border-radius: var(--border-radius-lg);
                 padding: var(--spacing-lg);
                 margin-bottom: var(--spacing-lg);
-                box-shadow: var(--shadow-sm);
+                box-shadow: var(--shadow-md);
                 position: relative;
                 transition: all var(--transition-normal);
                 overflow: hidden;
@@ -2740,39 +2760,52 @@ function parseAddressAndPort(input) {
                 top: 0;
                 left: 0;
                 right: 0;
-                height: 3px;
-                background: linear-gradient(90deg, rgba(0, 122, 255, 0.5), rgba(90, 200, 250, 0.5));
+                height: 4px;
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
                 border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
-                backdrop-filter: blur(5px);
+                opacity: 0.8;
+            }
+            .card::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+                pointer-events: none;
             }
             .card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 16px 32px rgba(31, 38, 135, 0.25);
-                border-color: rgba(10, 132, 255, 0.4);
-                background: rgba(255, 255, 255, 0.3);
+                transform: translateY(-8px) scale(1.01);
+                box-shadow: var(--shadow-lg), 0 0 20px rgba(102, 126, 234, 0.3);
+                border-color: rgba(102, 126, 234, 0.4);
+                background: rgba(255, 255, 255, 0.12);
             }
             .card-title {
-                font-size: 1.4rem;
+                font-size: 1.35rem;
                 margin-bottom: var(--spacing-md);
                 color: var(--text-primary);
-                font-weight: 600;
+                font-weight: 700;
                 display: flex;
                 align-items: center;
-                gap: 12px;
-                padding-bottom: var(--spacing-xs);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+                gap: 14px;
+                padding-bottom: var(--spacing-sm);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                position: relative;
+                z-index: 1;
             }
             .card-title::before {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                width: 32px;
-                height: 32px;
-                background-color: rgba(10, 132, 255, 0.1);
-                color: var(--primary-color);
-                border-radius: 8px;
-                font-size: 16px;
+                width: 40px;
+                height: 40px;
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+                color: white;
+                border-radius: 12px;
+                font-size: 18px;
                 flex-shrink: 0;
+                box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
             }
             #selectClientCard .card-title::before {
                 content: '📱';
@@ -2848,28 +2881,30 @@ function parseAddressAndPort(input) {
                 }
             }
             .client-btn {
-                background: var(--card-background);
-                border: 1px solid var(--border-color);
-                padding: 14px 8px;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 18px 12px;
                 color: var(--text-primary);
-                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-weight: 500;
+                font-family: inherit;
+                font-weight: 600;
                 cursor: pointer;
-                transition: all var(--transition-fast);
+                transition: all var(--transition-normal);
                 text-align: center;
-                border-radius: 10px;
+                border-radius: var(--border-radius);
                 box-shadow: var(--shadow-sm);
                 position: relative;
                 overflow: hidden;
                 font-size: 13px;
-                line-height: 1.3;
+                line-height: 1.4;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                min-height: 65px;
+                min-height: 80px;
                 height: auto;
-                min-width: 85px;
+                min-width: 90px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
             }
             .client-btn::before {
                 content: '';
@@ -2878,41 +2913,54 @@ function parseAddressAndPort(input) {
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.1), transparent);
                 transform: translateX(-100%);
-                transition: transform 0.6s ease;
+                transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
                 pointer-events: none;
             }
+            .client-btn::after {
+                content: '';
+                position: absolute;
+                inset: -1px;
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+                border-radius: var(--border-radius);
+                opacity: 0;
+                transition: opacity var(--transition-normal);
+                z-index: -1;
+            }
             .client-btn:hover {
-                border-color: rgba(0, 122, 255, 0.4);
-                box-shadow: var(--shadow-md);
-                transform: translateY(-3px);
-                background: rgba(255, 255, 255, 0.3);
+                border-color: transparent;
+                box-shadow: var(--shadow-md), 0 0 30px rgba(96, 165, 250, 0.3);
+                transform: translateY(-5px) scale(1.02);
+                color: white;
             }
             .client-btn:hover::before {
                 transform: translateX(100%);
             }
+            .client-btn:hover::after {
+                opacity: 1;
+            }
             .client-btn:active {
-                transform: translateY(-1px);
+                transform: translateY(-2px) scale(0.98);
                 box-shadow: var(--shadow-sm);
-                background: rgba(255, 255, 255, 0.25);
             }
             .generate-btn {
-                background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
                 border: none;
-                padding: 12px 16px;
+                padding: 14px 24px;
                 color: white;
-                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-weight: 500;
+                font-family: inherit;
+                font-weight: 600;
                 cursor: pointer;
-                transition: all var(--transition-fast);
+                transition: all var(--transition-normal);
                 margin-right: var(--spacing-sm);
-                border-radius: 8px;
-                box-shadow: var(--shadow-sm);
+                border-radius: var(--border-radius);
+                box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
                 position: relative;
                 overflow: hidden;
                 font-size: 14px;
-                line-height: 1.3;
+                line-height: 1.4;
+                letter-spacing: 0.3px;
             }
             .generate-btn::before {
                 content: '';
@@ -2921,33 +2969,33 @@ function parseAddressAndPort(input) {
                 left: -100%;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-                transition: left 0.8s ease;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                background-size: 200% 100%;
+                animation: shimmer 2s infinite;
                 pointer-events: none;
             }
-            .generate-btn:hover {
-                background: linear-gradient(135deg, var(--primary-hover), #0056b3);
-                box-shadow: var(--shadow-md);
-                transform: translateY(-3px);
+            @keyframes shimmer {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
             }
-            .generate-btn:hover::before {
-                left: 100%;
+            .generate-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(96, 165, 250, 0.5), 0 0 40px rgba(96, 165, 250, 0.3);
             }
             .generate-btn:active {
                 transform: translateY(-1px);
-                box-shadow: var(--shadow-sm);
+                box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
             }
             .subscription-url {
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
                 padding: var(--spacing-md);
                 word-break: break-all;
-                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
                 color: var(--text-primary);
                 margin-top: var(--spacing-md);
                 display: none;
-                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-                border-radius: 8px;
+                border-radius: var(--border-radius);
                 position: relative;
                 overflow-wrap: break-word;
                 overflow-x: auto;
@@ -2955,6 +3003,8 @@ function parseAddressAndPort(input) {
                 box-sizing: border-box;
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
+                font-size: 13px;
+                line-height: 1.6;
             }
             .language-selector {
                 position: fixed;
@@ -2963,62 +3013,69 @@ function parseAddressAndPort(input) {
                 z-index: 1000;
             }
             #languageSelector {
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.15);
                 color: var(--text-primary);
                 padding: var(--spacing-xs) var(--spacing-sm);
-                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-family: inherit;
                 font-size: 14px;
                 cursor: pointer;
-                border-radius: 8px;
+                border-radius: 50px;
                 box-shadow: var(--shadow-sm);
                 outline: none;
-                transition: all 0.3s ease;
+                transition: all var(--transition-normal);
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
             }
             #languageSelector:hover {
                 box-shadow: var(--shadow-md);
                 transform: translateY(-2px);
+                border-color: rgba(102, 126, 234, 0.4);
             }
             .app-title {
                 position: fixed;
                 top: var(--spacing-md);
                 right: var(--spacing-md);
-                color: var(--primary-color);
-                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-size: 16px;
+                color: var(--text-primary);
+                font-family: inherit;
+                font-size: 15px;
                 font-weight: 600;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+                padding: 8px 16px;
+                border-radius: 50px;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
             }
             #systemStatus {
                 margin: var(--spacing-md) 0;
                 padding: var(--spacing-md);
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.1);
                 box-shadow: var(--shadow-sm);
                 position: relative;
-                border-radius: 8px;
+                border-radius: var(--border-radius);
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
             }
             #systemStatus div {
                 margin-bottom: var(--spacing-sm);
                 color: var(--text-primary);
-                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-family: inherit;
             }
             #regionStatus, #backupStatus, #currentIP, #echStatus, #regionMatch {
                 font-size: 14px;
-                line-height: 1.5;
+                line-height: 1.6;
             }
             #geoInfo {
                 font-size: 13px;
                 color: var(--text-secondary);
             }
             #kvStatus, #currentConfig, #pathTypeInfo {
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.25);
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.1);
                 color: var(--text-primary);
-                border-radius: 8px;
+                border-radius: var(--border-radius);
                 padding: var(--spacing-md);
                 margin-bottom: var(--spacing-md);
                 box-shadow: var(--shadow-sm);
@@ -3026,8 +3083,8 @@ function parseAddressAndPort(input) {
                 -webkit-backdrop-filter: blur(15px);
             }
             #pathTypeInfo {
-                background-color: #f0f8ff;
-                border-color: rgba(0, 122, 255, 0.3);
+                border-color: rgba(102, 126, 234, 0.3);
+                background: rgba(102, 126, 234, 0.1);
             }
             form {
                 margin-bottom: var(--spacing-md);
@@ -3044,24 +3101,24 @@ function parseAddressAndPort(input) {
             form input[type="text"], form input[type="number"], form select {
                 width: 100%;
                 padding: var(--spacing-sm) var(--spacing-md);
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.1);
                 color: var(--text-primary);
-                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-family: inherit;
                 font-size: 14px;
                 border-radius: var(--border-radius-sm);
                 box-shadow: var(--shadow-sm);
-                transition: all var(--transition-fast);
+                transition: all var(--transition-normal);
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
             }
             form input[type="text"]:focus, form input[type="number"]:focus, form select:focus {
                 outline: none;
-                border-color: rgba(0, 122, 255, 0.5);
-                box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3), var(--shadow-md);
-                background: rgba(255, 255, 255, 0.25);
+                border-color: rgba(96, 165, 250, 0.5);
+                box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2), var(--shadow-md);
+                background: rgba(255, 255, 255, 0.12);
             }
-            /* 苹果风格开关样式 */
+            /* 现代风格开关样式 */
             .toggle-switch {
                 position: relative;
                 display: inline-flex;
@@ -3077,63 +3134,65 @@ function parseAddressAndPort(input) {
             }
             .toggle-slider {
                 position: relative;
-                width: 50px;
-                height: 28px;
-                background: linear-gradient(to bottom, #e0e0e0, #f5f5f7);
-                border: 1px solid #d0d0d0;
+                width: 52px;
+                height: 30px;
+                background: rgba(255, 255, 255, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.2);
                 border-radius: 9999px;
-                transition: all var(--transition-fast);
-                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+                transition: all var(--transition-normal);
+                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
             }
             .toggle-slider:before {
                 content: "";
                 position: absolute;
-                top: 2px;
-                left: 2px;
+                top: 3px;
+                left: 3px;
                 width: 24px;
                 height: 24px;
-                background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+                background: linear-gradient(145deg, #ffffff, #e0e0e0);
                 border-radius: 50%;
-                transition: all var(--transition-fast);
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+                transition: all var(--transition-normal);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             }
             input:checked + .toggle-slider {
-                background: linear-gradient(to bottom, #42a7ff, #3a98ef);
-                border-color: #007aff;
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+                border-color: transparent;
+                box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
             }
             input:checked + .toggle-slider:before {
                 transform: translateX(22px);
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             }
             input:focus + .toggle-slider {
-                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(10, 132, 255, 0.3);
+                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(96, 165, 250, 0.3);
             }
             input:hover + .toggle-slider {
-                background: linear-gradient(to bottom, #d0d0d0, #e5e5e7);
+                background: rgba(255, 255, 255, 0.2);
             }
             input:checked:hover + .toggle-slider {
-                background: linear-gradient(to bottom, #3a98ef, #2a89e5);
+                box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
             }
             form button[type="submit"], form button[type="button"] {
-                background: linear-gradient(135deg, #007aff, #0066cc);
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
                 border: none;
-                padding: 12px 16px;
+                padding: 12px 20px;
                 color: white;
-                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-weight: 500;
+                font-family: inherit;
+                font-weight: 600;
                 cursor: pointer;
                 margin-right: var(--spacing-sm);
-                border-radius: 8px;
-                box-shadow: var(--shadow-sm);
-                transition: all var(--transition-fast);
+                border-radius: var(--border-radius);
+                box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
+                transition: all var(--transition-normal);
                 position: relative;
                 overflow: hidden;
                 font-size: 14px;
-                line-height: 1.3;
+                line-height: 1.4;
                 min-height: 44px;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
+                letter-spacing: 0.2px;
             }
             form button[type="submit"]::before, form button[type="button"]::before {
                 content: '';
@@ -3142,46 +3201,25 @@ function parseAddressAndPort(input) {
                 left: -100%;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-                transition: left 0.8s ease;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                background-size: 200% 100%;
+                animation: shimmer 2s infinite;
                 pointer-events: none;
             }
             form button[type="submit"]:hover, form button[type="button"]:hover {
-                background: linear-gradient(135deg, #0066cc, #0052a3);
-                box-shadow: var(--shadow-md);
-                transform: translateY(-2px);
-            }
-            form button[type="submit"]:hover::before, form button[type="button"]:hover::before {
-                left: 100%;
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(96, 165, 250, 0.5), 0 0 40px rgba(96, 165, 250, 0.3);
             }
             form button[type="submit"]:active, form button[type="button"]:active {
-                transform: translateY(0);
-                box-shadow: var(--shadow-sm);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 15px rgba(96, 165, 250, 0.4);
             }
             form button[type="button"]#stopLatencyTest {
-                background: linear-gradient(135deg, #ff453a, #e32d22);
-                box-shadow: var(--shadow-sm);
-            }
-            form button[type="button"]#stopLatencyTest::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-                transition: left 0.8s ease;
-                pointer-events: none;
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
             }
             form button[type="button"]#stopLatencyTest:hover {
-                background: linear-gradient(135deg, #e32d22, #c8271e);
-                box-shadow: var(--shadow-md);
-            }
-            form button[type="button"]#stopLatencyTest:hover::before {
-                left: 100%;
-            }
-            form button[type="button"]#stopLatencyTest:active {
-                box-shadow: var(--shadow-sm);
+                box-shadow: 0 8px 25px rgba(245, 87, 108, 0.5), 0 0 40px rgba(245, 87, 108, 0.3);
             }
             small {
                 color: var(--text-secondary);
@@ -3195,20 +3233,30 @@ function parseAddressAndPort(input) {
             #latencyTestResults {
                 max-height: 250px;
                 overflow-y: auto;
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: var(--border-radius);
                 padding: var(--spacing-md);
-                padding-top: calc(var(--spacing-md) + 3px);
+                padding-top: calc(var(--spacing-md) + 4px);
                 box-shadow: var(--shadow-sm);
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
                 position: relative;
             }
+            #latencyTestResults::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+                border-radius: var(--border-radius) var(--border-radius) 0 0;
+            }
             #latencyResultsList {
-                background: rgba(255, 255, 255, 0.15);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: var(--border-radius-sm);
                 padding: var(--spacing-sm);
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
@@ -3224,12 +3272,12 @@ function parseAddressAndPort(input) {
             #latencyResultsList td {
                 padding: 8px 4px;
                 text-align: left;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             }
             #latencyResultsList th {
                 font-weight: 600;
                 color: var(--text-primary);
-                background: rgba(0, 122, 255, 0.05);
+                background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(59, 130, 246, 0.1));
                 position: sticky;
                 top: 0;
                 z-index: 10;
@@ -3239,22 +3287,22 @@ function parseAddressAndPort(input) {
             }
             #latencyResultsList .latency-good {
                 color: #34c759;
-                font-weight: 500;
+                font-weight: 600;
             }
             #latencyResultsList .latency-medium {
                 color: #ff9500;
-                font-weight: 500;
+                font-weight: 600;
             }
             #latencyResultsList .latency-bad {
                 color: #ff3b30;
-                font-weight: 500;
+                font-weight: 600;
             }
             #cityFilterContainer {
                 margin-bottom: var(--spacing-sm);
                 padding: var(--spacing-md);
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: var(--border-radius-sm);
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
             }
@@ -3262,10 +3310,10 @@ function parseAddressAndPort(input) {
                 display: none;
                 padding: var(--spacing-md);
                 margin: var(--spacing-sm) 0;
-                border: 1px solid rgba(0, 122, 255, 0.3);
-                background: rgba(240, 248, 255, 0.25);
-                color: var(--primary-color);
-                border-radius: 8px;
+                border: 1px solid rgba(102, 126, 234, 0.3);
+                background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+                color: var(--text-primary);
+                border-radius: var(--border-radius-sm);
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
             }
@@ -3275,31 +3323,46 @@ function parseAddressAndPort(input) {
                 padding: var(--spacing-lg) 0;
             }
             .related-links a {
-                color: var(--primary-color);
+                color: var(--text-primary);
                 text-decoration: none;
                 margin: 0 var(--spacing-md);
                 font-size: 1.1rem;
                 font-weight: 500;
-                transition: all 0.3s ease;
+                transition: all var(--transition-normal);
+                position: relative;
+            }
+            .related-links a::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+                transition: width var(--transition-normal);
             }
             .related-links a:hover {
-                text-decoration: underline;
-                color: #0056b3;
+                color: #93c5fd;
+            }
+            .related-links a:hover::after {
+                width: 100%;
             }
             .device-tag {
                 display: inline-block;
-                background: rgba(165, 210, 255, 0.3);
-                color: #007aff;
+                background: linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(59, 130, 246, 0.15));
+                color: #ffffff;
                 font-size: 10px;
-                font-weight: 600;
-                padding: 3px 8px;
-                border-radius: 20px;
+                font-weight: 700;
+                padding: 4px 10px;
+                border-radius: 50px;
                 margin-left: 8px;
                 vertical-align: middle;
-                border: 1px solid rgba(0, 122, 255, 0.4);
-                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(5px);
-                -webkit-backdrop-filter: blur(5px);
+                border: 1px solid rgba(96, 165, 250, 0.3);
+                box-shadow: 0 2px 8px rgba(96, 165, 250, 0.2);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
             }
             /* 延迟测试区域按钮样式优化 */
             #latencyTestResults button {
@@ -3336,7 +3399,7 @@ function parseAddressAndPort(input) {
                 left: 0;
                 right: 0;
                 height: 3px;
-                background: linear-gradient(90deg, var(--primary-color), #5ac8fa);
+                background: linear-gradient(90deg, var(--primary-color), #93c5fd);
                 border-radius: 12px 12px 0 0;
             }
             /* 平板设备 (768px - 1024px) */
