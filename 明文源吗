@@ -3680,7 +3680,7 @@ function parseAddressAndPort(input) {
         <div class="container">
             <div class="header">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: var(--spacing-md);">
-                        <div style="font-size: 3rem; animation: pulse 2s ease-in-out infinite;">🦝</div>
+                        <img src="https://i.stardots.io/rkkwhav7/StarDots-2026031302072447558.png" alt="Logo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
                     </div>
                     <h1 class="title">${t.title}</h1>
                     <p class="subtitle" id="beijingTime"></p>
