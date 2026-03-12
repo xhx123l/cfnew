@@ -2692,18 +2692,20 @@
                 line-height: 1.5;
             }
             .card {
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
+                background: rgba(255, 255, 255, 0.8);
+                border: 1px solid rgba(255, 255, 255, 0.3);
                 border-radius: var(--border-radius);
                 padding: var(--spacing-lg);
                 margin-bottom: var(--spacing-lg);
-                box-shadow: var(--shadow-sm);
+                box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
                 position: relative;
+                backdrop-filter: blur(10px);
                 transition: all 0.3s ease;
             }
             .card:hover {
                 transform: translateY(-2px);
-                box-shadow: var(--shadow-md);
+                box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+                background: rgba(255, 255, 255, 0.9);
             }
             .card-title {
                 font-size: 1.5rem;
@@ -3431,6 +3433,50 @@
                     window.location.reload();
                 }
                 
+                // 设备检测函数
+                function detectDevice() {
+                    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                    
+                    // 检测苹果设备
+                    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                        return '苹果';
+                    }
+                    
+                    // 检测安卓设备
+                    if (/Android/.test(userAgent)) {
+                        return '安卓';
+                    }
+                    
+                    // 默认为PC
+                    return 'PC';
+                }
+                
+                // 显示当前设备标签
+                function showDeviceTags() {
+                    const currentDevice = detectDevice();
+                    
+                    // 清除所有标签
+                    document.querySelectorAll('.device-tag').forEach(tag => {
+                        tag.textContent = '';
+                    });
+                    
+                    // 根据当前设备显示标签
+                    if (currentDevice === 'PC') {
+                        document.getElementById('clash-tag').textContent = '当前设备';
+                        document.getElementById('sing-box-tag').textContent = '当前设备';
+                        document.getElementById('v2ray-tag').textContent = '当前设备';
+                        document.getElementById('nekoray-tag').textContent = '当前设备';
+                    } else if (currentDevice === '苹果') {
+                        document.getElementById('surge-tag').textContent = '当前设备';
+                        document.getElementById('stash-tag').textContent = '当前设备';
+                        document.getElementById('loon-tag').textContent = '当前设备';
+                        document.getElementById('quantumult-tag').textContent = '当前设备';
+                        document.getElementById('shadowrocket-tag').textContent = '当前设备';
+                    } else if (currentDevice === '安卓') {
+                        document.getElementById('v2rayng-tag').textContent = '当前设备';
+                    }
+                }
+                
                 // 页面加载时检查 localStorage 和 Cookie，并清理URL参数
                 window.addEventListener('DOMContentLoaded', function() {
                     const savedLang = localStorage.getItem('preferredLanguage') || getCookie('preferredLanguage');
@@ -3457,6 +3503,9 @@
                         expiryDate.setFullYear(expiryDate.getFullYear() + 1);
                         document.cookie = 'preferredLanguage=' + savedLang + '; path=/; expires=' + expiryDate.toUTCString() + '; SameSite=Lax';
                     }
+                    
+                    // 显示设备标签
+                    showDeviceTags();
                 });
             
             function tryOpenApp(schemeUrl, fallbackCallback, timeout) {
