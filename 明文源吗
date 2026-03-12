@@ -1,42 +1,36 @@
-    // CFnew - 终端 v2.9.4
-    // 版本: v2.9.4
-    import { connect } from 'cloudflare:sockets';
-    let at = '351c9981-04b6-4103-aa4b-864aa9c91469';
-    let fallbackAddress = '';
-    let socks5Config = '';
-    let customPreferredIPs = [];
-    let customPreferredDomains = [];
-    let enableSocksDowngrade = false;
-    let disableNonTLS = false;
-    let disablePreferred = false;
+import { connect } from 'cloudflare:sockets';
+let at = '351c9981-04b6-4103-aa4b-864aa9c91469';
+let fallbackAddress = '';
+let socks5Config = '';
+let customPreferredIPs = [];
+let customPreferredDomains = [];
+let enableSocksDowngrade = false;
+let disableNonTLS = false;
+let disablePreferred = false;
 
-    let enableRegionMatching = true;
-    let currentWorkerRegion = '';
-    let manualWorkerRegion = '';
-    let piu = '';
-    let cp = '';  
+let enableRegionMatching = true;
+let currentWorkerRegion = '';
+let manualWorkerRegion = '';
+let piu = '';
+let cp = '';  
 
-    let ev = true;   
-    let et = false; 
-    let ex = false;  
-    let tp = '';
-    // 启用ECH功能（true启用，false禁用）
-    let enableECH = false;  
-    // 自定义DNS服务器（默认：https://dns.joeyblog.eu.org/joeyblog）
-    let customDNS = 'https://dns.joeyblog.eu.org/joeyblog';
-    // 自定义ECH域名（默认：cloudflare-ech.com）
-    let customECHDomain = 'cloudflare-ech.com';
+let ev = true;   
+let et = false; 
+let ex = false;  
+let tp = '';
+let enableECH = false;
+let customDNS = 'https://dns.joeyblog.eu.org/joeyblog';
+let customECHDomain = 'cloudflare-ech.com';
 
-    let scu = 'https://url.v1.mk/sub';  
-    // 远程配置URL（硬编码）
-    const remoteConfigUrl = 'https://raw.githubusercontent.com/byJoey/test/refs/heads/main/tist.ini';
+let scu = 'https://url.v1.mk/sub';
+const remoteConfigUrl = 'https://raw.githubusercontent.com/byJoey/test/refs/heads/main/tist.ini';
 
-    let epd = false;   // 优选域名默认关闭
-    let epi = true;       
-    let egi = true;          
+let epd = false;
+let epi = true;
+let egi = true;
 
-    let kvStore = null;
-    let kvConfig = {};
+let kvStore = null;
+let kvConfig = {};
 
     const regionMapping = {
         'US': ['🇺🇸 美国', 'US', 'United States'],
@@ -118,194 +112,181 @@
         return false;
     }
 
-    async function initKVStore(env) {
-        
-        if (env.C) {
-            try {
-                kvStore = env.C;
-                await loadKVConfig();
-            } catch (error) {
-                kvStore = null;
-            }
-        } else {
-        }
-    }
-
-    async function loadKVConfig() {
-        
-        if (!kvStore) {
-            return;
-        }
-        
+async function initKVStore(env) {
+    if (env.C) {
         try {
-            const configData = await kvStore.get('c');
-            
-            if (configData) {
-                kvConfig = JSON.parse(configData);
-            } else {
-            }
+            kvStore = env.C;
+            await loadKVConfig();
         } catch (error) {
-            kvConfig = {};
+            kvStore = null;
         }
     }
+}
 
-    async function saveKVConfig() {
-        if (!kvStore) {
-            return;
+async function loadKVConfig() {
+    if (!kvStore) {
+        return;
+    }
+    
+    try {
+        const configData = await kvStore.get('c');
+        if (configData) {
+            kvConfig = JSON.parse(configData);
         }
+    } catch (error) {
+        kvConfig = {};
+    }
+}
+
+async function saveKVConfig() {
+    if (!kvStore) {
+        return;
+    }
+    
+    try {
+        const configString = JSON.stringify(kvConfig);
+        await kvStore.put('c', configString);
+    } catch (error) {
+        throw error; 
+    }
+}
+
+function getConfigValue(key, defaultValue = '') {
+    if (kvConfig[key] !== undefined) {
+        return kvConfig[key];
+    }
+    return defaultValue;
+}
+
+async function setConfigValue(key, value) {
+    kvConfig[key] = value;
+    await saveKVConfig();
+}
+
+async function detectWorkerRegion(request) {
+    try {
+        const cfCountry = request.cf?.country;
         
-        try {
-            const configString = JSON.stringify(kvConfig);
-            await kvStore.put('c', configString);
-        } catch (error) {
-            throw error; 
-        }
-    }
-
-    function getConfigValue(key, defaultValue = '') {
-        
-        if (kvConfig[key] !== undefined) {
-            return kvConfig[key];
-        }
-        return defaultValue;
-    }
-
-    async function setConfigValue(key, value) {
-        kvConfig[key] = value;
-        await saveKVConfig();
-    }
-
-    async function detectWorkerRegion(request) {
-        try {
-            const cfCountry = request.cf?.country;
+        if (cfCountry) {
+            const countryToRegion = {
+                'US': 'US', 'SG': 'SG', 'JP': 'JP', 'KR': 'KR',
+                'DE': 'DE', 'SE': 'SE', 'NL': 'NL', 'FI': 'FI', 'GB': 'GB',
+                'CN': 'SG', 'TW': 'JP', 'AU': 'SG', 'CA': 'US',
+                'FR': 'DE', 'IT': 'DE', 'ES': 'DE', 'CH': 'DE',
+                'AT': 'DE', 'BE': 'NL', 'DK': 'SE', 'NO': 'SE', 'IE': 'GB'
+            };
             
-            if (cfCountry) {
-                const countryToRegion = {
-                    'US': 'US', 'SG': 'SG', 'JP': 'JP', 'KR': 'KR',
-                    'DE': 'DE', 'SE': 'SE', 'NL': 'NL', 'FI': 'FI', 'GB': 'GB',
-                    'CN': 'SG', 'TW': 'JP', 'AU': 'SG', 'CA': 'US',
-                    'FR': 'DE', 'IT': 'DE', 'ES': 'DE', 'CH': 'DE',
-                    'AT': 'DE', 'BE': 'NL', 'DK': 'SE', 'NO': 'SE', 'IE': 'GB'
-                };
-                
-                if (countryToRegion[cfCountry]) {
-                    return countryToRegion[cfCountry];
-                }
-            }
-            
-            return 'SG';
-            
-        } catch (error) {
-            return 'SG';
-        }
-    }
-
-    async function checkIPAvailability(domain, port = 443, timeout = 2000) {
-        try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), timeout);
-            
-            const response = await fetch(`https://${domain}`, {
-                method: 'HEAD',
-                signal: controller.signal,
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (compatible; CF-IP-Checker/1.0)'
-                }
-            });
-            
-            clearTimeout(timeoutId);
-            return response.status < 500;
-        } catch (error) {
-            return true;
-        }
-    }
-
-    async function getBestBackupIP(workerRegion = '', useRegionMatching = enableRegionMatching) {
-        
-        if (backupIPs.length === 0) {
-            return null;
-        }
-        
-        const availableIPs = backupIPs.map(ip => ({ ...ip, available: true }));
-        
-        if (useRegionMatching && workerRegion) {
-            const sortedIPs = getSmartRegionSelection(workerRegion, availableIPs, useRegionMatching);
-            if (sortedIPs.length > 0) {
-                const selectedIP = sortedIPs[0];
-                return selectedIP;
+            if (countryToRegion[cfCountry]) {
+                return countryToRegion[cfCountry];
             }
         }
         
-        const selectedIP = availableIPs[0];
-        return selectedIP;
+        return 'SG';
+    } catch (error) {
+        return 'SG';
     }
+}
 
-    function getNearbyRegions(region) {
-        const nearbyMap = {
-            'US': ['SG', 'JP', 'KR'], 
-            'SG': ['JP', 'KR', 'US'], 
-            'JP': ['SG', 'KR', 'US'], 
-            'KR': ['JP', 'SG', 'US'], 
-            'DE': ['NL', 'GB', 'SE', 'FI'], 
-            'SE': ['DE', 'NL', 'FI', 'GB'], 
-            'NL': ['DE', 'GB', 'SE', 'FI'], 
-            'FI': ['SE', 'DE', 'NL', 'GB'], 
-            'GB': ['DE', 'NL', 'SE', 'FI']  
-        };
+async function checkIPAvailability(domain, port = 443, timeout = 2000) {
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
         
-        return nearbyMap[region] || [];
-    }
-
-    function getAllRegionsByPriority(region) {
-        const nearbyRegions = getNearbyRegions(region);
-        const allRegions = ['US', 'SG', 'JP', 'KR', 'DE', 'SE', 'NL', 'FI', 'GB'];
-        
-        return [region, ...nearbyRegions, ...allRegions.filter(r => r !== region && !nearbyRegions.includes(r))];
-    }
-
-    function getSmartRegionSelection(workerRegion, availableIPs, useRegionMatching = enableRegionMatching) {
-        
-        if (!useRegionMatching || !workerRegion) {
-            return availableIPs;
-        }
-        
-        const priorityRegions = getAllRegionsByPriority(workerRegion);
-        
-        const sortedIPs = [];
-        
-        for (const region of priorityRegions) {
-            const regionIPs = availableIPs.filter(ip => ip.regionCode === region);
-            sortedIPs.push(...regionIPs);
-        }
-        
-        return sortedIPs;
-    }
-
-    function parseAddressAndPort(input) {
-        if (input.includes('[') && input.includes(']')) {
-            const match = input.match(/^\[([^\]]+)\](?::(\d+))?$/);
-            if (match) {
-                return {
-                    address: match[1],
-                    port: match[2] ? parseInt(match[2], 10) : null
-                };
+        const response = await fetch(`https://${domain}`, {
+            method: 'HEAD',
+            signal: controller.signal,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (compatible; CF-IP-Checker/1.0)'
             }
-        }
+        });
         
-        const lastColonIndex = input.lastIndexOf(':');
-        if (lastColonIndex > 0) {
-            const address = input.substring(0, lastColonIndex);
-            const portStr = input.substring(lastColonIndex + 1);
-            const port = parseInt(portStr, 10);
-
-            // address 含 ':' 说明是裸 IPv6（如 2001:db8::1），整体当地址，无端口
-            if (!address.includes(':') && !isNaN(port) && port > 0 && port <= 65535) {
-                return { address, port };
-            }
-        }
-        
-        return { address: input, port: null };
+        clearTimeout(timeoutId);
+        return response.status < 500;
+    } catch (error) {
+        return true;
     }
+}
+
+async function getBestBackupIP(workerRegion = '', useRegionMatching = enableRegionMatching) {
+    if (backupIPs.length === 0) {
+        return null;
+    }
+    
+    const availableIPs = backupIPs.map(ip => ({ ...ip, available: true }));
+    
+    if (useRegionMatching && workerRegion) {
+        const sortedIPs = getSmartRegionSelection(workerRegion, availableIPs, useRegionMatching);
+        if (sortedIPs.length > 0) {
+            return sortedIPs[0];
+        }
+    }
+    
+    return availableIPs[0];
+}
+
+function getNearbyRegions(region) {
+    const nearbyMap = {
+        'US': ['SG', 'JP', 'KR'], 
+        'SG': ['JP', 'KR', 'US'], 
+        'JP': ['SG', 'KR', 'US'], 
+        'KR': ['JP', 'SG', 'US'], 
+        'DE': ['NL', 'GB', 'SE', 'FI'], 
+        'SE': ['DE', 'NL', 'FI', 'GB'], 
+        'NL': ['DE', 'GB', 'SE', 'FI'], 
+        'FI': ['SE', 'DE', 'NL', 'GB'], 
+        'GB': ['DE', 'NL', 'SE', 'FI']  
+    };
+    
+    return nearbyMap[region] || [];
+}
+
+function getAllRegionsByPriority(region) {
+    const nearbyRegions = getNearbyRegions(region);
+    const allRegions = ['US', 'SG', 'JP', 'KR', 'DE', 'SE', 'NL', 'FI', 'GB'];
+    
+    return [region, ...nearbyRegions, ...allRegions.filter(r => r !== region && !nearbyRegions.includes(r))];
+}
+
+function getSmartRegionSelection(workerRegion, availableIPs, useRegionMatching = enableRegionMatching) {
+    if (!useRegionMatching || !workerRegion) {
+        return availableIPs;
+    }
+    
+    const priorityRegions = getAllRegionsByPriority(workerRegion);
+    const sortedIPs = [];
+    
+    for (const region of priorityRegions) {
+        const regionIPs = availableIPs.filter(ip => ip.regionCode === region);
+        sortedIPs.push(...regionIPs);
+    }
+    
+    return sortedIPs;
+}
+
+function parseAddressAndPort(input) {
+    if (input.includes('[') && input.includes(']')) {
+        const match = input.match(/^\[([^\]]+)\](?::(\d+))?$/);
+        if (match) {
+            return {
+                address: match[1],
+                port: match[2] ? parseInt(match[2], 10) : null
+            };
+        }
+    }
+    
+    const lastColonIndex = input.lastIndexOf(':');
+    if (lastColonIndex > 0) {
+        const address = input.substring(0, lastColonIndex);
+        const portStr = input.substring(lastColonIndex + 1);
+        const port = parseInt(portStr, 10);
+
+        if (!address.includes(':') && !isNaN(port) && port > 0 && port <= 65535) {
+            return { address, port };
+        }
+    }
+    
+    return { address: input, port: null };
+}
 
     export default {
         async fetch(request, env, ctx) {
@@ -805,7 +786,7 @@
                 --border-color: #e3e3e3;
                 --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
                 --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-                --border-radius: 12px;
+                --border-radius: 20px;
                 --spacing-xs: 8px;
                 --spacing-sm: 16px;
                 --spacing-md: 24px;
@@ -814,7 +795,10 @@
             }
             body {
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                background-color: var(--background-color);
+                background-image: url('https://i.stardots.io/rkkwhav7/StarDots-2026031218384457933.jpg');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
                 color: var(--text-primary);
                 min-height: 100vh;
                 overflow-x: hidden;
@@ -824,23 +808,52 @@
                 align-items: center;
                 padding: var(--spacing-md);
             }
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(245, 245, 247, 0.85);
+                z-index: -1;
+            }
             .terminal {
                 width: 90%;
                 max-width: 800px;
                 min-height: 500px;
-                background-color: var(--card-background);
+                background: rgba(255, 255, 255, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.9);
                 border-radius: var(--border-radius);
-                box-shadow: var(--shadow-md);
+                box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
                 position: relative;
                 z-index: 1;
                 overflow: hidden;
+                backdrop-filter: blur(20px);
+                transition: all 0.3s ease;
+            }
+            .terminal::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary-color), #5ac8fa);
+                border-radius: 20px 20px 0 0;
+            }
+            .terminal:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 60px rgba(31, 38, 135, 0.25);
+                background: rgba(255, 255, 255, 0.7);
             }
             .terminal-header {
-                background-color: var(--card-background);
+                background: rgba(255, 255, 255, 0.8);
                 padding: var(--spacing-sm) var(--spacing-md);
-                border-bottom: 1px solid var(--border-color);
+                border-bottom: 1px solid rgba(0, 122, 255, 0.1);
                 display: flex;
                 align-items: center;
+                backdrop-filter: blur(8px);
             }
             .terminal-buttons {
                 display: flex;
@@ -852,6 +865,10 @@
                 border-radius: 50%;
                 background: #ff5f57;
                 border: none;
+                transition: all 0.3s ease;
+            }
+            .terminal-button:hover {
+                transform: scale(1.1);
             }
             .terminal-button:nth-child(2) { background: #ffbd2e; }
             .terminal-button:nth-child(3) { background: #28ca42; }
@@ -867,6 +884,7 @@
                 overflow-y: auto;
                 font-size: 16px;
                 line-height: 1.6;
+                background: rgba(255, 255, 255, 0.5);
             }
             .terminal-line {
                 margin-bottom: var(--spacing-sm);
@@ -916,29 +934,6 @@
                 color: #007aff;
                 margin: var(--spacing-xs) 0;
             }
-            .language-selector {
-                position: fixed;
-                top: var(--spacing-md);
-                left: var(--spacing-md);
-                z-index: 1000;
-            }
-            #languageSelector {
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
-                color: var(--text-primary);
-                padding: var(--spacing-xs) var(--spacing-sm);
-                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-size: 14px;
-                cursor: pointer;
-                border-radius: 8px;
-                box-shadow: var(--shadow-sm);
-                outline: none;
-                transition: all 0.3s ease;
-            }
-            #languageSelector:hover {
-                box-shadow: var(--shadow-md);
-                transform: translateY(-2px);
-            }
             .app-title {
                 position: fixed;
                 top: var(--spacing-md);
@@ -959,14 +954,6 @@
                 .terminal-body {
                     padding: var(--spacing-md);
                     min-height: 380px;
-                }
-                .language-selector {
-                    top: var(--spacing-sm);
-                    left: var(--spacing-sm);
-                }
-                #languageSelector {
-                    padding: 6px 10px;
-                    font-size: 12px;
                 }
                 .app-title {
                     top: var(--spacing-sm);
@@ -2685,7 +2672,7 @@
                 z-index: -1;
             }
             .container {
-                max-width: 900px;
+                max-width: 950px;
                 margin: 0 auto;
                 padding: var(--spacing-md);
                 position: relative;
@@ -2695,35 +2682,66 @@
                 text-align: center;
                 margin-bottom: var(--spacing-xl);
                 padding-top: var(--spacing-lg);
+                position: relative;
+            }
+            .header::after {
+                content: '';
+                display: block;
+                width: 60px;
+                height: 3px;
+                background: var(--primary-color);
+                margin: var(--spacing-md) auto 0;
+                border-radius: 3px;
             }
             .title {
-                font-size: 3rem;
+                font-size: 3.5rem;
                 font-weight: 700;
                 color: var(--text-primary);
                 margin-bottom: var(--spacing-sm);
                 position: relative;
+                text-align: center;
+                letter-spacing: -0.02em;
+                background: linear-gradient(135deg, var(--text-primary), #3a3a3c);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
             }
             .subtitle {
                 color: var(--text-secondary);
                 margin-bottom: var(--spacing-lg);
                 font-size: 1.2rem;
                 line-height: 1.5;
+                text-align: center;
+                max-width: 700px;
+                margin-left: auto;
+                margin-right: auto;
             }
             .card {
-                background: rgba(255, 255, 255, 0.5);
-                border: 1px solid rgba(255, 255, 255, 0.8);
-                border-radius: var(--border-radius);
+                background: rgba(255, 255, 255, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.9);
+                border-radius: 20px;
                 padding: var(--spacing-lg);
                 margin-bottom: var(--spacing-lg);
-                box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+                box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
                 position: relative;
-                backdrop-filter: blur(15px);
+                backdrop-filter: blur(20px);
                 transition: all 0.3s ease;
+                overflow: hidden;
+            }
+            .card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary-color), #5ac8fa);
+                border-radius: 20px 20px 0 0;
             }
             .card:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
-                background: rgba(255, 255, 255, 0.6);
+                transform: translateY(-4px);
+                box-shadow: 0 20px 60px rgba(31, 38, 135, 0.25);
+                background: rgba(255, 255, 255, 0.7);
             }
             .card-title {
                 font-size: 1.6rem;
@@ -2766,41 +2784,51 @@
                 margin: var(--spacing-md) 0;
             }
             .client-btn {
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
+                background-color: rgba(255, 255, 255, 0.9);
+                border: 1px solid #e5e7eb;
                 padding: var(--spacing-sm) var(--spacing-md);
-                color: var(--primary-color);
+                color: var(--text-primary);
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-weight: 600;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all 0.2s ease;
                 text-align: center;
                 border-radius: 8px;
-                box-shadow: var(--shadow-sm);
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(8px);
             }
             .client-btn:hover {
-                background-color: var(--primary-color);
-                color: white;
-                box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
-                transform: translateY(-2px);
+                background-color: #f9fafb;
+                border-color: #d1d5db;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transform: translateY(-1px);
+            }
+            .client-btn:active {
+                transform: translateY(0);
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             }
             .generate-btn {
-                background-color: #5ac8fa;
+                background-color: var(--primary-color);
                 border: none;
                 padding: var(--spacing-sm) var(--spacing-md);
                 color: white;
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-weight: 600;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all 0.2s ease;
                 margin-right: var(--spacing-sm);
                 border-radius: 8px;
-                box-shadow: var(--shadow-sm);
+                box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2);
+                backdrop-filter: blur(8px);
             }
             .generate-btn:hover {
-                background-color: #34b7f1;
-                box-shadow: 0 4px 12px rgba(90, 200, 250, 0.3);
-                transform: translateY(-2px);
+                background-color: #0066d6;
+                box-shadow: 0 4px 6px rgba(0, 122, 255, 0.3);
+                transform: translateY(-1px);
+            }
+            .generate-btn:active {
+                transform: translateY(0);
+                box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2);
             }
             .subscription-url {
                 background-color: var(--card-background);
@@ -2900,64 +2928,72 @@
             }
             form input[type="text"], form input[type="number"], form select {
                 width: 100%;
-                padding: var(--spacing-sm);
-                background-color: var(--card-background);
-                border: 1px solid var(--border-color);
+                padding: var(--spacing-sm) var(--spacing-md);
+                background-color: rgba(255, 255, 255, 0.8);
+                border: 1px solid rgba(0, 122, 255, 0.2);
                 color: var(--text-primary);
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 14px;
-                border-radius: 8px;
+                border-radius: 12px;
                 box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(8px);
                 transition: all 0.3s ease;
             }
             form input[type="text"]:focus, form input[type="number"]:focus, form select:focus {
                 outline: none;
                 border-color: var(--primary-color);
-                box-shadow: inset 0 2px 4px rgba(0, 122, 255, 0.1), 0 0 0 3px rgba(0, 122, 255, 0.1);
+                box-shadow: inset 0 2px 4px rgba(0, 122, 255, 0.1), 0 0 0 3px rgba(0, 122, 255, 0.15);
+                background-color: rgba(255, 255, 255, 0.9);
             }
-            /* 苹果风格开关样式 */
+            /* shadcn 风格开关样式 */
             .toggle-switch {
                 position: relative;
-                display: inline-block;
-                width: 50px;
-                height: 24px;
+                display: inline-flex;
+                align-items: center;
+                cursor: pointer;
                 margin-right: var(--spacing-sm);
             }
             .toggle-switch input {
                 opacity: 0;
                 width: 0;
                 height: 0;
+                position: absolute;
             }
             .toggle-slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #ccc;
-                transition: .4s;
-                border-radius: 24px;
+                position: relative;
+                width: 44px;
+                height: 24px;
+                background-color: #e5e7eb;
+                border-radius: 9999px;
+                transition: all 0.2s ease;
             }
             .toggle-slider:before {
-                position: absolute;
                 content: "";
-                height: 18px;
-                width: 18px;
-                left: 3px;
-                bottom: 3px;
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                width: 20px;
+                height: 20px;
                 background-color: white;
-                transition: .4s;
                 border-radius: 50%;
+                transition: all 0.2s ease;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             }
             input:checked + .toggle-slider {
                 background-color: #007aff;
             }
-            input:focus + .toggle-slider {
-                box-shadow: 0 0 1px #007aff;
-            }
             input:checked + .toggle-slider:before {
-                transform: translateX(26px);
+                transform: translateX(20px);
+            }
+            input:focus + .toggle-slider {
+                box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+                outline: none;
+            }
+            input:hover + .toggle-slider {
+                background-color: #d1d5db;
+            }
+            input:checked:hover + .toggle-slider {
+                background-color: #0066d6;
             }
             form button[type="submit"], form button[type="button"] {
                 background-color: var(--primary-color);
@@ -2969,21 +3005,29 @@
                 cursor: pointer;
                 margin-right: var(--spacing-sm);
                 border-radius: 8px;
-                box-shadow: var(--shadow-sm);
-                transition: all 0.3s ease;
+                box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2);
+                backdrop-filter: blur(8px);
+                transition: all 0.2s ease;
             }
             form button[type="submit"]:hover, form button[type="button"]:hover {
-                background-color: #0056b3;
-                box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
-                transform: translateY(-2px);
+                background-color: #0066d6;
+                box-shadow: 0 4px 6px rgba(0, 122, 255, 0.3);
+                transform: translateY(-1px);
+            }
+            form button[type="submit"]:active, form button[type="button"]:active {
+                transform: translateY(0);
+                box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2);
             }
             form button[type="button"]#stopLatencyTest {
-                background-color: #ff3b30;
-                box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
+                background-color: #ef4444;
+                box-shadow: 0 1px 2px rgba(239, 68, 68, 0.2);
             }
             form button[type="button"]#stopLatencyTest:hover {
-                background-color: #d0021b;
-                box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
+                background-color: #dc2626;
+                box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3);
+            }
+            form button[type="button"]#stopLatencyTest:active {
+                box-shadow: 0 1px 2px rgba(239, 68, 68, 0.2);
             }
             small {
                 color: var(--text-secondary);
