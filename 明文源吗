@@ -2659,12 +2659,25 @@
             }
             body {
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                background-color: var(--background-color);
+                background-image: url('https://i.stardots.io/rkkwhav7/StarDots-2026031218384457933.jpg');
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
                 color: var(--text-primary);
                 min-height: 100vh;
                 overflow-x: hidden;
                 position: relative;
                 padding: var(--spacing-md);
+            }
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(245, 245, 247, 0.85);
+                z-index: -1;
             }
             .container {
                 max-width: 900px;
@@ -2692,20 +2705,20 @@
                 line-height: 1.5;
             }
             .card {
-                background: rgba(255, 255, 255, 0.8);
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: rgba(255, 255, 255, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.8);
                 border-radius: var(--border-radius);
                 padding: var(--spacing-lg);
                 margin-bottom: var(--spacing-lg);
                 box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
                 position: relative;
-                backdrop-filter: blur(10px);
+                backdrop-filter: blur(15px);
                 transition: all 0.3s ease;
             }
             .card:hover {
                 transform: translateY(-2px);
                 box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
-                background: rgba(255, 255, 255, 0.9);
+                background: rgba(255, 255, 255, 0.6);
             }
             .card-title {
                 font-size: 1.5rem;
@@ -2869,11 +2882,49 @@
                 border-color: var(--primary-color);
                 box-shadow: inset 0 2px 4px rgba(0, 122, 255, 0.1), 0 0 0 3px rgba(0, 122, 255, 0.1);
             }
-            form input[type="checkbox"] {
-                margin-right: var(--spacing-xs);
-                width: 18px;
-                height: 18px;
+            /* 苹果风格开关样式 */
+            .toggle-switch {
+                position: relative;
+                display: inline-block;
+                width: 50px;
+                height: 24px;
+                margin-right: var(--spacing-sm);
+            }
+            .toggle-switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .toggle-slider {
+                position: absolute;
                 cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+                border-radius: 24px;
+            }
+            .toggle-slider:before {
+                position: absolute;
+                content: "";
+                height: 18px;
+                width: 18px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: .4s;
+                border-radius: 50%;
+            }
+            input:checked + .toggle-slider {
+                background-color: #007aff;
+            }
+            input:focus + .toggle-slider {
+                box-shadow: 0 0 1px #007aff;
+            }
+            input:checked + .toggle-slider:before {
+                transform: translateX(26px);
             }
             form button[type="submit"], form button[type="button"] {
                 background-color: var(--primary-color);
@@ -3073,7 +3124,7 @@
                         <div id="selectionLogic" style="font-size: 0.9rem; color: #666;">${t.selectionLogic}${t.selectionLogicText}</div>
                 </div>
             </div>
-            <div class="card" id="configCard" style="display: none;">
+            <div class="card" id="configCard" style="display: block;">
                     <h2 class="card-title">${t.configManagement}</h2>
                 <div id="kvStatus">
                         ${t.kvStatusChecking}
@@ -3081,8 +3132,8 @@
                 <div id="configContent" style="display: none;">
                     <form id="regionForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
-                                <label>${t.specifyRegion}</label>
-                            <select id="wkRegion">
+                                <label style="display: block; margin-bottom: var(--spacing-xs); color: var(--text-primary); font-weight: 600;">${t.specifyRegion}</label>
+                            <select id="wkRegion" style="width: 100%; padding: var(--spacing-sm); background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 122, 255, 0.3); color: var(--text-primary); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); transition: all 0.3s ease;">
                                     <option value="">${t.autoDetect}</option>
                                     <option value="US">${t.regionNames.US}</option>
                                     <option value="SG">${t.regionNames.SG}</option>
@@ -3094,9 +3145,9 @@
                                     <option value="FI">${t.regionNames.FI}</option>
                                     <option value="GB">${t.regionNames.GB}</option>
                             </select>
-                                <small id="wkRegionHint" style="display: none;">⚠️ ${t.customIPDisabledHint}</small>
+                                <small id="wkRegionHint" style="display: none; color: var(--text-secondary); font-size: 0.85rem; display: block; margin-top: var(--spacing-xs);">⚠️ ${t.customIPDisabledHint}</small>
                         </div>
-                            <button type="submit">${t.saveRegion}</button>
+                            <button type="submit" style="background-color: var(--primary-color); border: none; padding: var(--spacing-sm) var(--spacing-md); color: white; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 600; cursor: pointer; margin-right: var(--spacing-sm); border-radius: 8px; box-shadow: var(--shadow-sm); transition: all 0.3s ease;">${t.saveRegion}</button>
                     </form>
                     <form id="otherConfigForm" style="margin-bottom: 20px;">
                         <div style="margin-bottom: 15px;">
@@ -3104,29 +3155,41 @@
                             <div style="padding: 20px; background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 122, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 122, 255, 0.1);">
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                        <input type="checkbox" id="ev" checked>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="ev" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                             <span style="font-size: 1.1rem;">${t.enableVLESS}</span>
                                     </label>
                                 </div>
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                        <input type="checkbox" id="et">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="et">
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                             <span style="font-size: 1.1rem;">${t.enableTrojan}</span>
                                     </label>
                                 </div>
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                        <input type="checkbox" id="ex">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="ex">
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                             <span style="font-size: 1.1rem;">${t.enableXhttp}</span>
                                     </label>
                                 </div>
                                 <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0, 122, 255, 0.2);">
                                     <div style="margin-bottom: 15px;">
                                         <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                            <input type="checkbox" id="ech">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="ech">
+                                                <span class="toggle-slider"></span>
+                                            </label>
                                                 <span style="font-size: 1.1rem;">${t.enableECH}</span>
                                         </label>
-                                        <small style="display: block; margin-top: 5px; margin-left: 26px;">${t.enableECHHint}</small>
+                                        <small style="display: block; margin-top: 5px; margin-left: 60px;">${t.enableECHHint}</small>
                                     </div>
                                     <div style="margin-top: 20px; margin-bottom: 15px;">
                                         <label>${t.customDNS}</label>
@@ -3266,19 +3329,28 @@
                             <div style="padding: 20px; background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0, 122, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 122, 255, 0.1);">
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                        <input type="checkbox" id="epd">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="epd">
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                             <span style="font-size: 1.1rem;">${t.enablePreferredDomain}</span>
                                     </label>
                                 </div>
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                        <input type="checkbox" id="epi" checked>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="epi" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                             <span style="font-size: 1.1rem;">${t.enablePreferredIP}</span>
                                     </label>
                                 </div>
                                 <div style="margin-bottom: 15px;">
                                     <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                        <input type="checkbox" id="egi" checked>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="egi" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                             <span style="font-size: 1.1rem;">${t.enableGitHubPreferred}</span>
                                     </label>
                                 </div>
@@ -3292,11 +3364,17 @@
                                     <label style="display: block; margin-bottom: 10px; font-weight: 600;">IP版本选择</label>
                                     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                                         <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                            <input type="checkbox" id="ipv4Enabled" checked>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="ipv4Enabled" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
                                             <span style="font-size: 1rem;">IPv4</span>
                                         </label>
                                         <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                            <input type="checkbox" id="ipv6Enabled" checked>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="ipv6Enabled" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
                                             <span style="font-size: 1rem;">IPv6</span>
                                         </label>
                                     </div>
@@ -3305,15 +3383,24 @@
                                     <label style="display: block; margin-bottom: 10px; font-weight: 600;">运营商选择</label>
                                     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                                         <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                            <input type="checkbox" id="ispMobile" checked>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="ispMobile" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
                                             <span style="font-size: 1rem;">移动</span>
                                         </label>
                                         <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                            <input type="checkbox" id="ispUnicom" checked>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="ispUnicom" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
                                             <span style="font-size: 1rem;">联通</span>
                                         </label>
                                         <label style="display: inline-flex; align-items: center; cursor: pointer;">
-                                            <input type="checkbox" id="ispTelecom" checked>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="ispTelecom" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
                                             <span style="font-size: 1rem;">电信</span>
                                         </label>
                                     </div>
@@ -3379,8 +3466,7 @@
             <div class="card">
                     <h2 class="card-title">${t.relatedLinks}</h2>
                 <div class="related-links">
-                        <a href="https://github.com/byJoey/cfnew" target="_blank">${t.githubProject}</a>
-                    <a href="https://www.youtube.com/@joeyblog" target="_blank">YouTube @joeyblog</a>
+                        <a href="https://github.com/xhx123l/cfnew" target="_blank">${t.githubProject}</a>
                 </div>
             </div>
         </div>
