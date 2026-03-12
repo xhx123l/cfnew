@@ -796,70 +796,107 @@
             <title>${t.title}</title>
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
+            :root {
+                --primary-color: #007aff;
+                --background-color: #f5f5f7;
+                --card-background: #ffffff;
+                --text-primary: #1d1d1f;
+                --text-secondary: #86868b;
+                --border-color: #e3e3e3;
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+                --border-radius: 12px;
+                --spacing-xs: 8px;
+                --spacing-sm: 16px;
+                --spacing-md: 24px;
+                --spacing-lg: 32px;
+                --spacing-xl: 48px;
+            }
             body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-                color: #333; min-height: 100vh;
-                overflow-x: hidden; position: relative;
-                display: flex; justify-content: center; align-items: center;
-                padding: 20px;
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background-color: var(--background-color);
+                color: var(--text-primary);
+                min-height: 100vh;
+                overflow-x: hidden;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: var(--spacing-md);
             }
             .terminal {
-                width: 90%; max-width: 800px; min-height: 500px;
-                background: rgba(255, 255, 255, 0.8);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                border-radius: 16px;
-                box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-                backdrop-filter: blur(10px);
-                position: relative; z-index: 1;
+                width: 90%;
+                max-width: 800px;
+                min-height: 500px;
+                background-color: var(--card-background);
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow-md);
+                position: relative;
+                z-index: 1;
                 overflow: hidden;
             }
             .terminal-header {
-                background: rgba(255, 255, 255, 0.9);
-                padding: 16px 20px;
-                border-bottom: 1px solid rgba(200, 200, 200, 0.3);
-                display: flex; align-items: center;
-                border-radius: 16px 16px 0 0;
+                background-color: var(--card-background);
+                padding: var(--spacing-sm) var(--spacing-md);
+                border-bottom: 1px solid var(--border-color);
+                display: flex;
+                align-items: center;
             }
             .terminal-buttons {
-                display: flex; gap: 10px;
+                display: flex;
+                gap: var(--spacing-xs);
             }
             .terminal-button {
-                width: 12px; height: 12px; border-radius: 50%;
-                background: #ff5f57; border: none;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #ff5f57;
+                border: none;
             }
             .terminal-button:nth-child(2) { background: #ffbd2e; }
             .terminal-button:nth-child(3) { background: #28ca42; }
             .terminal-title {
-                margin-left: 20px; color: #333;
-                font-size: 16px; font-weight: 600;
+                margin-left: var(--spacing-md);
+                color: var(--text-primary);
+                font-size: 14px;
+                font-weight: 500;
             }
             .terminal-body {
-                padding: 30px; min-height: 420px;
-                overflow-y: auto; font-size: 16px;
+                padding: var(--spacing-lg);
+                min-height: 420px;
+                overflow-y: auto;
+                font-size: 16px;
                 line-height: 1.6;
             }
             .terminal-line {
-                margin-bottom: 12px; display: flex; align-items: center;
+                margin-bottom: var(--spacing-sm);
+                display: flex;
+                align-items: center;
             }
             .terminal-prompt {
-                color: #007aff; margin-right: 12px;
+                color: var(--primary-color);
+                margin-right: var(--spacing-sm);
                 font-weight: 600;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             }
             .terminal-input {
-                background: transparent; border: none; outline: none;
-                color: #333; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-size: 16px; flex: 1;
-                caret-color: #007aff;
+                background: transparent;
+                border: none;
+                outline: none;
+                color: var(--text-primary);
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                flex: 1;
+                caret-color: var(--primary-color);
             }
             .terminal-input::placeholder {
-                color: #999; opacity: 0.7;
+                color: var(--text-secondary);
+                opacity: 0.7;
             }
             .terminal-cursor {
-                display: inline-block; width: 8px; height: 20px;
-                background: #007aff;
+                display: inline-block;
+                width: 8px;
+                height: 20px;
+                background: var(--primary-color);
                 margin-left: 2px;
                 animation: blink 1s infinite;
             }
@@ -868,63 +905,72 @@
                 51%, 100% { opacity: 0; }
             }
             .terminal-output {
-                color: #666; margin: 8px 0;
+                color: var(--text-secondary);
+                margin: var(--spacing-xs) 0;
             }
             .terminal-error {
-                color: #ff3b30; margin: 8px 0;
+                color: #ff3b30;
+                margin: var(--spacing-xs) 0;
             }
             .terminal-success {
-                color: #34c759; margin: 8px 0;
+                color: #34c759;
+                margin: var(--spacing-xs) 0;
             }
             .language-selector {
-                position: fixed; top: 20px; left: 20px; z-index: 1000;
+                position: fixed;
+                top: var(--spacing-md);
+                left: var(--spacing-md);
+                z-index: 1000;
             }
             #languageSelector {
-                background: rgba(255, 255, 255, 0.9);
-                border: 1px solid rgba(200, 200, 200, 0.3);
-                color: #333;
-                padding: 10px 16px;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
+                color: var(--text-primary);
+                padding: var(--spacing-xs) var(--spacing-sm);
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 14px;
                 cursor: pointer;
-                border-radius: 10px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(5px);
+                border-radius: 8px;
+                box-shadow: var(--shadow-sm);
                 outline: none;
                 transition: all 0.3s ease;
             }
             #languageSelector:hover {
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+                box-shadow: var(--shadow-md);
                 transform: translateY(-2px);
             }
             .app-title {
-                position: fixed; top: 20px; right: 20px;
-                color: #007aff;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                position: fixed;
+                top: var(--spacing-md);
+                right: var(--spacing-md);
+                color: var(--primary-color);
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 16px;
                 font-weight: 600;
-                text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
             }
             @media (max-width: 768px) {
+                body {
+                    padding: var(--spacing-sm);
+                }
                 .terminal {
-                    width: 95%;
+                    width: 100%;
                     min-height: 450px;
                 }
                 .terminal-body {
-                    padding: 20px;
+                    padding: var(--spacing-md);
                     min-height: 380px;
                 }
                 .language-selector {
-                    top: 10px;
-                    left: 10px;
+                    top: var(--spacing-sm);
+                    left: var(--spacing-sm);
                 }
                 #languageSelector {
-                    padding: 8px 12px;
+                    padding: 6px 10px;
                     font-size: 12px;
                 }
                 .app-title {
-                    top: 10px;
-                    right: 10px;
+                    top: var(--spacing-sm);
+                    right: var(--spacing-sm);
                     font-size: 14px;
                 }
             }
@@ -1061,6 +1107,50 @@
                     window.location.reload();
                 }
                 
+                // 设备检测函数
+                function detectDevice() {
+                    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                    
+                    // 检测苹果设备
+                    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                        return '苹果';
+                    }
+                    
+                    // 检测安卓设备
+                    if (/Android/.test(userAgent)) {
+                        return '安卓';
+                    }
+                    
+                    // 默认为PC
+                    return 'PC';
+                }
+                
+                // 显示当前设备标签
+                function showDeviceTags() {
+                    const currentDevice = detectDevice();
+                    
+                    // 清除所有标签
+                    document.querySelectorAll('.device-tag').forEach(tag => {
+                        tag.textContent = '';
+                    });
+                    
+                    // 根据当前设备显示标签
+                    if (currentDevice === 'PC') {
+                        document.getElementById('clash-tag').textContent = '当前设备';
+                        document.getElementById('sing-box-tag').textContent = '当前设备';
+                        document.getElementById('v2ray-tag').textContent = '当前设备';
+                        document.getElementById('nekoray-tag').textContent = '当前设备';
+                    } else if (currentDevice === '苹果') {
+                        document.getElementById('surge-tag').textContent = '当前设备';
+                        document.getElementById('stash-tag').textContent = '当前设备';
+                        document.getElementById('loon-tag').textContent = '当前设备';
+                        document.getElementById('quantumult-tag').textContent = '当前设备';
+                        document.getElementById('shadowrocket-tag').textContent = '当前设备';
+                    } else if (currentDevice === '安卓') {
+                        document.getElementById('v2rayng-tag').textContent = '当前设备';
+                    }
+                }
+                
                 // 页面加载时检查 localStorage 和 Cookie，并清理URL参数
                 window.addEventListener('DOMContentLoaded', function() {
                     function getCookie(name) {
@@ -1094,6 +1184,9 @@
                         expiryDate.setFullYear(expiryDate.getFullYear() + 1);
                         document.cookie = 'preferredLanguage=' + savedLang + '; path=/; expires=' + expiryDate.toUTCString() + '; SameSite=Lax';
                     }
+                    
+                    // 显示设备标签
+                    showDeviceTags();
                 });
             
             document.addEventListener('DOMContentLoaded', function() {
@@ -2259,7 +2352,7 @@
             
             const translations = {
                 zh: {
-                    title: '订阅中心',
+                    title: '浣熊博客',
                     subtitle: '多客户端支持 • 智能优选 • 一键生成',
                     selectClient: '[ 选择客户端 ]',
                     systemStatus: '[ 系统状态 ]',
@@ -2548,86 +2641,130 @@
             <title>${t.title}</title>
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
+            :root {
+                --primary-color: #007aff;
+                --background-color: #f5f5f7;
+                --card-background: #ffffff;
+                --text-primary: #1d1d1f;
+                --text-secondary: #86868b;
+                --border-color: #e3e3e3;
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+                --border-radius: 12px;
+                --spacing-xs: 8px;
+                --spacing-sm: 16px;
+                --spacing-md: 24px;
+                --spacing-lg: 32px;
+                --spacing-xl: 48px;
+            }
             body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-                color: #333; min-height: 100vh;
-                overflow-x: hidden; position: relative;
-                padding: 20px;
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background-color: var(--background-color);
+                color: var(--text-primary);
+                min-height: 100vh;
+                overflow-x: hidden;
+                position: relative;
+                padding: var(--spacing-md);
             }
-            .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
-            .header { text-align: center; margin-bottom: 40px; }
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: var(--spacing-md);
+                position: relative;
+                z-index: 1;
+            }
+            .header {
+                text-align: center;
+                margin-bottom: var(--spacing-xl);
+                padding-top: var(--spacing-lg);
+            }
             .title {
-                font-size: 2.8rem; font-weight: 700;
-                color: #007aff;
-                margin-bottom: 15px;
+                font-size: 3rem;
+                font-weight: 700;
+                color: var(--text-primary);
+                margin-bottom: var(--spacing-sm);
                 position: relative;
-                text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
             }
-            .subtitle { color: #666; margin-bottom: 30px; font-size: 1.2rem; }
+            .subtitle {
+                color: var(--text-secondary);
+                margin-bottom: var(--spacing-lg);
+                font-size: 1.2rem;
+                line-height: 1.5;
+            }
             .card {
-                background: rgba(255, 255, 255, 0.8);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                border-radius: 16px; padding: 30px; margin-bottom: 24px;
-                box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
+                border-radius: var(--border-radius);
+                padding: var(--spacing-lg);
+                margin-bottom: var(--spacing-lg);
+                box-shadow: var(--shadow-sm);
                 position: relative;
-                backdrop-filter: blur(10px);
-                box-sizing: border-box;
-                width: 100%;
-                max-width: 100%;
                 transition: all 0.3s ease;
             }
             .card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-md);
             }
             .card-title {
-                font-size: 1.6rem; margin-bottom: 20px;
-                color: #007aff;
+                font-size: 1.5rem;
+                margin-bottom: var(--spacing-md);
+                color: var(--text-primary);
                 font-weight: 600;
             }
             .client-grid {
-                display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 15px; margin: 20px 0;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: var(--spacing-sm);
+                margin: var(--spacing-md) 0;
             }
             .client-btn {
-                background: rgba(255, 255, 255, 0.9);
-                border: 1px solid rgba(0, 122, 255, 0.3);
-                padding: 15px 20px; color: #007aff;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
+                padding: var(--spacing-sm) var(--spacing-md);
+                color: var(--primary-color);
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-weight: 600;
-                cursor: pointer; transition: all 0.3s ease;
+                cursor: pointer;
+                transition: all 0.3s ease;
                 text-align: center;
-                border-radius: 10px;
-                box-shadow: 0 2px 8px rgba(0, 122, 255, 0.15);
+                border-radius: 8px;
+                box-shadow: var(--shadow-sm);
             }
             .client-btn:hover {
-                background: #007aff;
+                background-color: var(--primary-color);
                 color: white;
-                box-shadow: 0 4px 16px rgba(0, 122, 255, 0.4);
-                transform: translateY(-2px) scale(1.03);
+                box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+                transform: translateY(-2px);
             }
             .generate-btn {
-                background: #007aff;
-                border: none; padding: 12px 24px;
-                color: white; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-weight: 600; cursor: pointer;
-                transition: all 0.3s ease; margin-right: 15px;
+                background-color: var(--primary-color);
+                border: none;
+                padding: var(--spacing-sm) var(--spacing-md);
+                color: white;
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-right: var(--spacing-sm);
                 border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+                box-shadow: var(--shadow-sm);
             }
             .generate-btn:hover {
-                background: #0056b3;
-                box-shadow: 0 6px 16px rgba(0, 122, 255, 0.4);
+                background-color: #0056b3;
+                box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
                 transform: translateY(-2px);
             }
             .subscription-url {
-                background: rgba(255, 255, 255, 0.9);
-                border: 1px solid rgba(0, 122, 255, 0.3); padding: 15px;
-                word-break: break-all; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                color: #333; margin-top: 20px; display: none;
-                box-shadow: inset 0 2px 4px rgba(0, 122, 255, 0.1), 0 2px 8px rgba(0, 122, 255, 0.1);
-                border-radius: 10px;
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
+                padding: var(--spacing-md);
+                word-break: break-all;
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                color: var(--text-primary);
+                margin-top: var(--spacing-md);
+                display: none;
+                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+                border-radius: 8px;
                 position: relative;
                 overflow-wrap: break-word;
                 overflow-x: auto;
@@ -2635,85 +2772,91 @@
                 box-sizing: border-box;
             }
             .language-selector {
-                position: fixed; top: 20px; left: 20px; z-index: 1000;
+                position: fixed;
+                top: var(--spacing-md);
+                left: var(--spacing-md);
+                z-index: 1000;
             }
             #languageSelector {
-                background: rgba(255, 255, 255, 0.9);
-                border: 1px solid rgba(200, 200, 200, 0.3);
-                color: #333;
-                padding: 10px 16px;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
+                color: var(--text-primary);
+                padding: var(--spacing-xs) var(--spacing-sm);
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 14px;
                 cursor: pointer;
-                border-radius: 10px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(5px);
+                border-radius: 8px;
+                box-shadow: var(--shadow-sm);
                 outline: none;
                 transition: all 0.3s ease;
             }
             #languageSelector:hover {
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+                box-shadow: var(--shadow-md);
                 transform: translateY(-2px);
             }
             .app-title {
-                position: fixed; top: 20px; right: 20px;
-                color: #007aff;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                position: fixed;
+                top: var(--spacing-md);
+                right: var(--spacing-md);
+                color: var(--primary-color);
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 16px;
                 font-weight: 600;
-                text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
             }
             #systemStatus {
-                margin: 20px 0; padding: 20px; 
-                background: rgba(255, 255, 255, 0.9); 
-                border: 1px solid rgba(0, 122, 255, 0.3); 
-                box-shadow: 0 4px 12px rgba(0, 122, 255, 0.15), inset 0 0 10px rgba(0, 122, 255, 0.05); 
-                position: relative; 
-                overflow: hidden;
-                border-radius: 10px;
+                margin: var(--spacing-md) 0;
+                padding: var(--spacing-md);
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
+                box-shadow: var(--shadow-sm);
+                position: relative;
+                border-radius: 8px;
             }
             #systemStatus div {
-                margin-bottom: 12px; 
-                color: #333; 
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                margin-bottom: var(--spacing-sm);
+                color: var(--text-primary);
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             }
             #regionStatus, #backupStatus, #currentIP, #echStatus, #regionMatch {
                 font-size: 14px;
-                line-height: 1.4;
+                line-height: 1.5;
             }
             #geoInfo {
                 font-size: 13px;
-                color: #666;
+                color: var(--text-secondary);
             }
             #kvStatus, #currentConfig, #pathTypeInfo {
-                background: rgba(255, 255, 255, 0.9);
-                border: 1px solid rgba(0, 122, 255, 0.3);
-                color: #333;
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
+                color: var(--text-primary);
                 border-radius: 8px;
-                padding: 15px;
-                margin-bottom: 20px;
+                padding: var(--spacing-md);
+                margin-bottom: var(--spacing-md);
+                box-shadow: var(--shadow-sm);
             }
             #pathTypeInfo {
-                background: rgba(240, 248, 255, 0.9);
-                border-color: rgba(0, 122, 255, 0.4);
+                background-color: #f0f8ff;
+                border-color: rgba(0, 122, 255, 0.3);
             }
             form {
-                margin-bottom: 20px;
+                margin-bottom: var(--spacing-md);
             }
             form div {
-                margin-bottom: 15px;
+                margin-bottom: var(--spacing-md);
             }
             form label {
-                display: block; margin-bottom: 8px; 
-                color: #333; font-weight: 600;
+                display: block;
+                margin-bottom: var(--spacing-xs);
+                color: var(--text-primary);
+                font-weight: 600;
             }
             form input[type="text"], form input[type="number"], form select {
-                width: 100%; 
-                padding: 12px; 
-                background: rgba(255, 255, 255, 0.9); 
-                border: 1px solid rgba(200, 200, 200, 0.5); 
-                color: #333; 
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                width: 100%;
+                padding: var(--spacing-sm);
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
+                color: var(--text-primary);
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 14px;
                 border-radius: 8px;
                 box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -2721,88 +2864,90 @@
             }
             form input[type="text"]:focus, form input[type="number"]:focus, form select:focus {
                 outline: none;
-                border-color: #007aff;
+                border-color: var(--primary-color);
                 box-shadow: inset 0 2px 4px rgba(0, 122, 255, 0.1), 0 0 0 3px rgba(0, 122, 255, 0.1);
             }
             form input[type="checkbox"] {
-                margin-right: 8px; 
-                width: 18px; 
-                height: 18px; 
+                margin-right: var(--spacing-xs);
+                width: 18px;
+                height: 18px;
                 cursor: pointer;
             }
             form button[type="submit"], form button[type="button"] {
-                background: #007aff;
-                border: none; 
-                padding: 12px 24px; 
-                color: white; 
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-weight: 600; 
-                cursor: pointer; 
-                margin-right: 10px; 
+                background-color: var(--primary-color);
+                border: none;
+                padding: var(--spacing-sm) var(--spacing-md);
+                color: white;
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-weight: 600;
+                cursor: pointer;
+                margin-right: var(--spacing-sm);
                 border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+                box-shadow: var(--shadow-sm);
                 transition: all 0.3s ease;
             }
             form button[type="submit"]:hover, form button[type="button"]:hover {
-                background: #0056b3;
-                box-shadow: 0 6px 16px rgba(0, 122, 255, 0.4);
+                background-color: #0056b3;
+                box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
                 transform: translateY(-2px);
             }
             form button[type="button"]#stopLatencyTest {
-                background: #ff3b30;
+                background-color: #ff3b30;
                 box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
             }
             form button[type="button"]#stopLatencyTest:hover {
-                background: #d0021b;
-                box-shadow: 0 6px 16px rgba(255, 59, 48, 0.4);
+                background-color: #d0021b;
+                box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
             }
             small {
-                color: #666; 
+                color: var(--text-secondary);
                 font-size: 0.85rem;
-                display: block; 
-                margin-top: 5px;
+                display: block;
+                margin-top: var(--spacing-xs);
             }
             small[style*="color: #ffaa00"] {
                 color: #ff9500;
             }
             #latencyTestResults {
-                max-height: 250px; 
+                max-height: 250px;
                 overflow-y: auto;
-                background: rgba(255, 255, 255, 0.9);
-                border: 1px solid rgba(0, 122, 255, 0.3);
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
                 border-radius: 8px;
-                padding: 15px;
+                padding: var(--spacing-md);
+                box-shadow: var(--shadow-sm);
             }
             #latencyResultsList {
-                background: rgba(248, 249, 250, 0.9);
-                border: 1px solid rgba(200, 200, 200, 0.3);
+                background-color: #f8f9fa;
+                border: 1px solid var(--border-color);
                 border-radius: 6px;
-                padding: 10px;
+                padding: var(--spacing-sm);
             }
             #cityFilterContainer {
-                margin-bottom: 10px; 
-                padding: 15px; 
-                background: rgba(248, 249, 250, 0.9); 
-                border: 1px solid rgba(0, 122, 255, 0.3); 
+                margin-bottom: var(--spacing-sm);
+                padding: var(--spacing-md);
+                background-color: #f8f9fa;
+                border: 1px solid var(--border-color);
                 border-radius: 8px;
             }
             #statusMessage {
-                display: none; 
-                padding: 15px; 
-                margin: 10px 0; 
-                border: 1px solid rgba(0, 122, 255, 0.3); 
-                background: rgba(240, 248, 255, 0.9); 
-                color: #007aff;
+                display: none;
+                padding: var(--spacing-md);
+                margin: var(--spacing-sm) 0;
+                border: 1px solid rgba(0, 122, 255, 0.3);
+                background-color: #f0f8ff;
+                color: var(--primary-color);
                 border-radius: 8px;
             }
             .related-links {
-                text-align: center; 
-                margin: 20px 0;
+                text-align: center;
+                margin: var(--spacing-lg) 0;
+                padding: var(--spacing-lg) 0;
             }
             .related-links a {
-                color: #007aff; 
-                text-decoration: none; 
-                margin: 0 20px; 
+                color: var(--primary-color);
+                text-decoration: none;
+                margin: 0 var(--spacing-md);
                 font-size: 1.1rem;
                 font-weight: 500;
                 transition: all 0.3s ease;
@@ -2811,35 +2956,54 @@
                 text-decoration: underline;
                 color: #0056b3;
             }
+            .device-tag {
+                display: inline-block;
+                background-color: #34c759;
+                color: white;
+                font-size: 10px;
+                font-weight: 600;
+                padding: 2px 6px;
+                border-radius: 4px;
+                margin-left: 6px;
+                vertical-align: middle;
+            }
             @media (max-width: 768px) {
+                body {
+                    padding: var(--spacing-sm);
+                }
                 .container {
-                    padding: 10px;
+                    padding: var(--spacing-sm);
+                }
+                .header {
+                    padding-top: var(--spacing-md);
+                    margin-bottom: var(--spacing-lg);
                 }
                 .title {
                     font-size: 2.2rem;
                 }
                 .card {
-                    padding: 20px;
+                    padding: var(--spacing-md);
+                    margin-bottom: var(--spacing-md);
                 }
                 .client-grid {
                     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                    gap: 10px;
+                    gap: var(--spacing-xs);
                 }
                 .client-btn {
-                    padding: 12px 16px;
+                    padding: var(--spacing-xs) var(--spacing-sm);
                     font-size: 14px;
                 }
                 .language-selector {
-                    top: 10px;
-                    left: 10px;
+                    top: var(--spacing-sm);
+                    left: var(--spacing-sm);
                 }
                 #languageSelector {
-                    padding: 8px 12px;
+                    padding: 6px 10px;
                     font-size: 12px;
                 }
                 .app-title {
-                    top: 10px;
-                    right: 10px;
+                    top: var(--spacing-sm);
+                    right: var(--spacing-sm);
                     font-size: 14px;
                 }
             }
@@ -2860,18 +3024,38 @@
             </div>
             <div class="card">
                     <h2 class="card-title">${t.selectClient}</h2>
-                <div class="client-grid">
-                    <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='), 'CLASH')">CLASH</button>
-                    <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='), 'STASH')">STASH</button>
-                    <button class="client-btn" onclick="generateClientLink(atob('c3VyZ2U='), 'SURGE')">SURGE</button>
-                    <button class="client-btn" onclick="generateClientLink(atob('c2luZ2JveA=='), 'SING-BOX')">SING-BOX</button>
-                    <button class="client-btn" onclick="generateClientLink(atob('bG9vbg=='), 'LOON')">LOON</button>
-                    <button class="client-btn" onclick="generateClientLink(atob('cXVhbng='), 'QUANTUMULT X')">QUANTUMULT X</button>
-                    <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'V2RAY')">V2RAY</button>
-                    <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'V2RAYNG')">V2RAYNG</button>
-                    <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'NEKORAY')">NEKORAY</button>
-                    <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'Shadowrocket')">Shadowrocket</button>
+                
+                <!-- PC 客户端 -->
+                <div style="margin-bottom: 30px;">
+                    <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600;">PC</h3>
+                    <div class="client-grid">
+                        <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='), 'CLASH')">CLASH <span class="device-tag" id="clash-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('c2luZ2JveA=='), 'SING-BOX')">SING-BOX <span class="device-tag" id="sing-box-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'V2RAY')">V2RAY <span class="device-tag" id="v2ray-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'NEKORAY')">NEKORAY <span class="device-tag" id="nekoray-tag"></span></button>
+                    </div>
                 </div>
+                
+                <!-- 苹果客户端 -->
+                <div style="margin-bottom: 30px;">
+                    <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600;">苹果</h3>
+                    <div class="client-grid">
+                        <button class="client-btn" onclick="generateClientLink(atob('c3VyZ2U='), 'SURGE')">SURGE <span class="device-tag" id="surge-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='), 'STASH')">STASH <span class="device-tag" id="stash-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('bG9vbg=='), 'LOON')">LOON <span class="device-tag" id="loon-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('cXVhbng='), 'QUANTUMULT X')">QUANTUMULT X <span class="device-tag" id="quantumult-tag"></span></button>
+                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'Shadowrocket')">Shadowrocket <span class="device-tag" id="shadowrocket-tag"></span></button>
+                    </div>
+                </div>
+                
+                <!-- 安卓客户端 -->
+                <div style="margin-bottom: 20px;">
+                    <h3 style="font-size: 1.2rem; color: #1d1d1f; margin-bottom: 15px; font-weight: 600;">安卓</h3>
+                    <div class="client-grid">
+                        <button class="client-btn" onclick="generateClientLink(atob('djJyYXk='), 'V2RAYNG')">V2RAYNG <span class="device-tag" id="v2rayng-tag"></span></button>
+                    </div>
+                </div>
+                
                 <div class="subscription-url" id="clientSubscriptionUrl"></div>
             </div>
             <div class="card">
