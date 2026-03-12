@@ -913,7 +913,7 @@
                 margin: var(--spacing-xs) 0;
             }
             .terminal-success {
-                color: #34c759;
+                color: #007aff;
                 margin: var(--spacing-xs) 0;
             }
             .language-selector {
@@ -977,12 +977,6 @@
         </style>
     </head>
     <body>
-            <div class="language-selector">
-                <select id="languageSelector" onchange="changeLanguage(this.value)">
-                    <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
-                    <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
-                </select>
-            </div>
             <div class="app-title">${t.terminal}</div>
         <div class="terminal">
             <div class="terminal-header">
@@ -2668,6 +2662,17 @@
                 overflow-x: hidden;
                 position: relative;
                 padding: var(--spacing-md);
+                line-height: 1.6;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-weight: 700;
+                line-height: 1.3;
+            }
+            h3 {
+                font-size: 1.3rem;
+                color: var(--text-primary);
+                margin-bottom: 15px;
+                font-weight: 600;
             }
             body::before {
                 content: '';
@@ -2721,10 +2726,38 @@
                 background: rgba(255, 255, 255, 0.6);
             }
             .card-title {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
                 margin-bottom: var(--spacing-md);
                 color: var(--text-primary);
-                font-weight: 600;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .card-title::before {
+                content: '';
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            #selectClientCard .card-title::before {
+                content: '📱';
+                font-size: 20px;
+            }
+            #systemStatusCard .card-title::before {
+                content: '🖥️';
+                font-size: 20px;
+            }
+            #configCard .card-title::before {
+                content: '⚙️';
+                font-size: 20px;
+            }
+            #relatedLinksCard .card-title::before {
+                content: '🔗';
+                font-size: 20px;
             }
             .client-grid {
                 display: grid;
@@ -2752,7 +2785,7 @@
                 transform: translateY(-2px);
             }
             .generate-btn {
-                background-color: var(--primary-color);
+                background-color: #5ac8fa;
                 border: none;
                 padding: var(--spacing-sm) var(--spacing-md);
                 color: white;
@@ -2765,8 +2798,8 @@
                 box-shadow: var(--shadow-sm);
             }
             .generate-btn:hover {
-                background-color: #0056b3;
-                box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+                background-color: #34b7f1;
+                box-shadow: 0 4px 12px rgba(90, 200, 250, 0.3);
                 transform: translateY(-2px);
             }
             .subscription-url {
@@ -3011,7 +3044,7 @@
             }
             .device-tag {
                 display: inline-block;
-                background-color: #34c759;
+                background-color: #5ac8fa;
                 color: white;
                 font-size: 10px;
                 font-weight: 600;
@@ -3063,19 +3096,13 @@
         </style>
     </head>
     <body>
-            <div class="language-selector">
-                <select id="languageSelector" onchange="changeLanguage(this.value)">
-                    <option value="zh" ${!isFarsi ? 'selected' : ''}>🇨🇳 中文</option>
-                    <option value="fa" ${isFarsi ? 'selected' : ''}>🇮🇷 فارسی</option>
-                </select>
-            </div>
             <div class="app-title">${t.terminal}</div>
         <div class="container">
             <div class="header">
                     <h1 class="title">${t.title}</h1>
-                    <p class="subtitle">${t.subtitle}</p>
+                    <p class="subtitle" id="beijingTime"></p>
             </div>
-            <div class="card">
+            <div class="card" id="selectClientCard">
                     <h2 class="card-title">${t.selectClient}</h2>
                 
                 <!-- PC 客户端 -->
@@ -3111,7 +3138,7 @@
                 
                 <div class="subscription-url" id="clientSubscriptionUrl"></div>
             </div>
-            <div class="card">
+            <div class="card" id="systemStatusCard">
                     <h2 class="card-title">${t.systemStatus}</h2>
                 <div id="systemStatus">
                         <div style="color: #007aff; margin-bottom: 15px; font-weight: 600;">[ ${t.checking} ]</div>
@@ -3237,8 +3264,8 @@
                                 <small>${isFarsi ? 'URL منبع لیست IP ترجیحی سفارشی، اگر خالی بگذارید از آدرس پیش‌فرض استفاده می‌شود' : '自定义优选IP列表来源URL，留空则使用默认地址'}</small>
                         </div>
                         
-                        <div style="margin-bottom: 20px; padding: 20px; background: rgba(240, 248, 255, 0.9); border: 1px solid rgba(0, 122, 255, 0.3); border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 122, 255, 0.1);">
-                            <h4 style="color: #007aff; margin: 0 0 15px 0; font-size: 1.1rem; font-weight: 600;">⚡ ${t.latencyTest}</h4>
+                        <div style="margin-bottom: 20px; padding: 20px; background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 12px; box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15); backdrop-filter: blur(15px);">
+                            <h4 style="color: var(--primary-color); margin: 0 0 15px 0; font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">⚡ ${t.latencyTest}</h4>
                             <div style="display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; align-items: center;">
                                 <div style="min-width: 120px;">
                                     <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">${t.ipSource}</label>
@@ -3276,7 +3303,7 @@
                                 <button type="button" id="generateCFIPBtn" style="background: #007aff; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 100%; transition: all 0.3s;">🎲 ${t.generateIP}</button>
                             </div>
                             <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                                <button type="button" id="startLatencyTest" style="background: #34c759; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">▶ ${t.startTest}</button>
+                                <button type="button" id="startLatencyTest" style="background: #5cd689; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s;">▶ ${t.startTest}</button>
                                 <button type="button" id="stopLatencyTest" style="background: #ff3b30; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: none; transition: all 0.3s;">⏹ ${t.stopTest}</button>
                             </div>
                             <div id="latencyTestStatus" style="color: #666; font-size: 0.9rem; margin-bottom: 10px; display: none;"></div>
@@ -3303,7 +3330,7 @@
                                 </div>
                                 <div id="latencyResultsList"></div>
                                 <div style="margin-top: 15px; display: flex; gap: 10px;">
-                                    <button type="button" id="overwriteSelectedToYx" style="flex: 1; background: #34c759; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">${isFarsi ? '覆盖添加' : '覆盖添加'}</button>
+                                    <button type="button" id="overwriteSelectedToYx" style="flex: 1; background: #5cd689; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">${isFarsi ? '覆盖添加' : '覆盖添加'}</button>
                                     <button type="button" id="appendSelectedToYx" style="flex: 1; background: #5ac8fa; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">${isFarsi ? '追加添加' : '追加添加'}</button>
                                 </div>
                             </div>
@@ -3454,7 +3481,7 @@
                             ${t.loading}
                     </div>
                     <div id="pathTypeInfo">
-                            <div style="font-weight: 600; margin-bottom: 8px; color: #34c759;">${t.currentConfig}</div>
+                            <div style="font-weight: 600; margin-bottom: 8px; color: #007aff;">${t.currentConfig}</div>
                             <div id="pathTypeStatus">${t.checking}</div>
                     </div>
                         <button onclick="loadCurrentConfig()" style="background: #007aff; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; margin-right: 10px; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3); transition: all 0.3s ease;">${t.refreshConfig}</button>
@@ -3463,7 +3490,7 @@
                 <div id="statusMessage"></div>
             </div>
             
-            <div class="card">
+            <div class="card" id="relatedLinksCard">
                     <h2 class="card-title">${t.relatedLinks}</h2>
                 <div class="related-links">
                         <a href="https://github.com/xhx123l/cfnew" target="_blank">${t.githubProject}</a>
@@ -3476,18 +3503,7 @@
             // 远程配置URL（硬编码）
             var REMOTE_CONFIG_URL = "${ remoteConfigUrl }";
                 
-                // 翻译对象
-                const translations = {
-                    zh: {
-                        subscriptionCopied: '订阅链接已复制',
-                        autoSubscriptionCopied: '自动识别订阅链接已复制，客户端访问时会根据User-Agent自动识别并返回对应格式'
-                    },
-                    fa: {
-                        subscriptionCopied: 'لینک اشتراک کپی شد',
-                        autoSubscriptionCopied: 'لینک اشتراک تشخیص خودکار کپی شد، کلاینت هنگام دسترسی بر اساس User-Agent به طور خودکار تشخیص داده و قالب مربوطه را برمی‌گرداند'
-                    }
-                };
-                
+                // 获取Cookie的函数
                 function getCookie(name) {
                     const value = '; ' + document.cookie;
                     const parts = value.split('; ' + name + '=');
@@ -3495,29 +3511,35 @@
                     return null;
                 }
                 
-                const browserLang = navigator.language || navigator.userLanguage || '';
-                const savedLang = localStorage.getItem('preferredLanguage') || getCookie('preferredLanguage');
-                let isFarsi = false;
-                
-                if (savedLang === 'fa' || savedLang === 'fa-IR') {
-                    isFarsi = true;
-                } else if (savedLang === 'zh' || savedLang === 'zh-CN') {
-                    isFarsi = false;
-                } else {
-                    isFarsi = browserLang.includes('fa') || browserLang.includes('fa-IR');
+                // 北京时间实时显示
+                function updateBeijingTime() {
+                    const now = new Date();
+                    const beijingTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' }));
+                    
+                    const year = beijingTime.getFullYear();
+                    const month = String(beijingTime.getMonth() + 1).padStart(2, '0');
+                    const day = String(beijingTime.getDate()).padStart(2, '0');
+                    const hours = String(beijingTime.getHours()).padStart(2, '0');
+                    const minutes = String(beijingTime.getMinutes()).padStart(2, '0');
+                    const seconds = String(beijingTime.getSeconds()).padStart(2, '0');
+                    const milliseconds = String(beijingTime.getMilliseconds()).padStart(3, '0');
+                    
+                    const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+                    const weekday = weekdays[beijingTime.getDay()];
+                    
+                    const timeString = year + '年' + month + '月' + day + '日 ' + weekday + ' ' + hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
+                    document.getElementById('beijingTime').textContent = timeString;
                 }
                 
-                const t = translations[isFarsi ? 'fa' : 'zh'];
+                // 初始化并每秒更新时间
+                updateBeijingTime();
+                setInterval(updateBeijingTime, 100);
                 
-                function changeLanguage(lang) {
-                    localStorage.setItem('preferredLanguage', lang);
-                    // 设置Cookie（有效期1年）
-                    const expiryDate = new Date();
-                    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-                    document.cookie = 'preferredLanguage=' + lang + '; path=/; expires=' + expiryDate.toUTCString() + '; SameSite=Lax';
-                    // 刷新页面，不使用URL参数
-                    window.location.reload();
-                }
+                // 翻译对象（仅保留中文）
+                const t = {
+                    subscriptionCopied: '订阅链接已复制',
+                    autoSubscriptionCopied: '自动识别订阅链接已复制，客户端访问时会根据User-Agent自动识别并返回对应格式'
+                };
                 
                 // 设备检测函数
                 function detectDevice() {
@@ -4442,6 +4464,7 @@
                 checkSystemStatus();
                 checkKVStatus();
                 checkECHStatus();
+                showDeviceTags();
                 
                 // ECH 开启时自动联动开启仅TLS
                 const echCheckbox = document.getElementById('ech');
