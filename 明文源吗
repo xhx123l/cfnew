@@ -2623,20 +2623,27 @@ function parseAddressAndPort(input) {
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
             :root {
-                --primary-color: #007aff;
+                --primary-color: #0a84ff;
+                --primary-hover: #0071e3;
                 --background-color: #f5f5f7;
                 --card-background: #ffffff;
                 --text-primary: #1d1d1f;
                 --text-secondary: #86868b;
-                --border-color: #e3e3e3;
-                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-                --border-radius: 12px;
-                --spacing-xs: 8px;
-                --spacing-sm: 16px;
-                --spacing-md: 24px;
-                --spacing-lg: 32px;
-                --spacing-xl: 48px;
+                --border-color: #d2d2d7;
+                --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06);
+                --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.08);
+                --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+                --border-radius: 14px;
+                --border-radius-sm: 8px;
+                --border-radius-lg: 18px;
+                --spacing-xs: 6px;
+                --spacing-sm: 12px;
+                --spacing-md: 18px;
+                --spacing-lg: 24px;
+                --spacing-xl: 36px;
+                --transition-fast: 0.2s ease;
+                --transition-normal: 0.3s ease;
+                --transition-slow: 0.5s ease;
             }
             body {
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -2650,6 +2657,7 @@ function parseAddressAndPort(input) {
                 position: relative;
                 padding: var(--spacing-md);
                 line-height: 1.6;
+                animation: fadeIn 0.6s ease-out;
             }
             h1, h2, h3, h4, h5, h6 {
                 font-weight: 700;
@@ -2694,39 +2702,36 @@ function parseAddressAndPort(input) {
                 border-radius: 3px;
             }
             .title {
-                font-size: 3.5rem;
+                font-size: 2.5rem;
                 font-weight: 700;
                 color: var(--text-primary);
-                margin-bottom: var(--spacing-sm);
+                margin-bottom: var(--spacing-xs);
                 position: relative;
                 text-align: center;
                 letter-spacing: -0.02em;
-                background: linear-gradient(135deg, var(--text-primary), #3a3a3c);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
+                line-height: 1.2;
             }
             .subtitle {
                 color: var(--text-secondary);
                 margin-bottom: var(--spacing-lg);
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 line-height: 1.5;
                 text-align: center;
-                max-width: 700px;
+                max-width: 600px;
                 margin-left: auto;
                 margin-right: auto;
             }
             .card {
-                background: rgba(255, 255, 255, 0.6);
-                border: 1px solid rgba(255, 255, 255, 0.9);
-                border-radius: 20px;
+                background: var(--card-background);
+                border: 1px solid var(--border-color);
+                border-radius: var(--border-radius-lg);
                 padding: var(--spacing-lg);
                 margin-bottom: var(--spacing-lg);
-                box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
+                box-shadow: var(--shadow-sm);
                 position: relative;
-                backdrop-filter: blur(20px);
-                transition: all 0.3s ease;
+                transition: all var(--transition-normal);
                 overflow: hidden;
+                backdrop-filter: blur(10px);
             }
             .card::before {
                 content: '';
@@ -2734,48 +2739,49 @@ function parseAddressAndPort(input) {
                 top: 0;
                 left: 0;
                 right: 0;
-                height: 4px;
+                height: 2px;
                 background: linear-gradient(90deg, var(--primary-color), #5ac8fa);
-                border-radius: 20px 20px 0 0;
+                border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
             }
             .card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 20px 60px rgba(31, 38, 135, 0.25);
-                background: rgba(255, 255, 255, 0.7);
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-lg);
+                border-color: rgba(10, 132, 255, 0.2);
             }
             .card-title {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
                 margin-bottom: var(--spacing-md);
                 color: var(--text-primary);
-                font-weight: 700;
+                font-weight: 600;
                 display: flex;
                 align-items: center;
                 gap: 12px;
+                padding-bottom: var(--spacing-xs);
+                border-bottom: 1px solid var(--border-color);
             }
             .card-title::before {
-                content: '';
-                display: inline-block;
-                width: 24px;
-                height: 24px;
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                background-color: rgba(10, 132, 255, 0.1);
+                color: var(--primary-color);
+                border-radius: 8px;
+                font-size: 16px;
+                flex-shrink: 0;
             }
             #selectClientCard .card-title::before {
                 content: '📱';
-                font-size: 20px;
             }
             #systemStatusCard .card-title::before {
                 content: '🖥️';
-                font-size: 20px;
             }
             #configCard .card-title::before {
                 content: '⚙️';
-                font-size: 20px;
             }
             #relatedLinksCard .card-title::before {
                 content: '🔗';
-                font-size: 20px;
             }
             .client-grid {
                 display: grid;
@@ -2783,52 +2789,138 @@ function parseAddressAndPort(input) {
                 gap: var(--spacing-sm);
                 margin: var(--spacing-md) 0;
             }
+            
+            /* 添加动画和过渡效果 */
+            * {
+                transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+            }
+            
+            .animated-element {
+                animation: fadeInUp 0.6s ease-out;
+            }
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .fade-in {
+                animation: fadeIn 0.5s ease-out;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            .scale-in {
+                animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            
+            @keyframes scaleIn {
+                from {
+                    transform: scale(0.9);
+                    opacity: 0;
+                }
+                to {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
             .client-btn {
-                background-color: rgba(255, 255, 255, 0.9);
-                border: 1px solid #e5e7eb;
-                padding: var(--spacing-sm) var(--spacing-md);
+                background: var(--card-background);
+                border: 1px solid var(--border-color);
+                padding: 14px 8px;
                 color: var(--text-primary);
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-weight: 600;
+                font-weight: 500;
                 cursor: pointer;
-                transition: all 0.2s ease;
+                transition: all var(--transition-fast);
                 text-align: center;
-                border-radius: 8px;
-                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-                backdrop-filter: blur(8px);
+                border-radius: 10px;
+                box-shadow: var(--shadow-sm);
+                position: relative;
+                overflow: hidden;
+                font-size: 13px;
+                line-height: 1.3;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: auto;
+                height: auto;
+            }
+            .client-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                transform: translateX(-100%);
+                transition: transform 0.6s ease;
+                pointer-events: none;
             }
             .client-btn:hover {
-                background-color: #f9fafb;
-                border-color: #d1d5db;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                transform: translateY(-1px);
+                border-color: var(--primary-color);
+                box-shadow: var(--shadow-md);
+                transform: translateY(-3px);
+                background: linear-gradient(to bottom, var(--card-background), #f8f8f8);
+            }
+            .client-btn:hover::before {
+                transform: translateX(100%);
             }
             .client-btn:active {
-                transform: translateY(0);
-                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transform: translateY(-1px);
+                box-shadow: var(--shadow-sm);
+                background: var(--card-background);
             }
             .generate-btn {
-                background-color: var(--primary-color);
+                background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
                 border: none;
-                padding: var(--spacing-sm) var(--spacing-md);
+                padding: 12px 16px;
                 color: white;
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-weight: 600;
+                font-weight: 500;
                 cursor: pointer;
-                transition: all 0.2s ease;
+                transition: all var(--transition-fast);
                 margin-right: var(--spacing-sm);
                 border-radius: 8px;
-                box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2);
-                backdrop-filter: blur(8px);
+                box-shadow: var(--shadow-sm);
+                position: relative;
+                overflow: hidden;
+                font-size: 14px;
+                line-height: 1.3;
+            }
+            .generate-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                transition: left 0.8s ease;
+                pointer-events: none;
             }
             .generate-btn:hover {
-                background-color: #0066d6;
-                box-shadow: 0 4px 6px rgba(0, 122, 255, 0.3);
-                transform: translateY(-1px);
+                background: linear-gradient(135deg, var(--primary-hover), #0056b3);
+                box-shadow: var(--shadow-md);
+                transform: translateY(-3px);
+            }
+            .generate-btn:hover::before {
+                left: 100%;
             }
             .generate-btn:active {
-                transform: translateY(0);
-                box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2);
+                transform: translateY(-1px);
+                box-shadow: var(--shadow-sm);
             }
             .subscription-url {
                 background-color: var(--card-background);
@@ -2929,23 +3021,23 @@ function parseAddressAndPort(input) {
             form input[type="text"], form input[type="number"], form select {
                 width: 100%;
                 padding: var(--spacing-sm) var(--spacing-md);
-                background-color: rgba(255, 255, 255, 0.8);
-                border: 1px solid rgba(0, 122, 255, 0.2);
+                background-color: var(--card-background);
+                border: 1px solid var(--border-color);
                 color: var(--text-primary);
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 14px;
-                border-radius: 12px;
-                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-                backdrop-filter: blur(8px);
-                transition: all 0.3s ease;
+                border-radius: var(--border-radius-sm);
+                box-shadow: var(--shadow-sm);
+                transition: all var(--transition-fast);
+                backdrop-filter: blur(10px);
             }
             form input[type="text"]:focus, form input[type="number"]:focus, form select:focus {
                 outline: none;
                 border-color: var(--primary-color);
-                box-shadow: inset 0 2px 4px rgba(0, 122, 255, 0.1), 0 0 0 3px rgba(0, 122, 255, 0.15);
-                background-color: rgba(255, 255, 255, 0.9);
+                box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.2), var(--shadow-md);
+                background-color: var(--card-background);
             }
-            /* shadcn 风格开关样式 */
+            /* 苹果风格开关样式 */
             .toggle-switch {
                 position: relative;
                 display: inline-flex;
@@ -2961,73 +3053,111 @@ function parseAddressAndPort(input) {
             }
             .toggle-slider {
                 position: relative;
-                width: 44px;
-                height: 24px;
-                background-color: #e5e7eb;
+                width: 50px;
+                height: 28px;
+                background: linear-gradient(to bottom, #e0e0e0, #f5f5f7);
+                border: 1px solid #d0d0d0;
                 border-radius: 9999px;
-                transition: all 0.2s ease;
+                transition: all var(--transition-fast);
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
             }
             .toggle-slider:before {
                 content: "";
                 position: absolute;
                 top: 2px;
                 left: 2px;
-                width: 20px;
-                height: 20px;
-                background-color: white;
+                width: 24px;
+                height: 24px;
+                background: linear-gradient(to bottom, #ffffff, #f0f0f0);
                 border-radius: 50%;
-                transition: all 0.2s ease;
-                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transition: all var(--transition-fast);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
             }
             input:checked + .toggle-slider {
-                background-color: #007aff;
+                background: linear-gradient(to bottom, #4cd964, #42d65c);
+                border-color: #28a745;
             }
             input:checked + .toggle-slider:before {
-                transform: translateX(20px);
+                transform: translateX(22px);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             }
             input:focus + .toggle-slider {
-                box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
-                outline: none;
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(10, 132, 255, 0.3);
             }
             input:hover + .toggle-slider {
-                background-color: #d1d5db;
+                background: linear-gradient(to bottom, #d0d0d0, #e5e5e7);
             }
             input:checked:hover + .toggle-slider {
-                background-color: #0066d6;
+                background: linear-gradient(to bottom, #3ed959, #34c759);
             }
             form button[type="submit"], form button[type="button"] {
-                background-color: var(--primary-color);
+                background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
                 border: none;
-                padding: var(--spacing-sm) var(--spacing-md);
+                padding: 12px 16px;
                 color: white;
                 font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                font-weight: 600;
+                font-weight: 500;
                 cursor: pointer;
                 margin-right: var(--spacing-sm);
                 border-radius: 8px;
-                box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2);
-                backdrop-filter: blur(8px);
-                transition: all 0.2s ease;
+                box-shadow: var(--shadow-sm);
+                transition: all var(--transition-fast);
+                position: relative;
+                overflow: hidden;
+                font-size: 14px;
+                line-height: 1.3;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            form button[type="submit"]::before, form button[type="button"]::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                transition: left 0.8s ease;
+                pointer-events: none;
             }
             form button[type="submit"]:hover, form button[type="button"]:hover {
-                background-color: #0066d6;
-                box-shadow: 0 4px 6px rgba(0, 122, 255, 0.3);
-                transform: translateY(-1px);
+                background: linear-gradient(135deg, var(--primary-hover), #0056b3);
+                box-shadow: var(--shadow-md);
+                transform: translateY(-2px);
+            }
+            form button[type="submit"]:hover::before, form button[type="button"]:hover::before {
+                left: 100%;
             }
             form button[type="submit"]:active, form button[type="button"]:active {
                 transform: translateY(0);
-                box-shadow: 0 1px 2px rgba(0, 122, 255, 0.2);
+                box-shadow: var(--shadow-sm);
             }
             form button[type="button"]#stopLatencyTest {
-                background-color: #ef4444;
-                box-shadow: 0 1px 2px rgba(239, 68, 68, 0.2);
+                background: linear-gradient(135deg, #ff453a, #e32d22);
+                box-shadow: var(--shadow-sm);
+            }
+            form button[type="button"]#stopLatencyTest::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                transition: left 0.8s ease;
+                pointer-events: none;
             }
             form button[type="button"]#stopLatencyTest:hover {
-                background-color: #dc2626;
-                box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3);
+                background: linear-gradient(135deg, #e32d22, #c8271e);
+                box-shadow: var(--shadow-md);
+            }
+            form button[type="button"]#stopLatencyTest:hover::before {
+                left: 100%;
             }
             form button[type="button"]#stopLatencyTest:active {
-                box-shadow: 0 1px 2px rgba(239, 68, 68, 0.2);
+                box-shadow: var(--shadow-sm);
             }
             small {
                 color: var(--text-secondary);
@@ -3088,37 +3218,45 @@ function parseAddressAndPort(input) {
             }
             .device-tag {
                 display: inline-block;
-                background-color: #5ac8fa;
-                color: white;
+                background: linear-gradient(to bottom, #a5d2ff, #80b8ff);
+                color: #000080;
                 font-size: 10px;
                 font-weight: 600;
-                padding: 2px 6px;
-                border-radius: 4px;
-                margin-left: 6px;
+                padding: 3px 8px;
+                border-radius: 20px;
+                margin-left: 8px;
                 vertical-align: middle;
+                border: 1px solid rgba(128, 184, 255, 0.3);
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             }
             /* 平板设备 (768px - 1024px) */
-            @media (max-width: 1024px) {
+            @media (max-width: 1024px) and (min-width: 769px) {
                 .title {
-                    font-size: 2.5rem;
+                    font-size: 2.2rem;
                 }
                 .client-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                     gap: var(--spacing-sm);
                 }
                 .card {
                     padding: var(--spacing-md);
                     margin-bottom: var(--spacing-md);
                 }
+                .client-btn {
+                    padding: var(--spacing-sm) var(--spacing-sm);
+                    font-size: 13px;
+                    min-height: 56px;
+                }
             }
             
             /* 手机设备 (小于 768px) */
             @media (max-width: 768px) {
                 body {
-                    padding: var(--spacing-sm);
+                    padding: var(--spacing-xs);
                 }
                 .container {
-                    padding: var(--spacing-sm);
+                    padding: var(--spacing-xs);
+                    max-width: 100%;
                 }
                 .header {
                     padding-top: var(--spacing-md);
@@ -3126,62 +3264,77 @@ function parseAddressAndPort(input) {
                     text-align: center;
                 }
                 .title {
-                    font-size: 2rem;
+                    font-size: 1.8rem;
+                    line-height: 1.2;
                 }
                 .subtitle {
-                    font-size: 1rem;
+                    font-size: 0.9rem;
+                    margin-bottom: var(--spacing-md);
                 }
                 .card {
                     padding: var(--spacing-md);
                     margin-bottom: var(--spacing-md);
+                    border-radius: var(--border-radius);
                 }
                 .card-title {
-                    font-size: 1.4rem;
+                    font-size: 1.2rem;
+                    margin-bottom: var(--spacing-sm);
                 }
                 .client-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
                     gap: var(--spacing-xs);
+                    grid-gap: var(--spacing-xs);
                 }
                 .client-btn {
-                    padding: var(--spacing-xs) var(--spacing-sm);
-                    font-size: 13px;
-                    min-height: 44px;
+                    padding: 12px 6px;
+                    font-size: 12px;
+                    min-height: auto;
+                    height: auto;
                     display: flex;
+                    flex-direction: column;
                     align-items: center;
                     justify-content: center;
+                    gap: 3px;
+                    line-height: 1.3;
                 }
                 .app-title {
-                    top: var(--spacing-sm);
-                    right: var(--spacing-sm);
-                    font-size: 14px;
+                    top: var(--spacing-xs);
+                    right: var(--spacing-xs);
+                    font-size: 13px;
                 }
                 /* 优化表单元素在移动设备上的触摸体验 */
                 form input[type="text"], form input[type="number"], form select {
                     min-height: 44px;
-                    font-size: 16px;
+                    font-size: 15px;
+                    padding: 10px 12px;
+                    border-radius: 8px;
                 }
                 form button[type="submit"], form button[type="button"] {
                     min-height: 44px;
-                    font-size: 16px;
+                    font-size: 15px;
                     width: 100%;
                     margin-right: 0;
                     margin-bottom: 10px;
+                    border-radius: 8px;
+                    padding: 12px 16px;
                 }
                 /* 优化延迟测试部分在移动设备上的显示 */
                 #latencyTestResults {
-                    max-height: 200px;
+                    max-height: 180px;
                 }
                 /* 优化时间显示在移动设备上的大小 */
                 #beijingTime {
-                    font-size: 0.9rem;
+                    font-size: 0.8rem;
                     line-height: 1.4;
+                    word-break: break-word;
                 }
                 /* 优化系统状态卡片在移动设备上的显示 */
                 #systemStatus {
-                    gap: 8px !important;
+                    gap: 6px !important;
                 }
                 #systemStatus div {
-                    font-size: 0.85rem !important;
+                    font-size: 0.8rem !important;
+                    line-height: 1.4;
                 }
                 /* 优化配置管理卡片在移动设备上的显示 */
                 #configContent {
@@ -3191,24 +3344,31 @@ function parseAddressAndPort(input) {
                     margin-bottom: var(--spacing-md);
                 }
                 form div {
-                    margin-bottom: var(--spacing-md);
+                    margin-bottom: var(--spacing-sm);
                 }
                 /* 优化按钮在移动设备上的显示 */
                 .generate-btn {
                     width: 100%;
                     margin-right: 0;
                     margin-bottom: 10px;
+                    border-radius: 8px;
+                    padding: 12px 16px;
                 }
                 /* 优化复选框和开关在移动设备上的显示 */
                 .toggle-switch {
-                    width: 44px;
-                    height: 22px;
+                    width: 50px;
+                    height: 28px;
+                }
+                .toggle-slider {
+                    width: 50px;
+                    height: 28px;
+                    border-radius: 14px;
                 }
                 .toggle-slider:before {
-                    height: 16px;
-                    width: 16px;
-                    left: 3px;
-                    bottom: 3px;
+                    height: 24px;
+                    width: 24px;
+                    top: 2px;
+                    left: 2px;
                 }
                 input:checked + .toggle-slider:before {
                     transform: translateX(22px);
@@ -3217,31 +3377,87 @@ function parseAddressAndPort(input) {
                 #latencyTestResults button {
                     width: 100%;
                     margin-bottom: 8px;
+                    border-radius: 8px;
+                    padding: 10px 16px;
                 }
                 /* 优化相关链接在移动设备上的显示 */
                 .related-links a {
                     display: block;
-                    margin: 5px 0;
+                    margin: 8px 0;
+                    font-size: 1rem;
+                }
+                /* 优化所有表单控件的样式 */
+                select {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d1d1f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+                    background-repeat: no-repeat;
+                    background-position: right 12px center;
+                    background-size: 16px;
+                    padding-right: 36px;
+                }
+                /* 优化表单分组的显示 */
+                form div[style*="margin-bottom: 15px; padding: 20px"] {
+                    padding: var(--spacing-md) !important;
+                    border-radius: var(--border-radius) !important;
                 }
             }
             
             /* 小屏幕手机 (小于 480px) */
             @media (max-width: 480px) {
                 .title {
-                    font-size: 1.8rem;
+                    font-size: 1.6rem;
+                    line-height: 1.2;
                 }
-                .client-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                .subtitle {
+                    font-size: 0.85rem;
                 }
-                .client-btn {
-                    font-size: 12px;
-                    padding: 8px 12px;
+                .card {
+                    padding: var(--spacing-sm);
                 }
                 .card-title {
-                    font-size: 1.2rem;
+                    font-size: 1.1rem;
+                    padding-bottom: var(--spacing-xs);
+                }
+                .client-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                    gap: 6px;
+                }
+                .client-btn {
+                    padding: 10px 6px;
+                    font-size: 11px;
+                    min-height: auto;
+                    height: auto;
+                    gap: 3px;
+                }
+                .device-tag {
+                    font-size: 9px;
+                    padding: 2px 6px;
+                    margin-left: 4px;
                 }
                 #beijingTime {
-                    font-size: 0.8rem;
+                    font-size: 0.75rem;
+                }
+                .client-btn, form button[type="submit"], form button[type="button"], .generate-btn {
+                    min-height: 44px;
+                    font-size: 14px;
+                    border-radius: 8px;
+                    padding: 12px 16px;
+                }
+                form input[type="text"], form input[type="number"], form select {
+                    min-height: 44px;
+                    font-size: 15px;
+                    padding: 10px;
+                    border-radius: 8px;
+                }
+                .card-title::before {
+                    width: 28px;
+                    height: 28px;
+                    font-size: 14px;
+                }
+                h3 {
+                    font-size: 1.1rem;
                 }
             }
         </style>
